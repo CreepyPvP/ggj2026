@@ -3,8 +3,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "entity.h"
 #include "scene.h"
 #include "game_math.h"
+#include "player.h"
 
 #include "raylib.h"
 #include "raymath.h"
@@ -13,11 +15,6 @@
 
 Scene *game_scene;
 
-struct Entity
-{
-    Vector2 position;
-    bool possesed;
-};
 
 struct GameState
 {
@@ -25,7 +22,7 @@ struct GameState
     u32 height;
     u8 tiles[32 * 32];
 
-    Entity *entities;
+    Entity **entities;
     Camera2D camera;
 };
 
@@ -133,6 +130,11 @@ void LoadWorld()
     // }
 }
 
+static void AddEntity(Entity *entity) {
+    arrput(state.entities, entity);
+    entity->entityId = arrlen(state.entities) - 1;
+}
+
 static void GameSetup()
 {
     memset(&state, 0, sizeof(GameState));
@@ -143,16 +145,20 @@ static void GameSetup()
     state.camera.zoom = 2.5f;
 
     // player
-    Entity player = {};
-    player.possesed = true;
-    player.position = {2, 2};
-    arrput(state.entities, player);
+    Player *player = new Player();
+    player->position = {2, 2};
+    AddEntity(player);
 
     LoadWorld();
 }
 
 static void GameDestroy()
 {
+    for (u32 i = 0; i < arrlen(state.entities); ++i)
+    {
+        Entity *entity = state.entities[i];
+        delete entity;
+    }
     arrfree(state.entities);
 }
 
@@ -168,21 +174,6 @@ static f32 Raycast(Vector2 pos, Vector2 dir)
     return 0;
 }
 
-static void DoEntityMovement(Entity *entity, f32 delta)
-{
-    Vector2 movement = {};
-    if (IsKeyDown(KEY_W))
-        movement.y += -1;
-    if (IsKeyDown(KEY_S))
-        movement.y += 1;
-    if (IsKeyDown(KEY_A))
-        movement.x += -1;
-    if (IsKeyDown(KEY_D))
-        movement.x += 1;
-    movement = Vector2Normalize(movement);
-    entity->position += movement * 10 * delta;
-}
-
 static void GameFrame(f32 delta)
 {
     // Update
@@ -190,11 +181,8 @@ static void GameFrame(f32 delta)
 
     for (u32 i = 0; i < arrlen(state.entities); ++i)
     {
-        Entity *entity = state.entities;
-        if (entity->possesed)
-        {
-            DoEntityMovement(entity, delta);
-        }
+        Entity *entity = state.entities[i];
+        entity->Update(delta);
     }
 
     // Render
@@ -217,8 +205,8 @@ static void GameFrame(f32 delta)
 
     for (u32 i = 0; i < arrlen(state.entities); ++i)
     {
-        Entity *entity = state.entities + i;
-        DrawRectangle(entity->position.x * 32, entity->position.y * 32, 32, 32, BLUE);  
+        Entity *entity = state.entities[i];
+        entity->Draw();
     }
 
 
