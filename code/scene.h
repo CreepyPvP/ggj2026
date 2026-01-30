@@ -6,6 +6,7 @@ struct Scene
 {
     void (*Frame)(f32 delta);
     void (*Setup)();
+    void (*Destroy)();
     f32 time;
 };
 

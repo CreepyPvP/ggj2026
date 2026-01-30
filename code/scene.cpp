@@ -4,6 +4,9 @@ Scene *active_scene;
 
 void SceneStart(Scene *scene)
 {
+    if (active_scene && active_scene->Destroy)
+        active_scene->Destroy();
+
     active_scene = scene;
     active_scene->time = 0;
 
