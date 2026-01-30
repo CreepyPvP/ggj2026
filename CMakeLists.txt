@@ -11,6 +11,8 @@ set(CMAKE_BUILD_TYPE Debug)
 
 add_executable(${PROJECT_NAME}
 	code/main.cpp
+    code/scene.cpp
+    code/game.cpp
 )
 
 set(RAYLIB_DIR raylib)
