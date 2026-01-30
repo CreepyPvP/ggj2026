@@ -14,8 +14,3 @@ target:
   working_directory: ""
   enabled: 1
 }
-breakpoint:
-{
-  source_location: "code/game.cpp:98:1"
-  hit_count: 1
-}

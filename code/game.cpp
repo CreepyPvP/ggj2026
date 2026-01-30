@@ -28,13 +28,17 @@ struct GameState
 
 static GameState state;
     
-void SetTile(u32 x, u32 y, u8 tile)
+void SetTile(i32 x, i32 y, u8 tile)
 {
+    if (x < 0 || y < 0 || x >= state.width || y >= state.height)
+        return;
     state.tiles[x + y * state.width] = tile;
 }
 
-u8 GetTile(u32 x, u32 y)
+u8 GetTile(i32 x, i32 y)
 {
+    if (x < 0 || y < 0 || x >= state.width || y >= state.height)
+        return 0;
     return state.tiles[x + y * state.width];
 }
 
@@ -89,10 +93,17 @@ void LoadWorld()
     const auto& level = world.getLevel("level_0");
     const ldtk::Layer& collision_layer = level.getLayer("collisions");
 
-    // const IntGridValue& getIntGridVal(int grid_x, int grid_y);
-
     state.width = level.size.x / 32;
     state.height = level.size.y / 32;
+
+    for (i32 x = 0; x < state.width; ++x)
+    {
+        for (i32 y = 0; y < state.height; ++y)
+        {
+            const ldtk::IntGridValue& grid_val = collision_layer.getIntGridVal(x, y);
+            SetTile(x, y, grid_val.value);
+        }
+    }
 
     // for (const auto& tile : collision_layer.allTiles()) {
     //     ldtk::Point<int> position = tile.getPosition();
@@ -163,6 +174,32 @@ static f32 Raycast(Vector2 pos, Vector2 dir)
     return 0;
 }
 
+void UpdateCamera(const Entity *entity) {
+        Vector2 playerPos = entity->position;
+        Vector2 cameraPos = state.camera.target;
+
+        const int targetX = 0.9f * playerPos.x + 0.1f * cameraPos.x;
+        const int targetY = 0.9f * playerPos.y + 0.1f * cameraPos.y;
+
+        state.camera.target = playerPos * 32;
+        // state.camera.target = Vector2(targetX, targetY);
+    }
+
+static void DoEntityMovement(Entity *entity, f32 delta)
+{
+    Vector2 movement = {};
+    if (IsKeyDown(KEY_W))
+        movement.y += -1;
+    if (IsKeyDown(KEY_S))
+        movement.y += 1;
+    if (IsKeyDown(KEY_A))
+        movement.x += -1;
+    if (IsKeyDown(KEY_D))
+        movement.x += 1;
+    movement = Vector2Normalize(movement);
+    entity->position += movement * 10 * delta;
+}
+
 static void GameFrame(f32 delta)
 {
     // Update
@@ -172,6 +209,7 @@ static void GameFrame(f32 delta)
     {
         Entity *entity = state.entities[i];
         entity->Update(delta);
+        UpdateCamera(entity);
     }
 
     // Render
