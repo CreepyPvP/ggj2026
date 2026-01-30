@@ -1,4 +1,2 @@
-Example bitmap
-Basic entity system
-Player movement
 Player collisions
+raycast based player movement

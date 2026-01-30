@@ -59,12 +59,25 @@ static void GameSetup()
     // player
     Entity player = {};
     player.possesed = true;
+    player.position = {2, 2};
     arrput(state.entities, player);
 }
 
 static void GameDestroy()
 {
     arrfree(state.entities);
+}
+
+static f32 Raycast(Vector2 pos, Vector2 dir)
+{
+    u32 tile_x = pos.x;
+    u32 tile_y = pos.y;
+    if (GetTile(tile_x, tile_y))
+    {
+        return 0;
+    }
+    pos += dir;
+    return 0;
 }
 
 static void DoEntityMovement(Entity *entity, f32 delta)
@@ -79,7 +92,7 @@ static void DoEntityMovement(Entity *entity, f32 delta)
     if (IsKeyDown(KEY_D))
         movement.x += 1;
     movement = Vector2Normalize(movement);
-    entity->position += movement * 200 * delta;
+    entity->position += movement * 10 * delta;
 }
 
 static void GameFrame(f32 delta)
@@ -116,7 +129,7 @@ static void GameFrame(f32 delta)
     for (u32 i = 0; i < arrlen(state.entities); ++i)
     {
         Entity *entity = state.entities + i;
-        DrawRectangle(entity->position.x, entity->position.y, 32, 32, BLUE);  
+        DrawRectangle(entity->position.x * 32, entity->position.y * 32, 32, 32, BLUE);  
     }
 
     {
