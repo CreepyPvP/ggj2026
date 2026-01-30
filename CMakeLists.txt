@@ -13,6 +13,22 @@ add_executable(${PROJECT_NAME}
 	code/main.cpp
     code/scene.cpp
     code/game.cpp
+
+    external/LDtkLoader/DataTypes.cpp
+    external/LDtkLoader/Entity.cpp
+    external/LDtkLoader/EntityDef.cpp
+    external/LDtkLoader/Enum.cpp
+    external/LDtkLoader/FieldsContainer.cpp
+    external/LDtkLoader/json.hpp
+    external/LDtkLoader/Layer.cpp
+    external/LDtkLoader/LayerDef.cpp
+    external/LDtkLoader/Level.cpp
+    external/LDtkLoader/Project.cpp
+    external/LDtkLoader/TagsContainer.cpp
+    external/LDtkLoader/Tile.cpp
+    external/LDtkLoader/Tileset.cpp
+    external/LDtkLoader/Utils.cpp
+    external/LDtkLoader/World.cpp
 )
 
 set(RAYLIB_DIR raylib)

@@ -1,21 +1,23 @@
 #include "raylib.h"
 #include "types.h"
 #include "scene.h"
+#include "game.h"
 
 i32 main(void)
 {
-    const int screenWidth = 800;
-    const int screenHeight = 450;
+    const int screenWidth = 1600;
+    const int screenHeight = 900;
 
-    InitWindow(screenWidth, screenHeight, "Colorful heist");
-
+    InitWindow(screenWidth, screenHeight, "Colorful Heist");
     SetTargetFPS(60);
+
+    GameInitialize();
+
+    SceneStart(game_scene);
+
     while (!WindowShouldClose())
     {
-        BeginDrawing();
-        ClearBackground(RAYWHITE);
-        DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
-        EndDrawing();
+        SceneFrame(GetFrameTime());
     }
 
     CloseWindow();

@@ -1,3 +1,7 @@
 #pragma once
 
-#include "scene.h"
+struct Scene;
+
+extern Scene *game_scene;
+
+void GameInitialize();

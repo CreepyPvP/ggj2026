@@ -4,7 +4,7 @@
 
 struct Scene
 {
-    void (*Frame)();
+    void (*Frame)(f32 delta);
     void (*Setup)();
     f32 time;
 };

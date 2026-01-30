@@ -13,6 +13,6 @@ void SceneStart(Scene *scene)
 
 void SceneFrame(f32 delta)
 {
-    active_scene->Frame();
+    active_scene->Frame(delta);
     active_scene->time += delta;
 }
