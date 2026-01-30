@@ -176,7 +176,13 @@
 					"height": 32,
 					"defUid": 5,
 					"px": [192,128],
-					"fieldInstances": [{ "__identifier": "PatrolPath", "__type": "Array<Point>", "__value": [ { "cx": 6, "cy": 9 }, { "cx": 6, "cy": 4 } ], "__tile": null, "defUid": 9, "realEditorValues": [ {
+					"fieldInstances": [{ "__identifier": "PatrolPath", "__type": "Array<Point>", "__value": [ { "cx": 6, "cy": 9 }, { "cx": 2, "cy": 9 }, { "cx": 6, "cy": 9 }, { "cx": 6, "cy": 4 } ], "__tile": null, "defUid": 9, "realEditorValues": [ {
+						"id": "V_String",
+						"params": ["6,9"]
+					}, {
+						"id": "V_String",
+						"params": ["2,9"]
+					}, {
 						"id": "V_String",
 						"params": ["6,9"]
 					}, {
