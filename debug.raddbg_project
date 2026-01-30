@@ -1,5 +1,8 @@
 // raddbg 0.9.20 project file
 
+recent_file: path: "code/game.cpp"
+recent_file: path: "../../../../Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.41.34120/include/vector"
+recent_file: path: "external/ldtkloader/project.cpp"
 target:
 {
   executable: "../dashrealm2/build/dashrealm.exe"
@@ -10,4 +13,9 @@ target:
   executable: "build/ggj2026.exe"
   working_directory: ""
   enabled: 1
+}
+breakpoint:
+{
+  source_location: "code/game.cpp:98:1"
+  hit_count: 1
 }
