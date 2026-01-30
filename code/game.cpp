@@ -196,14 +196,9 @@ static void GameFrame(f32 delta)
 
     for (u32 i = 0; i < arrlen(state.entities); ++i)
     {
-        Entity *entity = state.entities;
-        if (entity->possesed)
-        {
-            DoEntityMovement(entity, delta);
-            UpdateCamera(entity);
-        }
         Entity *entity = state.entities[i];
         entity->Update(delta);
+        UpdateCamera(entity);
     }
 
     // Render
