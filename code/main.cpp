@@ -3,6 +3,7 @@
 #include "scene.h"
 #include "game.h"
 
+
 i32 main(void)
 {
     const int screenWidth = 1600;
