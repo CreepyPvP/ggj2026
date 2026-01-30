@@ -24,6 +24,7 @@ struct GameState
     u8 tiles[32 * 32];
 
     Entity *entities;
+    Camera2D camera;
 };
 
 static GameState state;
@@ -55,6 +56,12 @@ static void GameSetup()
             }
         }
     }
+
+
+    state.camera.target = Vector2{ 0, 0 };
+    state.camera.offset = Vector2{ GetScreenWidth()/2.0f, GetScreenHeight()/2.0f };
+    state.camera.rotation = 0.0f;
+    state.camera.zoom = 2.5f;
 
     // player
     Entity player = {};
@@ -101,6 +108,7 @@ static void GameFrame(f32 delta)
 
     BeginDrawing();
     ClearBackground(LIGHTGRAY);
+    BeginMode2D(state.camera);
 
     for (u32 x = 0; x < 10; ++x)
     {
@@ -119,6 +127,9 @@ static void GameFrame(f32 delta)
         DrawRectangle(entity->position.x, entity->position.y, 32, 32, BLUE);  
     }
 
+
+    EndMode2D();
+
     {
         // fade in
         f32 t = Range(game_scene->time, 0, 0.5);
@@ -132,7 +143,7 @@ void GameInitialize()
 {
     game_scene = (Scene *) malloc(sizeof(Scene));
     memset(game_scene, 0, sizeof(*game_scene));
-    game_scene->Frame = GameFrame;
     game_scene->Setup = GameSetup;
+    game_scene->Frame = GameFrame;
     game_scene->Destroy = GameDestroy;
 }
