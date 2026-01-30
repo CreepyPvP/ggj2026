@@ -13,6 +13,8 @@ add_executable(${PROJECT_NAME}
 	code/main.cpp
     code/scene.cpp
     code/game.cpp
+    code/entity.cpp
+    code/player.cpp
 
     external/LDtkLoader/DataTypes.cpp
     external/LDtkLoader/Entity.cpp
