@@ -1,0 +1,13 @@
+// raddbg 0.9.20 project file
+
+target:
+{
+  executable: "../dashrealm2/build/dashrealm.exe"
+  working_directory: "../dashrealm2/"
+}
+target:
+{
+  executable: "build/ggj2026.exe"
+  working_directory: ""
+  enabled: 1
+}
