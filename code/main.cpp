@@ -3,6 +3,9 @@
 #include "scene.h"
 #include "game.h"
 
+#define STB_DS_IMPLEMENTATION
+#include "stb_ds.h"
+
 i32 main(void)
 {
     const int screenWidth = 1600;
@@ -17,6 +20,11 @@ i32 main(void)
 
     while (!WindowShouldClose())
     {
+        if (IsKeyDown(KEY_T))
+        {
+            SceneStart(game_scene);
+        }
+
         SceneFrame(GetFrameTime());
     }
 
