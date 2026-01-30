@@ -20,7 +20,7 @@ struct GameState
 {
     u32 width;
     u32 height;
-    u8 tiles[32 * 32];
+    u8 tiles[64 * 64];
 
     Entity **entities;
     Camera2D camera;
@@ -101,7 +101,7 @@ void LoadWorld()
         for (i32 y = 0; y < state.height; ++y)
         {
             const ldtk::IntGridValue& grid_val = collision_layer.getIntGridVal(x, y);
-            SetTile(x, y, grid_val.value);
+            SetTile(x, y, grid_val.value > 0);
         }
     }
 
@@ -219,9 +219,9 @@ static void GameFrame(f32 delta)
     ClearBackground(LIGHTGRAY);
     BeginMode2D(state.camera);
 
-    for (u32 x = 0; x < 10; ++x)
+    for (u32 x = 0; x < state.width; ++x)
     {
-        for (u32 y = 0; y < 10; ++y)
+        for (u32 y = 0; y < state.height; ++y)
         {
             u8 tile = GetTile(x, y);
 
