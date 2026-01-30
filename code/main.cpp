@@ -1,5 +1,6 @@
 #include "raylib.h"
 #include "types.h"
+#include "scene.h"
 
 i32 main(void)
 {

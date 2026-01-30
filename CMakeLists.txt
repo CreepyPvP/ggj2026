@@ -18,6 +18,8 @@ add_executable(${PROJECT_NAME}
 set(RAYLIB_DIR raylib)
 add_subdirectory(${RAYLIB_DIR})
 
+target_include_directories(ggj2026 PUBLIC external)
+
 target_link_libraries(${PROJECT_NAME} 
     raylib
 )
