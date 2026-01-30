@@ -31,13 +31,17 @@ struct GameState
 
 static GameState state;
     
-void SetTile(u32 x, u32 y, u8 tile)
+void SetTile(i32 x, i32 y, u8 tile)
 {
+    if (x < 0 || y < 0 || x >= state.width || y >= state.height)
+        return;
     state.tiles[x + y * state.width] = tile;
 }
 
-u8 GetTile(u32 x, u32 y)
+u8 GetTile(i32 x, i32 y)
 {
+    if (x < 0 || y < 0 || x >= state.width || y >= state.height)
+        return 0;
     return state.tiles[x + y * state.width];
 }
 
@@ -92,10 +96,17 @@ void LoadWorld()
     const auto& level = world.getLevel("level_0");
     const ldtk::Layer& collision_layer = level.getLayer("collisions");
 
-    // const IntGridValue& getIntGridVal(int grid_x, int grid_y);
-
     state.width = level.size.x / 32;
     state.height = level.size.y / 32;
+
+    for (i32 x = 0; x < state.width; ++x)
+    {
+        for (i32 y = 0; y < state.height; ++y)
+        {
+            const ldtk::IntGridValue& grid_val = collision_layer.getIntGridVal(x, y);
+            SetTile(x, y, grid_val.value);
+        }
+    }
 
     // for (const auto& tile : collision_layer.allTiles()) {
     //     ldtk::Point<int> position = tile.getPosition();
