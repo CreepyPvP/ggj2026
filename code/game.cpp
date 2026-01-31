@@ -10,6 +10,7 @@
 
 #include "raylib.h"
 #include "raymath.h"
+#include "treasure.h"
 
 #include "LDtkLoader/Project.hpp"
 
@@ -89,12 +90,17 @@ void LoadWorld()
 
                 for (auto& data_entity : layer.allEntities()) {
                     Entity *entity = NULL;
-                    if (data_entity.getName() == "door") {
-                        // entity = new Door()
+                    if (data_entity.getName() == "player" && PLAYER) {
+                        PLAYER->position = Vector2{(f32)data_entity.getWorldPosition().x / 32, (f32)data_entity.getWorldPosition().y / 32};
+                        continue;
+                    }
+
+                    if (data_entity.getName() == "treasure") {
+                        entity = new Treasure();
                     }
 
                     if (entity) {
-                        entity->position = Vector2{(f32)data_entity.getWorldPosition().x, (f32)data_entity.getWorldPosition().y};
+                        entity->position = Vector2{(f32)data_entity.getWorldPosition().x / 32, (f32)data_entity.getWorldPosition().y / 32};
                         entity->Configure(data_entity);
                         AddEntity(entity);
                     }
@@ -153,6 +159,7 @@ static void GameDestroy()
     }
     arrfree(state.entities);
     arrfree(state.textured_tiles);
+    arrfree(state.rooms);
 }
 
 f32 GameRaycast(Vector2 pos, Vector2 dir) 
@@ -277,7 +284,7 @@ static void GameFrame(f32 delta)
     //
 
     BeginDrawing();
-    ClearBackground(LIGHTGRAY);
+    ClearBackground({34, 32, 52, 255});
     BeginMode2D(state.camera);
 
     for (u32 i = 0; i < arrlen(state.textured_tiles); ++i)

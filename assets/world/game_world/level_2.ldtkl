@@ -167,14 +167,14 @@
 					"__grid": [2,2],
 					"__pivot": [0,0],
 					"__tags": [],
-					"__tile": null,
+					"__tile": { "tilesetUid": 13, "x": 64, "y": 384, "w": 32, "h": 32 },
 					"__smartColor": "#FFE700",
 					"iid": "fa3f3f00-fa90-11f0-b3c4-61b948a21908",
 					"width": 32,
 					"height": 32,
 					"defUid": 3,
 					"px": [64,64],
-					"fieldInstances": [],
+					"fieldInstances": [{ "__identifier": "treasure_type", "__type": "LocalEnum.treasure_type", "__value": "money_small", "__tile": { "tilesetUid": 13, "x": 64, "y": 384, "w": 32, "h": 32 }, "defUid": 80, "realEditorValues": [] }],
 					"__worldX": 64,
 					"__worldY": 64
 				},
@@ -183,14 +183,14 @@
 					"__grid": [5,2],
 					"__pivot": [0,0],
 					"__tags": [],
-					"__tile": null,
+					"__tile": { "tilesetUid": 13, "x": 64, "y": 384, "w": 32, "h": 32 },
 					"__smartColor": "#FFE700",
 					"iid": "fb6dfb00-fa90-11f0-b3c4-fb3e048da02c",
 					"width": 32,
 					"height": 32,
 					"defUid": 3,
 					"px": [160,64],
-					"fieldInstances": [],
+					"fieldInstances": [{ "__identifier": "treasure_type", "__type": "LocalEnum.treasure_type", "__value": "money_small", "__tile": { "tilesetUid": 13, "x": 64, "y": 384, "w": 32, "h": 32 }, "defUid": 80, "realEditorValues": [] }],
 					"__worldX": 160,
 					"__worldY": 64
 				},
@@ -249,6 +249,46 @@
 					}] }],
 					"__worldX": 224,
 					"__worldY": 352
+				},
+				{
+					"__identifier": "switch",
+					"__grid": [18,2],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": null,
+					"__smartColor": "#63C74D",
+					"iid": "890e0390-fa90-11f0-ae0a-499ca93a126f",
+					"width": 32,
+					"height": 32,
+					"defUid": 7,
+					"px": [576,64],
+					"fieldInstances": [{ "__identifier": "Controlled_door", "__type": "EntityRef", "__value": {
+						"entityIid": "c845a030-fa90-11f0-b3c4-1111e00724d6",
+						"layerIid": "97753f22-fa90-11f0-b3c4-cb7a01d4c3e3",
+						"levelIid": "97753f21-fa90-11f0-b3c4-21091f66cf92",
+						"worldIid": "97753f20-fa90-11f0-b3c4-d91c1b21430c"
+					}, "__tile": null, "defUid": 10, "realEditorValues": [{
+						"id": "V_String",
+						"params": ["c845a030-fa90-11f0-b3c4-1111e00724d6"]
+					}] }],
+					"__worldX": 576,
+					"__worldY": 64
+				},
+				{
+					"__identifier": "player",
+					"__grid": [11,13],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": null,
+					"__smartColor": "#B55088",
+					"iid": "bb295b30-fa90-11f0-8a34-c1ea72427486",
+					"width": 32,
+					"height": 32,
+					"defUid": 78,
+					"px": [352,416],
+					"fieldInstances": [],
+					"__worldX": 352,
+					"__worldY": 416
 				}
 			]
 		},
