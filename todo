@@ -1,5 +1,6 @@
 color lookup
 do deferred rendering       <---------
+fix autotiling order
 
 camera lookahead
 

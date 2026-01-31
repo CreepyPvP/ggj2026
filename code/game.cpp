@@ -303,10 +303,10 @@ static void GameFrame(f32 delta)
 {
     if (state.game_lost)
     {
-        f32 t = Range(state.time_since_game_lost, 0, 1.5);
+        f32 t = Range(state.time_since_game_lost, 0, 1.1);
         state.time_since_game_lost += delta;
         delta = Lerp(0.002, 0.0007, t);
-        if (state.time_since_game_lost > 2)
+        if (state.time_since_game_lost > 1.3)
         {
             SceneStart(game_scene);
             return;
