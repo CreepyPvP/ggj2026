@@ -21,6 +21,15 @@ struct Room {
     u8 tiles[128 * 128];
 };
 
+struct Equipment {
+    bool mask_red;
+    bool mask_green;
+    bool mask_blue;
+
+    u32 lock_picks;
+    bool glass_cutter;
+};
+
 struct GameState
 {
     Room *rooms;
@@ -32,6 +41,8 @@ struct GameState
 
     Entity **entities;
     Camera2D camera;
+
+    Equipment equipment;
 };
 
 extern GameState state;

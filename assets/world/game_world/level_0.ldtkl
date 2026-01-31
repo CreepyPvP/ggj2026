@@ -493,22 +493,6 @@
 					"__worldY": 896
 				},
 				{
-					"__identifier": "item",
-					"__grid": [17,9],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": null,
-					"__smartColor": "#00EFFF",
-					"iid": "283d3f40-fa90-11f0-97a2-a9870440c6fc",
-					"width": 32,
-					"height": 32,
-					"defUid": 11,
-					"px": [544,288],
-					"fieldInstances": [],
-					"__worldX": 1824,
-					"__worldY": 832
-				},
-				{
 					"__identifier": "door",
 					"__grid": [14,3],
 					"__pivot": [0,0],
@@ -536,12 +520,12 @@
 					"height": 32,
 					"defUid": 7,
 					"px": [576,160],
-					"fieldInstances": [{ "__identifier": "Controlled_door", "__type": "EntityRef", "__value": {
+					"fieldInstances": [{ "__identifier": "Controlled_doors", "__type": "Array<EntityRef>", "__value": [{
 						"entityIid": "7a459630-fa90-11f0-b3c4-0fd540d550a4",
 						"layerIid": "8227e180-fa90-11f0-97a2-25de3f2f6b6c",
 						"levelIid": "e54f92c1-fa90-11f0-abe6-a5960b7d5931",
 						"worldIid": "e54f92c0-fa90-11f0-abe6-53b9e50ae076"
-					}, "__tile": null, "defUid": 10, "realEditorValues": [{
+					}], "__tile": null, "defUid": 82, "realEditorValues": [{
 						"id": "V_String",
 						"params": ["7a459630-fa90-11f0-b3c4-0fd540d550a4"]
 					}] }],
@@ -560,12 +544,12 @@
 					"height": 32,
 					"defUid": 7,
 					"px": [224,256],
-					"fieldInstances": [{ "__identifier": "Controlled_door", "__type": "EntityRef", "__value": {
+					"fieldInstances": [{ "__identifier": "Controlled_doors", "__type": "Array<EntityRef>", "__value": [{
 						"entityIid": "a4a3afc0-fa90-11f0-b3c4-6b6d30901471",
 						"layerIid": "8227e180-fa90-11f0-97a2-25de3f2f6b6c",
 						"levelIid": "e54f92c1-fa90-11f0-abe6-a5960b7d5931",
 						"worldIid": "e54f92c0-fa90-11f0-abe6-53b9e50ae076"
-					}, "__tile": null, "defUid": 10, "realEditorValues": [{
+					}], "__tile": null, "defUid": 82, "realEditorValues": [{
 						"id": "V_String",
 						"params": ["a4a3afc0-fa90-11f0-b3c4-6b6d30901471"]
 					}] }],
@@ -586,6 +570,25 @@
 					"px": [384,288],
 					"fieldInstances": [{ "__identifier": "unlockable", "__type": "Bool", "__value": false, "__tile": null, "defUid": 64, "realEditorValues": [] }],
 					"__worldX": 1664,
+					"__worldY": 832
+				},
+				{
+					"__identifier": "treasure",
+					"__grid": [17,9],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": { "tilesetUid": 13, "x": 224, "y": 384, "w": 32, "h": 32 },
+					"__smartColor": "#FFE700",
+					"iid": "c76bc7b0-fa90-11f0-90d9-d1dacc76bf89",
+					"width": 32,
+					"height": 32,
+					"defUid": 3,
+					"px": [544,288],
+					"fieldInstances": [{ "__identifier": "treasure_type", "__type": "LocalEnum.treasure_type", "__value": "diamong_big", "__tile": { "tilesetUid": 13, "x": 224, "y": 384, "w": 32, "h": 32 }, "defUid": 80, "realEditorValues": [{
+						"id": "V_String",
+						"params": ["diamong_big"]
+					}] }],
+					"__worldX": 1824,
 					"__worldY": 832
 				}
 			]
