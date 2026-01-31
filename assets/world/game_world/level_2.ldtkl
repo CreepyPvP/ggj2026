@@ -238,12 +238,12 @@
 					"height": 32,
 					"defUid": 7,
 					"px": [224,352],
-					"fieldInstances": [{ "__identifier": "Controlled_door", "__type": "EntityRef", "__value": {
+					"fieldInstances": [{ "__identifier": "Controlled_doors", "__type": "Array<EntityRef>", "__value": [{
 						"entityIid": "4d09a9b0-fa90-11f0-b3c4-edaec3ed6d12",
 						"layerIid": "97753f22-fa90-11f0-b3c4-cb7a01d4c3e3",
 						"levelIid": "97753f21-fa90-11f0-b3c4-21091f66cf92",
 						"worldIid": "97753f20-fa90-11f0-b3c4-d91c1b21430c"
-					}, "__tile": null, "defUid": 10, "realEditorValues": [{
+					}], "__tile": null, "defUid": 82, "realEditorValues": [{
 						"id": "V_String",
 						"params": ["4d09a9b0-fa90-11f0-b3c4-edaec3ed6d12"]
 					}] }],
@@ -262,12 +262,12 @@
 					"height": 32,
 					"defUid": 7,
 					"px": [576,64],
-					"fieldInstances": [{ "__identifier": "Controlled_door", "__type": "EntityRef", "__value": {
+					"fieldInstances": [{ "__identifier": "Controlled_doors", "__type": "Array<EntityRef>", "__value": [{
 						"entityIid": "c845a030-fa90-11f0-b3c4-1111e00724d6",
 						"layerIid": "97753f22-fa90-11f0-b3c4-cb7a01d4c3e3",
 						"levelIid": "97753f21-fa90-11f0-b3c4-21091f66cf92",
 						"worldIid": "97753f20-fa90-11f0-b3c4-d91c1b21430c"
-					}, "__tile": null, "defUid": 10, "realEditorValues": [{
+					}], "__tile": null, "defUid": 82, "realEditorValues": [{
 						"id": "V_String",
 						"params": ["c845a030-fa90-11f0-b3c4-1111e00724d6"]
 					}] }],
