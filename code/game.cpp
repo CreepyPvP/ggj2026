@@ -4,6 +4,7 @@
 #include <string.h>
 
 #include "entity.h"
+#include "extract.h"
 #include "scene.h"
 #include "game_math.h"
 #include "guard.h"
@@ -106,6 +107,11 @@ void LoadWorld(const char *world_name) {
                 }
                 if (data_entity.getName() == "door") {
                     entity = new Door();
+                    room->tiles[data_entity.getPosition().x + data_entity.getPosition().y * room->width] = 1;
+                }
+
+                if (data_entity.getName() == "extract") {
+                    entity = new Extract();
                 }
 
                 if (entity) {
