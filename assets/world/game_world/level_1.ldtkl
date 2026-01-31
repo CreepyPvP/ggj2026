@@ -265,6 +265,22 @@
 					}] }],
 					"__worldX": 704,
 					"__worldY": 288
+				},
+				{
+					"__identifier": "player",
+					"__grid": [1,6],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": null,
+					"__smartColor": "#B55088",
+					"iid": "7b49c950-fa90-11f0-8a34-79d632ac0c0f",
+					"width": 32,
+					"height": 32,
+					"defUid": 78,
+					"px": [32,192],
+					"fieldInstances": [],
+					"__worldX": 544,
+					"__worldY": 416
 				}
 			]
 		},
