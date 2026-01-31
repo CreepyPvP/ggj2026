@@ -41,10 +41,10 @@ u8 GetTile(i32 x, i32 y)
     return 0;
 }
 
-void LoadWorld() {
+void LoadWorld(const char *world_name) {
     ldtk::Project ldtk_project;
     ldtk_project.loadFromFile("assets/world/game_world.ldtk");
-    const auto &world = ldtk_project.getWorld("tutorial");
+    const auto &world = ldtk_project.getWorld(world_name);
     for (const ldtk::Level &level: world.allLevels()) {
         const ldtk::Layer &collision_layer = level.getLayer("collisions");
 
@@ -102,7 +102,7 @@ void LoadWorld() {
                     entity->position = Vector2{
                         (f32) data_entity.getWorldPosition().x / 32, (f32) data_entity.getWorldPosition().y / 32
                     };
-                    entity->Configure(data_entity);
+                    entity->Configure(world, data_entity);
                     AddEntity(entity);
                 }
             }
@@ -133,6 +133,14 @@ void AddEntity(Entity *entity) {
     entity->entity_id = arrlen(state.entities) - 1;
 }
 
+static void StartLevel() {
+    // player
+    Player *player = new Player();
+    player->position = {2, 2};
+    AddEntity(player);
+    LoadWorld("tutorial");
+}
+
 static void GameSetup()
 {
     memset(&state, 0, sizeof(GameState));
@@ -142,12 +150,7 @@ static void GameSetup()
     state.camera.rotation = 0.0f;
     state.camera.zoom = 2.5f;
 
-    // player
-    Player *player = new Player();
-    player->position = {2, 2};
-    AddEntity(player);
-
-    LoadWorld();
+    StartLevel();
 }
 
 static void GameDestroy()
