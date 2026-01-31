@@ -10,6 +10,7 @@
 struct Entity {
     virtual ~Entity() = default;
 
+    ldtk::IID ldtk_id;
 
     u32 entity_id = INVALID_ENTITY_ID;
     Vector2 position = {};

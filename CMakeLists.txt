@@ -10,6 +10,8 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_BUILD_TYPE Debug)
 
 add_executable(${PROJECT_NAME}
+    code/switch.cpp
+    code/guard.cpp
 	code/main.cpp
     code/scene.cpp
     code/game.cpp

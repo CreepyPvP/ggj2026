@@ -4,7 +4,7 @@
 
 constexpr float rotationSpeed = 100.0f;
 constexpr float speed = 3.0f;
-constexpr int max_path_size = 32;
+constexpr int max_path_size = 64;
 
 enum GuardColor {
   Red,
@@ -24,4 +24,13 @@ struct Guard : Entity {
   void Draw() override;
   void Configure(const ldtk::World &world, Room* room, const ldtk::Entity &data) override;
   Vector2 patrolPath[32];
+};
+
+struct GuardCamera : Entity {
+  GuardColor color;
+  bool activated;
+
+  void Update(f32 delta) override;
+  void Draw() override;
+  void Configure(const ldtk::World &world, Room* room, const ldtk::Entity &data) override;
 };
