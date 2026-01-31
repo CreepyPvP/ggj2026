@@ -30,3 +30,4 @@ extern GameState state;
 
 extern Scene *game_scene;
 void GameInitialize();
+void AddEntity(Entity *entity);
