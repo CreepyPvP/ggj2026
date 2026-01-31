@@ -1,7 +1,7 @@
-Player collisions
+render world basic
 raycast based player movement
-
-
+render light shapes
+do deferred rendering       <---------
 
  
 after:
