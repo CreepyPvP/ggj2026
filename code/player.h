@@ -8,6 +8,7 @@ extern Player *PLAYER;
 struct Player : Entity {
 
     Entity *last_interactable = NULL;
+    Vector2 last_dir = {};
 
     Player();
     ~Player() override;

@@ -1,4 +1,3 @@
-
 #include "player.h"
 
 #include "entity.h"
@@ -23,8 +22,7 @@ void Player::Update(f32 delta) {
     // Update interaction system
     Entity *new_interaction_target = NULL;
     f32 best_dist = 100;
-    for (u32 i = 0; i < arrlen(state.entities); ++i)
-    {
+    for (u32 i = 0; i < arrlen(state.entities); ++i) {
         Entity *entity = state.entities[i];
         if (!entity->interactable) continue;
         f32 dist = Vector2LengthSqr(entity->position - this->position);
@@ -60,19 +58,33 @@ void Player::Update(f32 delta) {
     // x movement
     {
         Vector2 dir = {movement.x, 0};
-        f32 len = Min(GameRaycast(position, dir) - 0.001, 10 * delta);
-        position += movement * len;
+        f32 len = Min(GameRaycast(position, dir) - 0.001, 6 * delta);
+        position += dir * len;
     }
 
     // y movement
     {
         Vector2 dir = {0, movement.y};
-        f32 len = Min(GameRaycast(position, dir) - 0.001, 10 * delta);
-        position += movement * len;
+        f32 len = Min(GameRaycast(position, dir) - 0.001, 6 * delta);
+        position += dir * len;
     }
+
+    if (Vector2LengthSqr(movement) > 0) last_dir = movement;
 }
 
 void Player::Draw() {
     Entity::Draw();
-    DrawRectangle(this->position.x * 32, this->position.y * 32, 32, 32, BLUE);
+
+    Vector2 render_pos = {floorf(this->position.x * 32), floorf(this->position.y * 32)};
+    if (last_dir.y < 0) {
+        DrawTextureRec(tileset, Rectangle{96, 352, 32, 32}, render_pos, WHITE);
+    } else if (last_dir.y > 0) {
+        DrawTextureRec(tileset, Rectangle{32, 352, 32, 32}, render_pos, WHITE);
+    } else if (last_dir.x < 0) {
+        DrawTextureRec(tileset, Rectangle{64, 352, 32, 32}, render_pos, WHITE);
+    } else if (last_dir.x > 0) {
+        DrawTextureRec(tileset, Rectangle{128, 352, 32, 32}, render_pos, WHITE);
+    } else {
+        DrawTextureRec(tileset, Rectangle{32, 352, 32, 32}, render_pos, WHITE);
+    }
 }
