@@ -8,10 +8,7 @@
 
 i32 main(void)
 {
-    const int screenWidth = 1600;
-    const int screenHeight = 900;
-
-    InitWindow(screenWidth, screenHeight, "Colorful Heist");
+    InitWindow(1600, 900, "Colorful Heist");
     SetTargetFPS(60);
 
     tileset = LoadTexture("assets/textures/tileset_world.png");
