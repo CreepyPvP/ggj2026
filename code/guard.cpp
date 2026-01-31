@@ -5,8 +5,6 @@
 #include "raymath.h"
 #include "LDtkLoader/World.hpp"
 
-#include "render_util.cpp"
-
 void Guard::Update(f32 delta) {
     Entity::Update(delta);
 
