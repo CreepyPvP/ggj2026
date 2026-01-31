@@ -36,6 +36,8 @@ add_executable(${PROJECT_NAME}
 		code/treasure.h
 		code/guard.cpp
 		code/guard.h
+		code/render_util.cpp
+		code/render_util.h
 )
 
 set(RAYLIB_DIR raylib)
