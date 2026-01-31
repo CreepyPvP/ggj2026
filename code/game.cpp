@@ -17,19 +17,13 @@ Scene *game_scene;
 Texture2D tileset;
 
 GameState state;
-    
-void SetTile(i32 x, i32 y, u8 tile)
-{
-    if (x < 0 || y < 0 || x >= state.width || y >= state.height)
-        return;
-    state.tiles[x + y * state.width] = tile;
-}
 
 u8 GetTile(i32 x, i32 y)
 {
-    if (x < 0 || y < 0 || x >= state.width || y >= state.height)
-        return 0;
-    return state.tiles[x + y * state.width];
+    // if (x < 0 || y < 0 || x >= state.width || y >= state.height)
+    //     return 0;
+    // return state.tiles[x + y * state.width];
+    return 0;
 }
 
 void LoadWorld()
@@ -37,57 +31,60 @@ void LoadWorld()
     ldtk::Project ldtk_project;
     ldtk_project.loadFromFile("assets/world/game_world.ldtk");
     const auto& world = ldtk_project.getWorld("tutorial");
-    const auto& level = world.getLevel("level_0");
-    const ldtk::Layer& collision_layer = level.getLayer("collisions");
+    for (const ldtk::Level &level : world.allLevels()) {
+        const ldtk::Layer& collision_layer = level.getLayer("collisions");
 
-    state.width = level.size.x / 32;
-    state.height = level.size.y / 32;
+        Room *room = state.rooms + state.room_count++;
 
-    for (i32 x = 0; x < state.width; ++x)
-    {
-        for (i32 y = 0; y < state.height; ++y)
+        room->width = level.size.x / 32;
+        room->height = level.size.y / 32;
+
+        for (i32 x = 0; x < room->width; ++x)
         {
-            const ldtk::IntGridValue& grid_val = collision_layer.getIntGridVal(x, y);
-            SetTile(x, y, grid_val.value > 0);
-        }
-    }
-
-    for (const ldtk::Layer& layer : level.allLayers())
-    {
-        if (layer.getType() == ldtk::LayerType::AutoLayer)
-        {
-            for (const auto& tile : layer.allTiles()) {
-                const auto& position = tile.getPosition();
-                const auto& texture_rect = tile.getTextureRect();
-
-                TexturedTile textured = {};
-                textured.position = Vector2(position.x, position.y);
-                textured.source = {
-                    (f32) texture_rect.x,
-                    (f32) texture_rect.y,
-                    (f32) texture_rect.width * (tile.flipX ? -1.0f : 1.0f),
-                    (f32) texture_rect.height * (tile.flipY ? -1.0f : 1.0f)
-                };
-
-                arrput(state.textured_tiles, textured);
-            }
-        }
-    }
-
-    for (const ldtk::Layer& layer : level.allLayers()) {
-        if (layer.getType() != ldtk::LayerType::Entities) continue;
-
-        for (auto& data_entity : layer.allEntities()) {
-            Entity *entity = NULL;
-            if (data_entity.getName() == "door") {
-                // entity = new Door()
+            for (i32 y = 0; y < room->height; ++y)
+            {
+                const ldtk::IntGridValue& grid_val = collision_layer.getIntGridVal(x, y);
+                room->tiles[x + y * room->width] = grid_val.value > 0;
             }
 
+            for (const ldtk::Layer& layer : level.allLayers())
+            {
+                if (layer.getType() == ldtk::LayerType::AutoLayer)
+                {
+                    for (const auto& tile : layer.allTiles()) {
+                        const auto& position = tile.getWorldPosition();
+                        const auto& texture_rect = tile.getTextureRect();
 
-            if (entity) {
-                entity->position = Vector2{(f32)data_entity.getWorldPosition().x, (f32)data_entity.getWorldPosition().y};
-                entity->Configure(data_entity);
-                AddEntity(entity);
+                        TexturedTile textured = {};
+                        textured.position = Vector2(position.x, position.y);
+                        textured.source = {
+                            (f32) texture_rect.x,
+                            (f32) texture_rect.y,
+                            (f32) texture_rect.width * (tile.flipX ? -1.0f : 1.0f),
+                            (f32) texture_rect.height * (tile.flipY ? -1.0f : 1.0f)
+                        };
+
+                        arrput(state.textured_tiles, textured);
+                    }
+                }
+            }
+
+            for (const ldtk::Layer& layer : level.allLayers()) {
+                if (layer.getType() != ldtk::LayerType::Entities) continue;
+
+                for (auto& data_entity : layer.allEntities()) {
+                    Entity *entity = NULL;
+                    if (data_entity.getName() == "door") {
+                        // entity = new Door()
+                    }
+
+
+                    if (entity) {
+                        entity->position = Vector2{(f32)data_entity.getWorldPosition().x, (f32)data_entity.getWorldPosition().y};
+                        entity->Configure(data_entity);
+                        AddEntity(entity);
+                    }
+                }
             }
         }
     }
@@ -148,9 +145,9 @@ f32 GameRaycast(Vector2 pos, Vector2 dir)
 {
     f32 min_t = 1e30;
 
-    for (u32 y = 0; y < state.height; ++y) 
+    for (u32 y = 0; y < 0; ++y)
     {
-        for (u32 x = 0; x < state.width; ++x)
+        for (u32 x = 0; x < 0; ++x)
         {
             if (GetTile(x, y) == 0)
                 continue;
