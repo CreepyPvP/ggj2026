@@ -74,19 +74,25 @@
 					"__pivot": [0,0],
 					"__tags": [],
 					"__tile": null,
-					"__smartColor": "#FF0000",
+					"__smartColor": "#4BB41C",
 					"iid": "b70d58d0-fa90-11f0-97a2-bf6875ae14e9",
 					"width": 32,
 					"height": 32,
 					"defUid": 5,
 					"px": [384,384],
-					"fieldInstances": [{ "__identifier": "PatrolPath", "__type": "Array<Point>", "__value": [ { "cx": 6, "cy": 12 }, { "cx": 17, "cy": 12 } ], "__tile": null, "defUid": 9, "realEditorValues": [ {
-						"id": "V_String",
-						"params": ["6,12"]
-					}, {
-						"id": "V_String",
-						"params": ["17,12"]
-					} ] }],
+					"fieldInstances": [
+						{ "__identifier": "color", "__type": "LocalEnum.color", "__value": "green", "__tile": null, "defUid": 71, "realEditorValues": [{
+							"id": "V_String",
+							"params": ["green"]
+						}] },
+						{ "__identifier": "PatrolPath", "__type": "Array<Point>", "__value": [ { "cx": 6, "cy": 12 }, { "cx": 17, "cy": 12 } ], "__tile": null, "defUid": 9, "realEditorValues": [ {
+							"id": "V_String",
+							"params": ["6,12"]
+						}, {
+							"id": "V_String",
+							"params": ["17,12"]
+						} ] }
+					],
 					"__worldX": 896,
 					"__worldY": 608
 				},
@@ -160,25 +166,31 @@
 					"__pivot": [0,0],
 					"__tags": [],
 					"__tile": null,
-					"__smartColor": "#FF0000",
+					"__smartColor": "#BE4A2F",
 					"iid": "18a57a50-fa90-11f0-97a2-3ff95b0c13d7",
 					"width": 32,
 					"height": 32,
 					"defUid": 5,
 					"px": [448,64],
-					"fieldInstances": [{ "__identifier": "PatrolPath", "__type": "Array<Point>", "__value": [ { "cx": 21, "cy": 2 }, { "cx": 21, "cy": 8 }, { "cx": 14, "cy": 8 }, { "cx": 14, "cy": 2 } ], "__tile": null, "defUid": 9, "realEditorValues": [ {
-						"id": "V_String",
-						"params": ["21,2"]
-					}, {
-						"id": "V_String",
-						"params": ["21,8"]
-					}, {
-						"id": "V_String",
-						"params": ["14,8"]
-					}, {
-						"id": "V_String",
-						"params": ["14,2"]
-					} ] }],
+					"fieldInstances": [
+						{ "__identifier": "color", "__type": "LocalEnum.color", "__value": "red", "__tile": null, "defUid": 71, "realEditorValues": [{
+							"id": "V_String",
+							"params": ["red"]
+						}] },
+						{ "__identifier": "PatrolPath", "__type": "Array<Point>", "__value": [ { "cx": 21, "cy": 2 }, { "cx": 21, "cy": 8 }, { "cx": 14, "cy": 8 }, { "cx": 14, "cy": 2 } ], "__tile": null, "defUid": 9, "realEditorValues": [ {
+							"id": "V_String",
+							"params": ["21,2"]
+						}, {
+							"id": "V_String",
+							"params": ["21,8"]
+						}, {
+							"id": "V_String",
+							"params": ["14,8"]
+						}, {
+							"id": "V_String",
+							"params": ["14,2"]
+						} ] }
+					],
 					"__worldX": 960,
 					"__worldY": 288
 				},
@@ -226,12 +238,33 @@
 					"height": 32,
 					"defUid": 4,
 					"px": [256,256],
-					"fieldInstances": [{ "__identifier": "unlockable", "__type": "Bool", "__value": false, "__tile": null, "defUid": 64, "realEditorValues": [{
-						"id": "V_Bool",
-						"params": [ false ]
-					}] }],
+					"fieldInstances": [{ "__identifier": "unlockable", "__type": "Bool", "__value": false, "__tile": null, "defUid": 64, "realEditorValues": [null] }],
 					"__worldX": 768,
 					"__worldY": 480
+				},
+				{
+					"__identifier": "switch",
+					"__grid": [6,2],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": null,
+					"__smartColor": "#63C74D",
+					"iid": "4a0c0170-fa90-11f0-b3c4-4d93e804ff1d",
+					"width": 32,
+					"height": 32,
+					"defUid": 7,
+					"px": [192,64],
+					"fieldInstances": [{ "__identifier": "Controlled_door", "__type": "EntityRef", "__value": {
+						"entityIid": "661564c0-fa90-11f0-b3c4-415ec76fa2e3",
+						"layerIid": "d5a6b5d1-fa90-11f0-97a2-33a6ba9b44e2",
+						"levelIid": "d5a6b5d0-fa90-11f0-97a2-6de6c99f907e",
+						"worldIid": "e54f92c0-fa90-11f0-abe6-53b9e50ae076"
+					}, "__tile": null, "defUid": 10, "realEditorValues": [{
+						"id": "V_String",
+						"params": ["661564c0-fa90-11f0-b3c4-415ec76fa2e3"]
+					}] }],
+					"__worldX": 704,
+					"__worldY": 288
 				}
 			]
 		},
