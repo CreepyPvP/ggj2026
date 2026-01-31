@@ -69,6 +69,30 @@
 					"__worldY": 288
 				},
 				{
+					"__identifier": "switch",
+					"__grid": [6,2],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": null,
+					"__smartColor": "#63C74D",
+					"iid": "ad9555f0-fa90-11f0-97a2-df67e8826f48",
+					"width": 32,
+					"height": 32,
+					"defUid": 7,
+					"px": [192,64],
+					"fieldInstances": [{ "__identifier": "controlled_door", "__type": "EntityRef", "__value": {
+						"entityIid": "955106f0-fa90-11f0-8452-4f81f36bfc15",
+						"layerIid": "d5a6b5d1-fa90-11f0-97a2-33a6ba9b44e2",
+						"levelIid": "d5a6b5d0-fa90-11f0-97a2-6de6c99f907e",
+						"worldIid": "e54f92c0-fa90-11f0-abe6-53b9e50ae076"
+					}, "__tile": null, "defUid": 10, "realEditorValues": [{
+						"id": "V_String",
+						"params": ["955106f0-fa90-11f0-8452-4f81f36bfc15"]
+					}] }],
+					"__worldX": 704,
+					"__worldY": 288
+				},
+				{
 					"__identifier": "guard",
 					"__grid": [12,12],
 					"__pivot": [0,0],
@@ -221,15 +245,12 @@
 					"__tags": [],
 					"__tile": null,
 					"__smartColor": "#6192DF",
-					"iid": "661564c0-fa90-11f0-b3c4-415ec76fa2e3",
+					"iid": "955106f0-fa90-11f0-8452-4f81f36bfc15",
 					"width": 32,
 					"height": 32,
 					"defUid": 4,
 					"px": [256,256],
-					"fieldInstances": [{ "__identifier": "unlockable", "__type": "Bool", "__value": false, "__tile": null, "defUid": 64, "realEditorValues": [{
-						"id": "V_Bool",
-						"params": [ false ]
-					}] }],
+					"fieldInstances": [{ "__identifier": "keyopenable", "__type": "Bool", "__value": false, "__tile": null, "defUid": 67, "realEditorValues": [] }],
 					"__worldX": 768,
 					"__worldY": 480
 				}
