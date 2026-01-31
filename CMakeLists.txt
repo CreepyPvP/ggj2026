@@ -16,6 +16,7 @@ add_executable(${PROJECT_NAME}
     code/entity.cpp
     code/player.cpp
 	code/treasure.cpp
+	code/level_selection.cpp
 
     external/LDtkLoader/DataTypes.cpp
     external/LDtkLoader/Entity.cpp
