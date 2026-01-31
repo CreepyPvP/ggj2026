@@ -2,7 +2,7 @@
 #include "entity.h"
 #include "game.h"
 
-constexpr float rotationSpeed = 0.5f;
+constexpr float rotationSpeed = 100.0f;
 constexpr float speed = 3.0f;
 constexpr int max_path_size = 32;
 

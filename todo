@@ -1,9 +1,5 @@
-render light shapes
 color lookup
 do deferred rendering       <---------
-
-dont linear sample pixelart lmao
-
 
 camera lookahead
 

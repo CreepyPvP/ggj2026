@@ -16,6 +16,11 @@ add_executable(${PROJECT_NAME}
     code/entity.cpp
     code/player.cpp
 	code/treasure.cpp
+	code/level_selection.cpp
+    code/treasure.cpp
+    code/treasure.h
+    code/guard.cpp
+    code/guard.h
 
     external/LDtkLoader/DataTypes.cpp
     external/LDtkLoader/Entity.cpp
@@ -32,10 +37,6 @@ add_executable(${PROJECT_NAME}
     external/LDtkLoader/Tileset.cpp
     external/LDtkLoader/Utils.cpp
     external/LDtkLoader/World.cpp
-		code/treasure.cpp
-		code/treasure.h
-		code/guard.cpp
-		code/guard.h
 )
 
 set(RAYLIB_DIR raylib)

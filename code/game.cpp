@@ -18,6 +18,8 @@
 Scene *game_scene;
 Texture2D tileset;
 
+RenderTexture2D render_target;
+
 GameState state;
 
 u8 GetTile(i32 x, i32 y, Room *room)
@@ -151,7 +153,7 @@ static void GameSetup()
     memset(&state, 0, sizeof(GameState));
 
     state.camera.target = Vector2{ 0, 0 };
-    state.camera.offset = Vector2{ GetScreenWidth()/2.0f, GetScreenHeight()/2.0f };
+    state.camera.offset = Vector2{ (f32)render_target.texture.width/2.0f, (f32) render_target.texture.height / 2.0f };
     state.camera.rotation = 0.0f;
     state.camera.zoom = 2.5f;
 
@@ -260,11 +262,10 @@ void UpdateCamera(const Entity *entity, f32 delta)
     state.camera.target = Vector2(targetX, targetY);
 }
 
-static void GameDrawCone(Vector2 pos, Vector2 dir, f32 length, f32 angle)
+void GameDrawCone(Vector2 pos, f32 forward_angle, f32 length, f32 angle)
 {
-    u32 sample_points = 128;
+    u32 sample_points = 32;
 
-    f32 forward_angle = 0;
     f32 start_angle = forward_angle + angle / 2;
     f32 end_angle = forward_angle - angle / 2;
 
@@ -305,7 +306,6 @@ static void GameFrame(f32 delta)
     // Render
     //
 
-    BeginDrawing();
     ClearBackground({34, 32, 52, 255});
     BeginMode2D(state.camera);
 
@@ -316,22 +316,22 @@ static void GameFrame(f32 delta)
     }
 
     // Draw colliders
-    for (u32 i = 0; i < arrlen(state.rooms); ++i)
-    {
-        Room *room = state.rooms + i;
-        for (u32 dx = 0; dx < room->width; ++dx)
-        {
-            for (u32 dy = 0; dy < room->height; ++dy)
-            {
-                i32 x = room->offset_x + dx;
-                i32 y = room->offset_y + dy;
-                u8 tile = GetTile(x, y);
-
-                // if (tile)
-                //     DrawRectangle(x * 32, y * 32, 32, 32, BLACK);
-            }
-        }
-    }
+    // for (u32 i = 0; i < arrlen(state.rooms); ++i)
+    // {
+    //     Room *room = state.rooms + i;
+    //     for (u32 dx = 0; dx < room->width; ++dx)
+    //     {
+    //         for (u32 dy = 0; dy < room->height; ++dy)
+    //         {
+    //             i32 x = room->offset_x + dx;
+    //             i32 y = room->offset_y + dy;
+    //             u8 tile = GetTile(x, y);
+    //
+    //             if (tile)
+    //                 DrawRectangle(x * 32, y * 32, 32, 32, BLACK);
+    //         }
+    //     }
+    // }
 
     for (u32 i = 0; i < arrlen(state.entities); ++i)
     {
@@ -339,19 +339,21 @@ static void GameFrame(f32 delta)
         entity->Draw();
     }
 
-    if (PLAYER != NULL)
-        GameDrawCone(PLAYER->position, {1, 0}, 6, 45);
 
     EndMode2D();
 
     {
         // fade in
-        f32 t = Range(game_scene->time, 0, 0.65);
-        DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, 1 - t));
+        f32 t = Range(game_scene->time, 0, 1.25);
+        DrawRectangle(0, 0, render_target.texture.width, render_target.texture.height, Fade(BLACK, 1 - t));
     }
 
-    DrawFPS(10, 10);
+    EndTextureMode();
 
+    BeginDrawing();
+    DrawTexturePro(render_target.texture, {0, 0, (f32) render_target.texture.width, (f32) -render_target.texture.height},
+                   {0, 0, (f32) GetScreenWidth(), (f32) GetScreenHeight()}, {}, 0, WHITE);
+    DrawFPS(10, 10);
     EndDrawing();
 }
 
@@ -362,4 +364,6 @@ void GameInitialize()
     game_scene->Setup = GameSetup;
     game_scene->Frame = GameFrame;
     game_scene->Destroy = GameDestroy;
+
+    render_target = LoadRenderTexture(1600, 900);
 }
