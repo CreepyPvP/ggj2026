@@ -77,8 +77,8 @@ void Player::Update(f32 delta) {
         if (dir.x > 0)
             off += 2;
 
-        f32 sensor_value = Min(GameRaycast(position + sensor_offsets[off], dir) - 0.001,
-                                GameRaycast(position + sensor_offsets[off + 1], dir) - 0.001);
+        f32 sensor_value = Min(GameRaycast(position + sensor_offsets[off], dir, 5) - 0.001,
+                                GameRaycast(position + sensor_offsets[off + 1], dir, 5) - 0.001);
         f32 len = Min(sensor_value, speed * delta);
         position += dir * len;
     }
@@ -91,8 +91,8 @@ void Player::Update(f32 delta) {
         if (dir.y > 0)
             off += 2;
 
-        f32 sensor_value = Min(GameRaycast(position + sensor_offsets[off], dir) - 0.001,
-                                GameRaycast(position + sensor_offsets[off + 1], dir) - 0.001);
+        f32 sensor_value = Min(GameRaycast(position + sensor_offsets[off], dir, 5) - 0.001,
+                                GameRaycast(position + sensor_offsets[off + 1], dir, 5) - 0.001);
         f32 len = Min(sensor_value, speed * delta);
         position += dir * len;
     }

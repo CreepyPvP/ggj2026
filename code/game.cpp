@@ -172,75 +172,78 @@ static void GameDestroy()
     arrfree(state.rooms);
 }
 
-f32 GameRaycast(Vector2 pos, Vector2 dir)
+f32 GameRaycast(Vector2 pos, Vector2 dir, f32 max_dist)
 {
     f32 min_t = 1e30;
 
-    for (u32 i = 0; i < arrlen(state.rooms); ++i)
+    i32 tile_x = pos.x;
+    i32 tile_y = pos.y;
+    i32 sign_x = dir.x >= 0 ? 1 : -1;
+    i32 sign_y = dir.y >= 0 ? 1 : -1;
+
+    u32 steps = max_dist + 1;
+
+    for (u32 dy = 0; dy < steps; ++dy)
     {
-        Room *room = state.rooms + i;
-        for (u32 dy = 0; dy < room->height; ++dy)
+        for (u32 dx = 0; dx < steps; ++dx)
         {
-            for (u32 dx = 0; dx < room->width; ++dx)
+            i32 x = tile_x + dx * sign_x;
+            i32 y = tile_y + dy * sign_y;
+
+            if (GetTile(x, y) == 0)
+                continue;
+
+            Vector2 aabb_position = { (f32) x, (f32) y };
+            Vector2 aabb_size = { 1, 1 };
+
+            // x collision
+            if (dir.x > 0.00001 || dir.x < 0.00001)
             {
-                i32 x = room->offset_x + dx;
-                i32 y = room->offset_y + dy;
-
-                if (GetTile(x, y) == 0)
-                    continue;
-
-                Vector2 aabb_position = { (f32) x, (f32) y };
-                Vector2 aabb_size = { 1, 1 };
-
-                // x collision
-                if (dir.x > 0.00001 || dir.x < 0.00001)
                 {
-                    {
-                        float t = (aabb_position.x - pos.x) / dir.x;
-                        float y = t * dir.y + pos.y;
-                        float y_diff = y - aabb_position.y;
+                    float t = (aabb_position.x - pos.x) / dir.x;
+                    float y = t * dir.y + pos.y;
+                    float y_diff = y - aabb_position.y;
 
-                        if (y_diff >= 0 && y_diff <= aabb_size.y) {
-                            if (t >= 0 && t < min_t) {
-                                min_t = t;
-                            }
-                        }
-                    }
-                    {
-                        float t = (aabb_position.x + aabb_size.x - pos.x) / dir.x;
-                        float y = t * dir.y + pos.y;
-                        float y_diff = y - aabb_position.y;
-
-                        if (y_diff >= 0 && y_diff <= aabb_size.y) {
-                            if (t >= 0 && t < min_t) {
-                                min_t = t;
-                            }
+                    if (y_diff >= 0 && y_diff <= aabb_size.y) {
+                        if (t >= 0 && t < min_t) {
+                            min_t = t;
                         }
                     }
                 }
+                {
+                    float t = (aabb_position.x + aabb_size.x - pos.x) / dir.x;
+                    float y = t * dir.y + pos.y;
+                    float y_diff = y - aabb_position.y;
 
-                // y collision
-                if (dir.y > 0.00001 || dir.y < 0.00001) {
-                    {
-                        float t = (aabb_position.y - pos.y) / dir.y;
-                        float x = t * dir.x + pos.x;
-                        float x_diff = x - aabb_position.x;
-
-                        if (x_diff >= 0 && x_diff <= aabb_size.x) {
-                            if (t >= 0 && t < min_t) {
-                                min_t = t;
-                            }
+                    if (y_diff >= 0 && y_diff <= aabb_size.y) {
+                        if (t >= 0 && t < min_t) {
+                            min_t = t;
                         }
                     }
-                    {
-                        float t = (aabb_position.y + aabb_size.y - pos.y) / dir.y;
-                        float x = t * dir.x + pos.x;
-                        float x_diff = x - aabb_position.x;
+                }
+            }
 
-                        if (x_diff >= 0 && x_diff <= aabb_size.x) {
-                            if (t >= 0 && t < min_t) {
-                                min_t = t;
-                            }
+            // y collision
+            if (dir.y > 0.00001 || dir.y < 0.00001) {
+                {
+                    float t = (aabb_position.y - pos.y) / dir.y;
+                    float x = t * dir.x + pos.x;
+                    float x_diff = x - aabb_position.x;
+
+                    if (x_diff >= 0 && x_diff <= aabb_size.x) {
+                        if (t >= 0 && t < min_t) {
+                            min_t = t;
+                        }
+                    }
+                }
+                {
+                    float t = (aabb_position.y + aabb_size.y - pos.y) / dir.y;
+                    float x = t * dir.x + pos.x;
+                    float x_diff = x - aabb_position.x;
+
+                    if (x_diff >= 0 && x_diff <= aabb_size.x) {
+                        if (t >= 0 && t < min_t) {
+                            min_t = t;
                         }
                     }
                 }
@@ -264,7 +267,7 @@ void UpdateCamera(const Entity *entity, f32 delta)
 
 void GameDrawCone(Vector2 pos, f32 forward_angle, f32 length, f32 angle)
 {
-    u32 sample_points = 32;
+    u32 sample_points = 64;
 
     f32 start_angle = forward_angle + angle / 2;
     f32 end_angle = forward_angle - angle / 2;
@@ -273,7 +276,7 @@ void GameDrawCone(Vector2 pos, f32 forward_angle, f32 length, f32 angle)
 
     {
         Vector2 current_dir = {cos(start_angle / 180.0f * PI), sin(start_angle / 180.0f * PI)};
-        f32 len = Min(GameRaycast(pos, current_dir), length);
+        f32 len = Min(GameRaycast(pos, current_dir, length), length);
         prev_sample = (pos + current_dir * len) * 32;
     }
 
@@ -282,7 +285,7 @@ void GameDrawCone(Vector2 pos, f32 forward_angle, f32 length, f32 angle)
         f32 current_angle = start_angle + (end_angle - start_angle) * ((f32) i / ((f32) sample_points - 1));
         Vector2 current_dir = {cos(current_angle / 180.0f * PI), sin(current_angle / 180.0f * PI)};
 
-        f32 len = Min(GameRaycast(pos, current_dir), length);
+        f32 len = Min(GameRaycast(pos, current_dir, length), length);
         Vector2 sample = (pos + current_dir * len) * 32;
 
         DrawTriangle(pos * 32, prev_sample, sample, Fade(BLUE, 0.5));
