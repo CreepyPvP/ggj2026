@@ -61,4 +61,6 @@ void GameStartLose();
 extern Scene *game_scene;
 void GameInitialize();
 void AddEntity(Entity *entity);
+void SetTile(float x, float y, int value);
+void SetTile(i32 int_x, i32 int_y, Room* room, int value);
 Entity* getEntity(ldtk::IID ldtk_id);

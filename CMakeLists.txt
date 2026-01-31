@@ -39,6 +39,8 @@ add_executable(${PROJECT_NAME}
     external/LDtkLoader/Tileset.cpp
     external/LDtkLoader/Utils.cpp
     external/LDtkLoader/World.cpp
+		code/extract.cpp
+		code/extract.h
 )
 
 set(RAYLIB_DIR raylib)

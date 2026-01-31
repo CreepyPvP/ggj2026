@@ -4,6 +4,7 @@
 #include <string.h>
 
 #include "entity.h"
+#include "extract.h"
 #include "scene.h"
 #include "game_math.h"
 #include "guard.h"
@@ -43,6 +44,33 @@ u8 GetTile(i32 x, i32 y)
             return GetTile(x, y, room);
     }
     return 0;
+}
+
+void SetTile(i32 int_x, i32 int_y, Room* room, int value){
+    
+    i32 rx = int_x - room->offset_x;
+    i32 ry = int_y - room->offset_y;
+    if (rx < 0 || ry < 0 || rx >= room->width || ry >= room->height){
+        printf("Invalid SetTile call!!!");
+        return;
+    }
+    room->tiles[rx + ry * room->width] = value;
+}
+
+void SetTile(float x, float y, int value){
+    i32 int_x = (int)(x / 32);
+    i32 int_y = (int)(y / 32);
+    
+    for (u32 i = 0; i < arrlen(state.rooms); ++i)
+    {
+        Room *room = state.rooms + i;
+        if(room->offset_x <= int_x && room->offset_x + room->width >= int_x && 
+        room->offset_y <= int_y && room->offset_y + room->width >= int_y){
+            SetTile(int_x,int_y, room, value);
+        }
+        
+    }
+
 }
 
 void LoadWorld(const char *world_name) {
@@ -109,6 +137,11 @@ void LoadWorld(const char *world_name) {
                 }
                 if (data_entity.getName() == "door") {
                     entity = new Door();
+                    room->tiles[data_entity.getPosition().x / 32 + data_entity.getPosition().y / 32 * room->width] = 1;
+                }
+
+                if (data_entity.getName() == "extract") {
+                    entity = new Extract();
                 }
 
                 if (entity) {
