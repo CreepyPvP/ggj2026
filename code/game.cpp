@@ -36,7 +36,7 @@ void LoadWorld()
 {
     ldtk::Project ldtk_project;
     ldtk_project.loadFromFile("assets/world/game_world.ldtk");
-    const auto& world = ldtk_project.getWorld("world");
+    const auto& world = ldtk_project.getWorld("tutorial");
     const auto& level = world.getLevel("level_0");
     const ldtk::Layer& collision_layer = level.getLayer("collisions");
 
@@ -74,8 +74,25 @@ void LoadWorld()
         }
     }
 
+    for (const ldtk::Layer& layer : level.allLayers()) {
+        if (layer.getType() != ldtk::LayerType::Entities) continue;
 
-    // // iterate on Enemy entities
+        for (auto& data_entity : layer.allEntities()) {
+            Entity *entity = NULL;
+            if (data_entity.getName() == "door") {
+                // entity = new Door()
+            }
+
+
+            if (entity) {
+                entity->position = Vector2{(f32)data_entity.getWorldPosition().x, (f32)data_entity.getWorldPosition().y};
+                entity->Configure(data_entity);
+                AddEntity(entity);
+            }
+        }
+    }
+
+    // iterate on Enemy entities
     // for (const ldtk::Entity& enemy : level1.getLayer("Entities").getEntitiesByName("Enemy")) {
     //
     //     // iterate over an array field of Enum values
@@ -94,7 +111,7 @@ void LoadWorld()
     // }
 }
 
-static void AddEntity(Entity *entity) {
+void AddEntity(Entity *entity) {
     arrput(state.entities, entity);
     entity->entity_id = arrlen(state.entities) - 1;
 }
@@ -204,8 +221,13 @@ void UpdateCamera(const Entity *entity, f32 delta)
     Vector2 playerPos = entity->position;
     Vector2 cameraPos = state.camera.target;
 
-    const int targetX = 0.1f * playerPos.x * 32 + 0.9f * cameraPos.x;
-    const int targetY = 0.1f * playerPos.y * 32 + 0.9f * cameraPos.y;
+    // Smoothing camera following player
+    float targetX = 0.1f * playerPos.x * 32 + 0.9f * cameraPos.x;
+    float targetY = 0.1f * playerPos.y * 32 + 0.9f * cameraPos.y;
+
+    // Centering camera
+    targetX++;
+    targetY++;
 
     state.camera.target = Vector2(targetX, targetY);
 }
@@ -222,7 +244,6 @@ static void GameFrame(f32 delta)
     }
 
     if (PLAYER != NULL) UpdateCamera(PLAYER, delta);
-
 
     // Render
     //

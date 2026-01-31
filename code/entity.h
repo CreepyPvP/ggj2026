@@ -1,11 +1,14 @@
 #pragma once
+
 #include "raylib.h"
 #include "types.h"
+#include "LDtkLoader/Entity.hpp"
 
 #define INVALID_ENTITY_ID (-1)
 
 struct Entity {
     virtual ~Entity() = default;
+
 
     u32 entity_id = INVALID_ENTITY_ID;
     Vector2 position = {};
@@ -13,6 +16,7 @@ struct Entity {
     bool interactable = false;
     bool active_interaction = NULL;
 
+    virtual void Configure(const ldtk::Entity& data) {}
     virtual void Update(f32 delta) {}
     virtual void Draw() {}
 

@@ -31,3 +31,4 @@ f32 GameRaycast(Vector2 pos, Vector2 dir);
 
 extern Scene *game_scene;
 void GameInitialize();
+void AddEntity(Entity *entity);
