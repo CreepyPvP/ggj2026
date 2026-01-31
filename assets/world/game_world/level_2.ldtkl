@@ -69,11 +69,11 @@
 							"id": "V_String",
 							"params": ["green"]
 						}] },
-						{ "__identifier": "direction", "__type": "Point", "__value": { "cx": 3, "cy": 5 }, "__tile": null, "defUid": 66, "realEditorValues": [{
+						{ "__identifier": "field_of_view", "__type": "Float", "__value": 45, "__tile": null, "defUid": 67, "realEditorValues": [] },
+						{ "__identifier": "directions", "__type": "Array<Point>", "__value": [{ "cx": 3, "cy": 6 }], "__tile": null, "defUid": 81, "realEditorValues": [{
 							"id": "V_String",
-							"params": ["3,5"]
-						}] },
-						{ "__identifier": "field_of_view", "__type": "Float", "__value": 45, "__tile": null, "defUid": 67, "realEditorValues": [] }
+							"params": ["3,6"]
+						}] }
 					],
 					"__worldX": 96,
 					"__worldY": 256
@@ -95,11 +95,11 @@
 							"id": "V_String",
 							"params": ["blue"]
 						}] },
-						{ "__identifier": "direction", "__type": "Point", "__value": { "cx": 12, "cy": 3 }, "__tile": null, "defUid": 66, "realEditorValues": [{
+						{ "__identifier": "field_of_view", "__type": "Float", "__value": 10, "__tile": null, "defUid": 67, "realEditorValues": [{ "id": "V_Float", "params": [10] }] },
+						{ "__identifier": "directions", "__type": "Array<Point>", "__value": [{ "cx": 12, "cy": 3 }], "__tile": null, "defUid": 81, "realEditorValues": [{
 							"id": "V_String",
 							"params": ["12,3"]
-						}] },
-						{ "__identifier": "field_of_view", "__type": "Float", "__value": 10, "__tile": null, "defUid": 67, "realEditorValues": [{ "id": "V_Float", "params": [10] }] }
+						}] }
 					],
 					"__worldX": 320,
 					"__worldY": 96
@@ -121,11 +121,11 @@
 							"id": "V_String",
 							"params": ["red"]
 						}] },
-						{ "__identifier": "direction", "__type": "Point", "__value": { "cx": 18, "cy": 6 }, "__tile": null, "defUid": 66, "realEditorValues": [{
+						{ "__identifier": "field_of_view", "__type": "Float", "__value": 45, "__tile": null, "defUid": 67, "realEditorValues": [] },
+						{ "__identifier": "directions", "__type": "Array<Point>", "__value": [{ "cx": 18, "cy": 6 }], "__tile": null, "defUid": 81, "realEditorValues": [{
 							"id": "V_String",
 							"params": ["18,6"]
-						}] },
-						{ "__identifier": "field_of_view", "__type": "Float", "__value": 45, "__tile": null, "defUid": 67, "realEditorValues": [] }
+						}] }
 					],
 					"__worldX": 576,
 					"__worldY": 256
