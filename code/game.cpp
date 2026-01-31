@@ -293,8 +293,24 @@ void GameDrawCone(Vector2 pos, f32 forward_angle, f32 length, f32 angle, Color c
     }
 }
 
+void GameStartLose()
+{
+    state.game_lost = true;
+}
+
 static void GameFrame(f32 delta)
 {
+    if (state.game_lost)
+    {
+        state.time_since_game_lost += delta;
+        delta = 0.001;
+        if (state.time_since_game_lost > 1)
+        {
+            SceneStart(game_scene);
+            return;
+        }
+    }
+
     // Update
     //
 
