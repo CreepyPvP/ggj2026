@@ -140,13 +140,19 @@ static f32 Raycast(Vector2 pos, Vector2 dir)
 }
 
 void UpdateCamera(const Entity *entity, f32 delta) {
-        Vector2 playerPos = entity->position;
-        Vector2 cameraPos = state.camera.target;
+    Vector2 playerPos = entity->position;
+    Vector2 cameraPos = state.camera.target;
 
-        const int targetX = 0.1f * playerPos.x * 32 + 0.9f * cameraPos.x;
-        const int targetY = 0.1f * playerPos.y * 32 + 0.9f * cameraPos.y;
+    // Smoothing camera following player
+    float targetX = 0.1f * playerPos.x * 32 + 0.9f * cameraPos.x;
+    float targetY = 0.1f * playerPos.y * 32 + 0.9f * cameraPos.y;
 
-        state.camera.target = Vector2(targetX, targetY);
+    // Centering camera
+    targetX++;
+    targetY++;
+
+    state.camera.target = Vector2(targetX, targetY);
+
     }
 
 static void DoEntityMovement(Entity *entity, f32 delta)
@@ -174,6 +180,9 @@ static void GameFrame(f32 delta)
         Entity *entity = state.entities[i];
         entity->Update(delta);
     }
+
+
+
 
     if (PLAYER != NULL) UpdateCamera(PLAYER, delta);
 
