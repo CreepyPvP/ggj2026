@@ -145,7 +145,7 @@ static void StartLevel() {
     Player *player = new Player();
     player->position = {2, 2};
     AddEntity(player);
-    LoadWorld("tutorial");
+    LoadWorld("level");
 }
 
 static void GameSetup()
@@ -354,6 +354,18 @@ static void GameFrame(f32 delta)
     EndTextureMode();
 
     BeginDrawing();
+    int fontSize = 45;
+    int uiWidth = 600;
+    int uiHeight = 180;
+    Color bgWhite = ColorAlpha(WHITE, 0.85);
+    Color bgBlack = ColorAlpha(BLACK, 0.5);
+
+    DrawRectangle(0,0, uiWidth, uiHeight, BLACK);
+    DrawRectangleGradientEx(Rectangle(0,0,600,uiHeight),bgBlack,BLANK,bgBlack,BLANK);
+    DrawRectangleGradientEx(Rectangle(0,0,600,uiHeight),BLANK,bgWhite,BLANK,bgWhite);
+    DrawText(TextFormat("Total cash: %08ik", state.saved_cash),0.5 * fontSize,fontSize, fontSize, BLACK);
+    DrawText(TextFormat("Held cash:   %08ik", state.held_cash),0.5 * fontSize,2 * fontSize, fontSize, BLACK);
+
     DrawTexturePro(render_target.texture, {0, 0, (f32) render_target.texture.width, (f32) -render_target.texture.height},
                    {0, 0, (f32) GetScreenWidth(), (f32) GetScreenHeight()}, {}, 0, WHITE);
     DrawFPS(10, 10);
