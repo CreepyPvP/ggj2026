@@ -3,7 +3,10 @@
 #include "game.h"
 #include "entity.h"
 #include "raymath.h"
+#include "player.h"
 #include "LDtkLoader/World.hpp"
+
+#include <stdio.h>
 
 void Guard::Update(f32 delta) {
     Entity::Update(delta);
@@ -28,6 +31,24 @@ void Guard::Update(f32 delta) {
 
     ConeLength = 10* exp(dotProduct - 1);
 
+    // Check game over
+    if (PLAYER)
+    {
+        Vector2 player_pos = PLAYER->position + Vector2{0.5, 0.5};
+        Vector2 guard_pos = position + Vector2{0.5, 0.5};
+        Vector2 to = Vector2Normalize(player_pos - guard_pos);
+        f32 dist = GameRaycast(guard_pos, to, ConeLength + 1);
+        f32 dist_to_player = Vector2Length(player_pos - guard_pos);
+        if ((dist + 0.001) >= dist_to_player && dist_to_player <= (ConeLength + 0.001))
+        {
+            Vector2 forward = { cos(ConeRotation / 180.0f * PI), sin(ConeRotation / 180.0f * PI) };
+            Vector2 edge = { cos((ConeRotation + 22.5f) / 180.0f * PI), sin((ConeRotation + 22.5f) / 180.0f * PI) };
+            if (Vector2DotProduct(forward, to) >= Vector2DotProduct(forward, edge))
+            {
+                GameStartLose();
+            }
+        }
+    }
 }
 
 void Guard::Draw() {
