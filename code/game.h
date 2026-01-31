@@ -25,6 +25,8 @@ struct GameState
 {
     Room rooms[32];
     u32 room_count;
+    u32 saved_cash;
+    u32 held_cash;
 
     TexturedTile *textured_tiles;
 
