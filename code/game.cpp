@@ -232,6 +232,16 @@ void UpdateCamera(const Entity *entity, f32 delta)
     state.camera.target = Vector2(targetX, targetY);
 }
 
+static void GameDrawCone(Vector2 pos, Vector2 dir, f32 length, f32 angle)
+{
+    Vector2 points[] = {
+        {(pos.x + 4) * 32, (pos.y + 1) * 32},
+        {(pos.x + 4) * 32, (pos.y - 1) * 32},
+        pos * 32,
+    };
+    DrawTriangleFan(points, 3, BLUE);   
+}
+
 static void GameFrame(f32 delta)
 {
     // Update
@@ -276,6 +286,7 @@ static void GameFrame(f32 delta)
         entity->Draw();
     }
 
+    GameDrawCone({1, 2}, {1, 0}, 3, 45);
 
     EndMode2D();
 
