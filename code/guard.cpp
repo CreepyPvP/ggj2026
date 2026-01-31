@@ -12,14 +12,22 @@ void Guard::Update(f32 delta) {
 
 
     Vector2 nextPoint = patrolPath[NextPatrolPoint];
-    Vector2 direction = Vector2Scale(Vector2Normalize((nextPoint - position)), speed*delta);
-    position = direction + position;
+    Vector2 movementDirection = Vector2Scale(Vector2Normalize((nextPoint - position)), speed*delta);
+    position = movementDirection + position;
 
-    if (Vector2DistanceSqr(position + direction, nextPoint ) > Vector2DistanceSqr(position,nextPoint)) {
+    if (Vector2DistanceSqr(position + movementDirection, nextPoint ) > Vector2DistanceSqr(position,nextPoint)) {
         NextPatrolPoint = (NextPatrolPoint + 1) % PatrolPathSize;
     }
 
-    ConeRotation += rotationSpeed* delta;
+    movementDirection = Vector2Normalize(movementDirection);
+    Vector2 facingDirection = Vector2(cos(ConeRotation/ 180.0f * PI), sin(ConeRotation/ 180.0f * PI));
+    float determinante = movementDirection.x * facingDirection.y - movementDirection.y * facingDirection.x;
+
+    float dotProduct = movementDirection.x * facingDirection.x + movementDirection.y * facingDirection.y;
+    if (dotProduct < 0.999f * Vector2DistanceSqr(facingDirection, {0,0})) {
+        ConeRotation += (determinante >= 0.1f ? -1 : 1 ) * rotationSpeed* delta;
+    }
+
 }
 
 void Guard::Draw() {
