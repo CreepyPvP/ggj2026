@@ -4,6 +4,7 @@
 #include "game.h"
 
 #define STB_DS_IMPLEMENTATION
+#include "level_selection.h"
 #include "stb_ds.h"
 
 i32 main(void)
@@ -14,6 +15,7 @@ i32 main(void)
     tileset = LoadTexture("assets/textures/tileset_world.png");
 
     GameInitialize();
+    InitializeLevelSelection();
 
     SceneStart(game_scene);
 
