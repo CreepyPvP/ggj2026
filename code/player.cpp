@@ -3,6 +3,7 @@
 
 #include "entity.h"
 #include "game.h"
+#include "game_math.h"
 #include "raymath.h"
 
 
@@ -55,7 +56,20 @@ void Player::Update(f32 delta) {
     if (IsKeyDown(KEY_D))
         movement.x += 1;
     movement = Vector2Normalize(movement);
-    this->position += movement * 10 * delta;
+
+    // x movement
+    {
+        Vector2 dir = {movement.x, 0};
+        f32 len = Min(GameRaycast(position, dir) - 0.001, 10 * delta);
+        position += movement * len;
+    }
+
+    // y movement
+    {
+        Vector2 dir = {0, movement.y};
+        f32 len = Min(GameRaycast(position, dir) - 0.001, 10 * delta);
+        position += movement * len;
+    }
 }
 
 void Player::Draw() {

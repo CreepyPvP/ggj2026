@@ -127,41 +127,87 @@ static void GameDestroy()
     arrfree(state.textured_tiles);
 }
 
-static f32 Raycast(Vector2 pos, Vector2 dir)
+f32 GameRaycast(Vector2 pos, Vector2 dir) 
 {
-    u32 tile_x = pos.x;
-    u32 tile_y = pos.y;
-    if (GetTile(tile_x, tile_y))
+    f32 min_t = 1e30;
+
+    for (u32 y = 0; y < state.height; ++y) 
     {
-        return 0;
+        for (u32 x = 0; x < state.width; ++x)
+        {
+            if (GetTile(x, y) == 0)
+                continue;
+
+            Vector2 aabb_position = { (f32) x, (f32) y };
+            Vector2 aabb_size = { 1, 1 };
+
+            // x collision
+            if (dir.x > 0.00001 || dir.x < 0.00001) 
+            {
+                {
+                    float t = (aabb_position.x - pos.x) / dir.x;
+                    float y = t * dir.y + pos.y;
+                    float y_diff = y - aabb_position.y;
+
+                    if (y_diff >= 0 && y_diff <= aabb_size.y) {
+                        if (t >= 0 && t < min_t) {
+                            min_t = t;
+                        }
+                    }
+                } 
+                {
+                    float t = (aabb_position.x + aabb_size.x - pos.x) / dir.x;
+                    float y = t * dir.y + pos.y;
+                    float y_diff = y - aabb_position.y;
+
+                    if (y_diff >= 0 && y_diff <= aabb_size.y) {
+                        if (t >= 0 && t < min_t) {
+                            min_t = t;
+                        }
+                    }
+                }
+            }
+
+            // y collision
+            if (dir.y > 0.00001 || dir.y < 0.00001) {
+                {
+                    float t = (aabb_position.y - pos.y) / dir.y;
+                    float x = t * dir.x + pos.x;
+                    float x_diff = x - aabb_position.x;
+
+                    if (x_diff >= 0 && x_diff <= aabb_size.x) {
+                        if (t >= 0 && t < min_t) {
+                            min_t = t;
+                        }
+                    }
+                } 
+                {
+                    float t = (aabb_position.y + aabb_size.y - pos.y) / dir.y;
+                    float x = t * dir.x + pos.x;
+                    float x_diff = x - aabb_position.x;
+
+                    if (x_diff >= 0 && x_diff <= aabb_size.x) {
+                        if (t >= 0 && t < min_t) {
+                            min_t = t;
+                        }
+                    }
+                }
+            }
+        }
     }
-    pos += dir;
-    return 0;
+
+    return min_t;
 }
 
-void UpdateCamera(const Entity *entity, f32 delta) {
-        Vector2 playerPos = entity->position;
-        Vector2 cameraPos = state.camera.target;
-
-        const int targetX = 0.1f * playerPos.x * 32 + 0.9f * cameraPos.x;
-        const int targetY = 0.1f * playerPos.y * 32 + 0.9f * cameraPos.y;
-
-        state.camera.target = Vector2(targetX, targetY);
-    }
-
-static void DoEntityMovement(Entity *entity, f32 delta)
+void UpdateCamera(const Entity *entity, f32 delta) 
 {
-    Vector2 movement = {};
-    if (IsKeyDown(KEY_W))
-        movement.y += -1;
-    if (IsKeyDown(KEY_S))
-        movement.y += 1;
-    if (IsKeyDown(KEY_A))
-        movement.x += -1;
-    if (IsKeyDown(KEY_D))
-        movement.x += 1;
-    movement = Vector2Normalize(movement);
-    entity->position += movement * 10 * delta;
+    Vector2 playerPos = entity->position;
+    Vector2 cameraPos = state.camera.target;
+
+    const int targetX = 0.1f * playerPos.x * 32 + 0.9f * cameraPos.x;
+    const int targetY = 0.1f * playerPos.y * 32 + 0.9f * cameraPos.y;
+
+    state.camera.target = Vector2(targetX, targetY);
 }
 
 static void GameFrame(f32 delta)
@@ -191,16 +237,17 @@ static void GameFrame(f32 delta)
         DrawTextureRec(tileset, textured.source, textured.position, WHITE);
     }
 
-    // for (u32 x = 0; x < state.width; ++x)
-    // {
-    //     for (u32 y = 0; y < state.height; ++y)
-    //     {
-    //         u8 tile = GetTile(x, y);
-    //
-    //         if (tile)
-    //             DrawRectangle(x * 32, y * 32, 32, 32, BLACK);  
-    //     }
-    // }
+    // Draw colliders
+    for (u32 x = 0; x < state.width; ++x)
+    {
+        for (u32 y = 0; y < state.height; ++y)
+        {
+            u8 tile = GetTile(x, y);
+
+            if (tile)
+                DrawRectangle(x * 32, y * 32, 32, 32, BLACK);  
+        }
+    }
 
     for (u32 i = 0; i < arrlen(state.entities); ++i)
     {
