@@ -2183,7 +2183,7 @@
 				"worldY": 0,
 				"worldDepth": 0,
 				"pxWid": 736,
-				"pxHei": 480,
+				"pxHei": 576,
 				"__bgColor": "#696A79",
 				"bgColor": null,
 				"useAutoIdentifier": true,
@@ -2242,7 +2242,7 @@
 				"externalRelPath": "game_world/level_4.ldtkl",
 				"fieldInstances": [],
 				"layerInstances": null,
-				"__neighbours": [ { "levelIid": "97753f21-fa90-11f0-b3c4-21091f66cf92", "dir": "s" }, { "levelIid": "a0d741a0-fa90-11f0-b3c4-63098683a504", "dir": "s" }, { "levelIid": "b02dccf0-fa90-11f0-b3c4-e10636d7e8be", "dir": "s" } ]
+				"__neighbours": [ { "levelIid": "97753f21-fa90-11f0-b3c4-21091f66cf92", "dir": "s" }, { "levelIid": "a0d741a0-fa90-11f0-b3c4-63098683a504", "dir": "s" }, { "levelIid": "b02dccf0-fa90-11f0-b3c4-e10636d7e8be", "dir": "s" }, { "levelIid": "e8b99980-fa90-11f0-ac94-d15d389cfd2f", "dir": "e" } ]
 			},
 			{
 				"identifier": "level_5",
@@ -2265,7 +2265,30 @@
 				"externalRelPath": "game_world/level_5.ldtkl",
 				"fieldInstances": [],
 				"layerInstances": null,
-				"__neighbours": [ { "levelIid": "97753f21-fa90-11f0-b3c4-21091f66cf92", "dir": "w" }, { "levelIid": "a992d250-fa90-11f0-b3c4-1fb56c707e5f", "dir": "n" } ]
+				"__neighbours": [ { "levelIid": "97753f21-fa90-11f0-b3c4-21091f66cf92", "dir": "w" }, { "levelIid": "a992d250-fa90-11f0-b3c4-1fb56c707e5f", "dir": "n" }, { "levelIid": "e8b99980-fa90-11f0-ac94-d15d389cfd2f", "dir": "n" } ]
+			},
+			{
+				"identifier": "level_6",
+				"iid": "e8b99980-fa90-11f0-ac94-d15d389cfd2f",
+				"uid": 83,
+				"worldX": 1184,
+				"worldY": -832,
+				"worldDepth": 0,
+				"pxWid": 1216,
+				"pxHei": 832,
+				"__bgColor": "#696A79",
+				"bgColor": null,
+				"useAutoIdentifier": true,
+				"bgRelPath": null,
+				"bgPos": null,
+				"bgPivotX": 0.5,
+				"bgPivotY": 0.5,
+				"__smartColor": "#ADADB5",
+				"__bgPos": null,
+				"externalRelPath": "game_world/level_6.ldtkl",
+				"fieldInstances": [],
+				"layerInstances": null,
+				"__neighbours": [ { "levelIid": "a992d250-fa90-11f0-b3c4-1fb56c707e5f", "dir": "w" }, { "levelIid": "b02dccf0-fa90-11f0-b3c4-e10636d7e8be", "dir": "s" } ]
 			}
 		] }
 	],
