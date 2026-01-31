@@ -6,6 +6,7 @@
 #include "entity.h"
 #include "scene.h"
 #include "game_math.h"
+#include "guard.h"
 #include "player.h"
 
 #include "raylib.h"
@@ -96,6 +97,10 @@ void LoadWorld(const char *world_name) {
 
                 if (data_entity.getName() == "treasure") {
                     entity = new Treasure();
+                }
+
+                if (data_entity.getName() == "guard") {
+                    entity = new Guard();
                 }
 
                 if (entity) {

@@ -34,6 +34,8 @@ add_executable(${PROJECT_NAME}
     external/LDtkLoader/World.cpp
 		code/treasure.cpp
 		code/treasure.h
+		code/guard.cpp
+		code/guard.h
 )
 
 set(RAYLIB_DIR raylib)
