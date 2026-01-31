@@ -75,8 +75,9 @@ void LoadWorld()
 
                 for (auto& data_entity : layer.allEntities()) {
                     Entity *entity = NULL;
-                    if (data_entity.getName() == "door") {
-                        // entity = new Door()
+                    if (data_entity.getName() == "player" && PLAYER) {
+                        PLAYER->position = Vector2{(f32)data_entity.getWorldPosition().x / 32, (f32)data_entity.getWorldPosition().y / 32};
+                        continue;
                     }
 
                     if (data_entity.getName() == "treasure") {
@@ -253,7 +254,7 @@ static void GameFrame(f32 delta)
     //
 
     BeginDrawing();
-    ClearBackground(LIGHTGRAY);
+    ClearBackground({34, 32, 52, 255});
     BeginMode2D(state.camera);
 
     for (u32 i = 0; i < arrlen(state.textured_tiles); ++i)
