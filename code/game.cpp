@@ -44,7 +44,7 @@ u8 GetTile(i32 x, i32 y)
 void LoadWorld() {
     ldtk::Project ldtk_project;
     ldtk_project.loadFromFile("assets/world/game_world.ldtk");
-    const auto &world = ldtk_project.getWorld("tutorial");
+    const auto &world = ldtk_project.getWorld("level");
     for (const ldtk::Level &level: world.allLevels()) {
         const ldtk::Layer &collision_layer = level.getLayer("collisions");
 
