@@ -23,8 +23,7 @@ struct Room {
 
 struct GameState
 {
-    Room rooms[32];
-    u32 room_count;
+    Room *rooms;
 
     TexturedTile *textured_tiles;
 

@@ -18,11 +18,25 @@ Texture2D tileset;
 
 GameState state;
 
+u8 GetTile(i32 x, i32 y, Room *room)
+{
+    i32 rx = x - room->offset_x;
+    i32 ry = y - room->offset_y;
+    if (rx < 0 || ry < 0 || rx >= room->width || ry >= room->height)
+        return 0;
+
+    return room->tiles[rx + ry * room->width];
+}
+
 u8 GetTile(i32 x, i32 y)
 {
-    // if (x < 0 || y < 0 || x >= state.width || y >= state.height)
-    //     return 0;
-    // return state.tiles[x + y * state.width];
+    for (u32 i = 0; i < arrlen(state.rooms); ++i)
+    {
+        Room *room = state.rooms + i;
+        if (x >= room->offset_x && y >= room->offset_y && 
+            x < room->offset_x + room->width && y < room->offset_y + room->height)
+            return GetTile(x, y, room);
+    }
     return 0;
 }
 
@@ -34,7 +48,8 @@ void LoadWorld()
     for (const ldtk::Level &level : world.allLevels()) {
         const ldtk::Layer& collision_layer = level.getLayer("collisions");
 
-        Room *room = state.rooms + state.room_count++;
+        Room *room = arraddnptr(state.rooms, 1);
+        memset(room, 0, sizeof(*room));
 
         room->width = level.size.x / 32;
         room->height = level.size.y / 32;
@@ -77,7 +92,6 @@ void LoadWorld()
                     if (data_entity.getName() == "door") {
                         // entity = new Door()
                     }
-
 
                     if (entity) {
                         entity->position = Vector2{(f32)data_entity.getWorldPosition().x, (f32)data_entity.getWorldPosition().y};
@@ -145,64 +159,71 @@ f32 GameRaycast(Vector2 pos, Vector2 dir)
 {
     f32 min_t = 1e30;
 
-    for (u32 y = 0; y < 0; ++y)
+    for (u32 i = 0; i < arrlen(state.rooms); ++i)
     {
-        for (u32 x = 0; x < 0; ++x)
+        Room *room = state.rooms + i;
+        for (u32 dy = 0; dy < room->height; ++dy)
         {
-            if (GetTile(x, y) == 0)
-                continue;
-
-            Vector2 aabb_position = { (f32) x, (f32) y };
-            Vector2 aabb_size = { 1, 1 };
-
-            // x collision
-            if (dir.x > 0.00001 || dir.x < 0.00001) 
+            for (u32 dx = 0; dx < room->width; ++dx)
             {
-                {
-                    float t = (aabb_position.x - pos.x) / dir.x;
-                    float y = t * dir.y + pos.y;
-                    float y_diff = y - aabb_position.y;
+                i32 x = room->offset_x + dx;
+                i32 y = room->offset_y + dy;
 
-                    if (y_diff >= 0 && y_diff <= aabb_size.y) {
-                        if (t >= 0 && t < min_t) {
-                            min_t = t;
+                if (GetTile(x, y) == 0)
+                    continue;
+
+                Vector2 aabb_position = { (f32) x, (f32) y };
+                Vector2 aabb_size = { 1, 1 };
+
+                // x collision
+                if (dir.x > 0.00001 || dir.x < 0.00001) 
+                {
+                    {
+                        float t = (aabb_position.x - pos.x) / dir.x;
+                        float y = t * dir.y + pos.y;
+                        float y_diff = y - aabb_position.y;
+
+                        if (y_diff >= 0 && y_diff <= aabb_size.y) {
+                            if (t >= 0 && t < min_t) {
+                                min_t = t;
+                            }
                         }
-                    }
-                } 
-                {
-                    float t = (aabb_position.x + aabb_size.x - pos.x) / dir.x;
-                    float y = t * dir.y + pos.y;
-                    float y_diff = y - aabb_position.y;
+                    } 
+                    {
+                        float t = (aabb_position.x + aabb_size.x - pos.x) / dir.x;
+                        float y = t * dir.y + pos.y;
+                        float y_diff = y - aabb_position.y;
 
-                    if (y_diff >= 0 && y_diff <= aabb_size.y) {
-                        if (t >= 0 && t < min_t) {
-                            min_t = t;
+                        if (y_diff >= 0 && y_diff <= aabb_size.y) {
+                            if (t >= 0 && t < min_t) {
+                                min_t = t;
+                            }
                         }
                     }
                 }
-            }
 
-            // y collision
-            if (dir.y > 0.00001 || dir.y < 0.00001) {
-                {
-                    float t = (aabb_position.y - pos.y) / dir.y;
-                    float x = t * dir.x + pos.x;
-                    float x_diff = x - aabb_position.x;
+                // y collision
+                if (dir.y > 0.00001 || dir.y < 0.00001) {
+                    {
+                        float t = (aabb_position.y - pos.y) / dir.y;
+                        float x = t * dir.x + pos.x;
+                        float x_diff = x - aabb_position.x;
 
-                    if (x_diff >= 0 && x_diff <= aabb_size.x) {
-                        if (t >= 0 && t < min_t) {
-                            min_t = t;
+                        if (x_diff >= 0 && x_diff <= aabb_size.x) {
+                            if (t >= 0 && t < min_t) {
+                                min_t = t;
+                            }
                         }
-                    }
-                } 
-                {
-                    float t = (aabb_position.y + aabb_size.y - pos.y) / dir.y;
-                    float x = t * dir.x + pos.x;
-                    float x_diff = x - aabb_position.x;
+                    } 
+                    {
+                        float t = (aabb_position.y + aabb_size.y - pos.y) / dir.y;
+                        float x = t * dir.x + pos.x;
+                        float x_diff = x - aabb_position.x;
 
-                    if (x_diff >= 0 && x_diff <= aabb_size.x) {
-                        if (t >= 0 && t < min_t) {
-                            min_t = t;
+                        if (x_diff >= 0 && x_diff <= aabb_size.x) {
+                            if (t >= 0 && t < min_t) {
+                                min_t = t;
+                            }
                         }
                     }
                 }
@@ -266,16 +287,22 @@ static void GameFrame(f32 delta)
     }
 
     // Draw colliders
-    // for (u32 x = 0; x < state.width; ++x)
-    // {
-    //     for (u32 y = 0; y < state.height; ++y)
-    //     {
-    //         u8 tile = GetTile(x, y);
-    //
-    //         if (tile)
-    //             DrawRectangle(x * 32, y * 32, 32, 32, BLACK);  
-    //     }
-    // }
+    for (u32 i = 0; i < arrlen(state.rooms); ++i)
+    {
+        Room *room = state.rooms + i;
+        for (u32 dx = 0; dx < room->width; ++dx)
+        {
+            for (u32 dy = 0; dy < room->height; ++dy)
+            {
+                i32 x = room->offset_x + dx;
+                i32 y = room->offset_y + dy;
+                u8 tile = GetTile(x, y);
+
+                if (tile)
+                    DrawRectangle(x * 32, y * 32, 32, 32, BLACK);  
+            }
+        }
+    }
 
     for (u32 i = 0; i < arrlen(state.entities); ++i)
     {
@@ -292,6 +319,8 @@ static void GameFrame(f32 delta)
         f32 t = Range(game_scene->time, 0, 0.65);
         DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, 1 - t));                        
     }
+
+    DrawFPS(10, 10);
 
     EndDrawing();
 }
