@@ -110,7 +110,7 @@ void LoadWorld(const char *world_name) {
                 }
                 if (data_entity.getName() == "door") {
                     entity = new Door();
-                    room->tiles[data_entity.getPosition().x + data_entity.getPosition().y * room->width] = 1;
+                    room->tiles[data_entity.getPosition().x / 32 + data_entity.getPosition().y / 32 * room->width] = 1;
                 }
 
                 if (data_entity.getName() == "extract") {

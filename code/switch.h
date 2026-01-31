@@ -14,8 +14,14 @@ constexpr int max_controlled_camera_size = 32;
 struct Door : Entity {
     bool unlocked = false;
     bool unlockable;
+    Room* room;
+    int tile_x, tile_y;
+
     void Update(f32 delta) override;
     void Draw() override;
+
+    void Open();
+
     void Configure(const ldtk::World &world, Room* room, const ldtk::Entity &data) override;
 
 };

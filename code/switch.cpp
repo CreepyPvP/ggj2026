@@ -16,7 +16,7 @@ void Switch::Update(f32 delta) {
     if (Vector2DistanceSqr(position, PLAYER->position) < 0.8 * 0.8) {
         activated = true;
         for(i32 i = 0 ; i < controlled_door_amount; i++){
-            controlled_doors[i]->unlocked = true;
+            controlled_doors[i]->Open();
         }
         for(i32 i = 0 ; i < controlled_camera_amount; i++){
             if(controlled_cameras[i])
@@ -40,6 +40,14 @@ void Door::Draw(){
     if(unlocked) return;
     Vector2 render_pos = {floorf(this->position.x * 32), floorf(this->position.y * 32)};
     DrawTextureRec(tileset, Rectangle{576, 96, 32, 32}, render_pos, {255,255,255,255});
+
+
+}
+
+void Door::Open() {
+    unlocked = true;
+    unlockable = false;
+    room->tiles[tile_x + tile_y * room->width] = 0;
 
 
 }
@@ -70,7 +78,10 @@ void Switch::Configure(const ldtk::World &world, Room* room, const ldtk::Entity 
 
 void Door::Configure(const ldtk::World &world, Room* room, const ldtk::Entity &data) {
     unlockable = data.getField<ldtk::FieldType::Bool>("unlockable").value();
-    
+    this->room = room;
+
+    tile_x = data.getPosition().x / 32;
+    tile_y = data.getPosition().y / 32;
 
 
     
