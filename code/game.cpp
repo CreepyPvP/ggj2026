@@ -101,7 +101,7 @@ void LoadWorld()
 
                     if (entity) {
                         entity->position = Vector2{(f32)data_entity.getWorldPosition().x / 32, (f32)data_entity.getWorldPosition().y / 32};
-                        entity->Configure(data_entity);
+                        entity->Configure(world, data_entity);
                         AddEntity(entity);
                     }
                 }
