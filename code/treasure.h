@@ -16,5 +16,5 @@ struct Treasure: Entity{
     TreasureType type;
     void Update(f32 delta) override;
     void Draw() override;
-    void Configure(const ldtk::World &world, const ldtk::Entity &data) override;
+    void Configure(const ldtk::World &world, Room* room, const ldtk::Entity &data) override;
 };
