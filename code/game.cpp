@@ -158,6 +158,7 @@ static void GameSetup()
     state.camera.zoom = 2.5f;
 
     StartLevel();
+    printf("Game setup\n");
 }
 
 static void GameDestroy()
@@ -302,13 +303,19 @@ static void GameFrame(f32 delta)
 {
     if (state.game_lost)
     {
+        f32 t = Range(state.time_since_game_lost, 0, 1.5);
         state.time_since_game_lost += delta;
-        delta = 0.001;
-        if (state.time_since_game_lost > 1)
+        delta = Lerp(0.002, 0.0007, t);
+        if (state.time_since_game_lost > 2)
         {
             SceneStart(game_scene);
             return;
         }
+    }
+
+    if (delta > 0.03)
+    {
+        delta = 0.03;
     }
 
     // Update
