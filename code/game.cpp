@@ -145,7 +145,7 @@ static void StartLevel() {
     Player *player = new Player();
     player->position = {2, 2};
     AddEntity(player);
-    LoadWorld("level");
+    LoadWorld("tutorial");
 }
 
 static void GameSetup()
@@ -265,7 +265,7 @@ void UpdateCamera(const Entity *entity, f32 delta)
     state.camera.target = Vector2(targetX, targetY);
 }
 
-void GameDrawCone(Vector2 pos, f32 forward_angle, f32 length, f32 angle)
+void GameDrawCone(Vector2 pos, f32 forward_angle, f32 length, f32 angle, Color color)
 {
     u32 sample_points = 64;
 
@@ -288,7 +288,7 @@ void GameDrawCone(Vector2 pos, f32 forward_angle, f32 length, f32 angle)
         f32 len = Min(GameRaycast(pos, current_dir, length), length);
         Vector2 sample = (pos + current_dir * len) * 32;
 
-        DrawTriangle(pos * 32, prev_sample, sample, Fade(BLUE, 0.5));
+        DrawTriangle(pos * 32, prev_sample, sample, Fade(color, 0.5));
         prev_sample = sample;
     }
 }

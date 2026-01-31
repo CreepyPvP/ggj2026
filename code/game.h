@@ -48,7 +48,7 @@ struct GameState
 extern GameState state;
 
 f32 GameRaycast(Vector2 pos, Vector2 dir, f32 max_dist);
-void GameDrawCone(Vector2 pos, f32 forward_angle, f32 length, f32 angle);
+void GameDrawCone(Vector2 pos, f32 forward_angle, f32 length, f32 angle, Color color);
 
 extern Scene *game_scene;
 void GameInitialize();
