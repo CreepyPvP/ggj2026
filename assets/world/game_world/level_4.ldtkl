@@ -795,7 +795,8 @@
 						}, {
 							"id": "V_String",
 							"params": ["44,18"]
-						} ] }
+						} ] },
+						{ "__identifier": "random_walk", "__type": "Bool", "__value": false, "__tile": null, "defUid": 83, "realEditorValues": [] }
 					],
 					"__worldX": 832,
 					"__worldY": -256
@@ -1062,7 +1063,8 @@
 								"id": "V_String",
 								"params": ["48,8"]
 							}
-						] }
+						] },
+						{ "__identifier": "random_walk", "__type": "Bool", "__value": false, "__tile": null, "defUid": 83, "realEditorValues": [] }
 					],
 					"__worldX": 1024,
 					"__worldY": -384
@@ -1131,7 +1133,8 @@
 								"id": "V_String",
 								"params": ["55,8"]
 							}
-						] }
+						] },
+						{ "__identifier": "random_walk", "__type": "Bool", "__value": false, "__tile": null, "defUid": 83, "realEditorValues": [] }
 					],
 					"__worldX": 800,
 					"__worldY": -384
@@ -1461,7 +1464,8 @@
 								"id": "V_String",
 								"params": ["22,5"]
 							}
-						] }
+						] },
+						{ "__identifier": "random_walk", "__type": "Bool", "__value": false, "__tile": null, "defUid": 83, "realEditorValues": [] }
 					],
 					"__worldX": -32,
 					"__worldY": -672
