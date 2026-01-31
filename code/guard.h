@@ -18,6 +18,7 @@ struct Guard : Entity {
   int PatrolPathSize;
   int NextPatrolPoint;
   float ConeRotation;
+  float ConeLength;
   bool RandomWalk;
   void Update(f32 delta) override;
   void Draw() override;
