@@ -525,15 +525,18 @@
 					"height": 32,
 					"defUid": 7,
 					"px": [576,160],
-					"fieldInstances": [{ "__identifier": "Controlled_doors", "__type": "Array<EntityRef>", "__value": [{
-						"entityIid": "7a459630-fa90-11f0-b3c4-0fd540d550a4",
-						"layerIid": "8227e180-fa90-11f0-97a2-25de3f2f6b6c",
-						"levelIid": "e54f92c1-fa90-11f0-abe6-a5960b7d5931",
-						"worldIid": "e54f92c0-fa90-11f0-abe6-53b9e50ae076"
-					}], "__tile": null, "defUid": 82, "realEditorValues": [{
-						"id": "V_String",
-						"params": ["7a459630-fa90-11f0-b3c4-0fd540d550a4"]
-					}] }],
+					"fieldInstances": [
+						{ "__identifier": "Controlled_doors", "__type": "Array<EntityRef>", "__value": [{
+							"entityIid": "7a459630-fa90-11f0-b3c4-0fd540d550a4",
+							"layerIid": "8227e180-fa90-11f0-97a2-25de3f2f6b6c",
+							"levelIid": "e54f92c1-fa90-11f0-abe6-a5960b7d5931",
+							"worldIid": "e54f92c0-fa90-11f0-abe6-53b9e50ae076"
+						}], "__tile": null, "defUid": 82, "realEditorValues": [{
+							"id": "V_String",
+							"params": ["7a459630-fa90-11f0-b3c4-0fd540d550a4"]
+						}] },
+						{ "__identifier": "Controlled_cameras", "__type": "Array<EntityRef>", "__value": [], "__tile": null, "defUid": 85, "realEditorValues": [] }
+					],
 					"__worldX": 1856,
 					"__worldY": 704
 				},
@@ -549,15 +552,18 @@
 					"height": 32,
 					"defUid": 7,
 					"px": [224,256],
-					"fieldInstances": [{ "__identifier": "Controlled_doors", "__type": "Array<EntityRef>", "__value": [{
-						"entityIid": "a4a3afc0-fa90-11f0-b3c4-6b6d30901471",
-						"layerIid": "8227e180-fa90-11f0-97a2-25de3f2f6b6c",
-						"levelIid": "e54f92c1-fa90-11f0-abe6-a5960b7d5931",
-						"worldIid": "e54f92c0-fa90-11f0-abe6-53b9e50ae076"
-					}], "__tile": null, "defUid": 82, "realEditorValues": [{
-						"id": "V_String",
-						"params": ["a4a3afc0-fa90-11f0-b3c4-6b6d30901471"]
-					}] }],
+					"fieldInstances": [
+						{ "__identifier": "Controlled_doors", "__type": "Array<EntityRef>", "__value": [{
+							"entityIid": "a4a3afc0-fa90-11f0-b3c4-6b6d30901471",
+							"layerIid": "8227e180-fa90-11f0-97a2-25de3f2f6b6c",
+							"levelIid": "e54f92c1-fa90-11f0-abe6-a5960b7d5931",
+							"worldIid": "e54f92c0-fa90-11f0-abe6-53b9e50ae076"
+						}], "__tile": null, "defUid": 82, "realEditorValues": [{
+							"id": "V_String",
+							"params": ["a4a3afc0-fa90-11f0-b3c4-6b6d30901471"]
+						}] },
+						{ "__identifier": "Controlled_cameras", "__type": "Array<EntityRef>", "__value": [], "__tile": null, "defUid": 85, "realEditorValues": [] }
+					],
 					"__worldX": 1504,
 					"__worldY": 800
 				},

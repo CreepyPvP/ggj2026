@@ -11,8 +11,8 @@
 	"identifier": "level_5",
 	"iid": "b02dccf0-fa90-11f0-b3c4-e10636d7e8be",
 	"uid": 77,
-	"worldX": 736,
-	"worldY": 0,
+	"worldX": 2592,
+	"worldY": 1664,
 	"worldDepth": 0,
 	"pxWid": 1664,
 	"pxHei": 1088,
@@ -65,8 +65,8 @@
 					"defUid": 4,
 					"px": [96,160],
 					"fieldInstances": [{ "__identifier": "unlockable", "__type": "Bool", "__value": false, "__tile": null, "defUid": 64, "realEditorValues": [] }],
-					"__worldX": 832,
-					"__worldY": 160
+					"__worldX": 2688,
+					"__worldY": 1824
 				},
 				{
 					"__identifier": "switch",
@@ -80,17 +80,20 @@
 					"height": 32,
 					"defUid": 7,
 					"px": [96,64],
-					"fieldInstances": [{ "__identifier": "Controlled_doors", "__type": "Array<EntityRef>", "__value": [{
-						"entityIid": "2a9ca810-fa90-11f0-ae0a-dd0b17700c96",
-						"layerIid": "b02dccf1-fa90-11f0-b3c4-a730ecfdc93f",
-						"levelIid": "b02dccf0-fa90-11f0-b3c4-e10636d7e8be",
-						"worldIid": "97753f20-fa90-11f0-b3c4-d91c1b21430c"
-					}], "__tile": null, "defUid": 82, "realEditorValues": [{
-						"id": "V_String",
-						"params": ["2a9ca810-fa90-11f0-ae0a-dd0b17700c96"]
-					}] }],
-					"__worldX": 832,
-					"__worldY": 64
+					"fieldInstances": [
+						{ "__identifier": "Controlled_doors", "__type": "Array<EntityRef>", "__value": [{
+							"entityIid": "2a9ca810-fa90-11f0-ae0a-dd0b17700c96",
+							"layerIid": "b02dccf1-fa90-11f0-b3c4-a730ecfdc93f",
+							"levelIid": "b02dccf0-fa90-11f0-b3c4-e10636d7e8be",
+							"worldIid": "97753f20-fa90-11f0-b3c4-d91c1b21430c"
+						}], "__tile": null, "defUid": 82, "realEditorValues": [{
+							"id": "V_String",
+							"params": ["2a9ca810-fa90-11f0-ae0a-dd0b17700c96"]
+						}] },
+						{ "__identifier": "Controlled_cameras", "__type": "Array<EntityRef>", "__value": [], "__tile": null, "defUid": 85, "realEditorValues": [] }
+					],
+					"__worldX": 2688,
+					"__worldY": 1728
 				},
 				{
 					"__identifier": "guard",
@@ -124,8 +127,8 @@
 						} ] },
 						{ "__identifier": "random_walk", "__type": "Bool", "__value": false, "__tile": null, "defUid": 83, "realEditorValues": [] }
 					],
-					"__worldX": 992,
-					"__worldY": 704
+					"__worldX": 2848,
+					"__worldY": 2368
 				},
 				{
 					"__identifier": "guard",
@@ -159,8 +162,8 @@
 						} ] },
 						{ "__identifier": "random_walk", "__type": "Bool", "__value": false, "__tile": null, "defUid": 83, "realEditorValues": [] }
 					],
-					"__worldX": 1248,
-					"__worldY": 800
+					"__worldX": 3104,
+					"__worldY": 2464
 				},
 				{
 					"__identifier": "guard",
@@ -194,8 +197,8 @@
 						} ] },
 						{ "__identifier": "random_walk", "__type": "Bool", "__value": false, "__tile": null, "defUid": 83, "realEditorValues": [] }
 					],
-					"__worldX": 1728,
-					"__worldY": 704
+					"__worldX": 3584,
+					"__worldY": 2368
 				},
 				{
 					"__identifier": "guard",
@@ -229,8 +232,8 @@
 						} ] },
 						{ "__identifier": "random_walk", "__type": "Bool", "__value": false, "__tile": null, "defUid": 83, "realEditorValues": [] }
 					],
-					"__worldX": 1440,
-					"__worldY": 992
+					"__worldX": 3296,
+					"__worldY": 2656
 				},
 				{
 					"__identifier": "guard",
@@ -264,8 +267,8 @@
 						} ] },
 						{ "__identifier": "random_walk", "__type": "Bool", "__value": false, "__tile": null, "defUid": 83, "realEditorValues": [] }
 					],
-					"__worldX": 1536,
-					"__worldY": 704
+					"__worldX": 3392,
+					"__worldY": 2368
 				},
 				{
 					"__identifier": "camera",
@@ -294,10 +297,11 @@
 						}, {
 							"id": "V_String",
 							"params": ["4,13"]
-						} ] }
+						} ] },
+						{ "__identifier": "active", "__type": "Bool", "__value": true, "__tile": null, "defUid": 84, "realEditorValues": [] }
 					],
-					"__worldX": 800,
-					"__worldY": 448
+					"__worldX": 2656,
+					"__worldY": 2112
 				},
 				{
 					"__identifier": "treasure",
@@ -315,8 +319,8 @@
 						"id": "V_String",
 						"params": ["diamond_small"]
 					}] }],
-					"__worldX": 1440,
-					"__worldY": 416
+					"__worldX": 3296,
+					"__worldY": 2080
 				},
 				{
 					"__identifier": "treasure",
@@ -334,8 +338,8 @@
 						"id": "V_String",
 						"params": ["diamond_small"]
 					}] }],
-					"__worldX": 1472,
-					"__worldY": 448
+					"__worldX": 3328,
+					"__worldY": 2112
 				},
 				{
 					"__identifier": "treasure",
@@ -353,8 +357,8 @@
 						"id": "V_String",
 						"params": ["diamond_small"]
 					}] }],
-					"__worldX": 1472,
-					"__worldY": 384
+					"__worldX": 3328,
+					"__worldY": 2048
 				},
 				{
 					"__identifier": "treasure",
@@ -372,8 +376,8 @@
 						"id": "V_String",
 						"params": ["diamond_small"]
 					}] }],
-					"__worldX": 1504,
-					"__worldY": 416
+					"__worldX": 3360,
+					"__worldY": 2080
 				},
 				{
 					"__identifier": "treasure",
@@ -388,8 +392,8 @@
 					"defUid": 3,
 					"px": [96,544],
 					"fieldInstances": [{ "__identifier": "treasure_type", "__type": "LocalEnum.treasure_type", "__value": "money_small", "__tile": { "tilesetUid": 13, "x": 64, "y": 384, "w": 32, "h": 32 }, "defUid": 80, "realEditorValues": [] }],
-					"__worldX": 832,
-					"__worldY": 544
+					"__worldX": 2688,
+					"__worldY": 2208
 				},
 				{
 					"__identifier": "treasure",
@@ -404,8 +408,8 @@
 					"defUid": 3,
 					"px": [608,800],
 					"fieldInstances": [{ "__identifier": "treasure_type", "__type": "LocalEnum.treasure_type", "__value": "money_small", "__tile": { "tilesetUid": 13, "x": 64, "y": 384, "w": 32, "h": 32 }, "defUid": 80, "realEditorValues": [] }],
-					"__worldX": 1344,
-					"__worldY": 800
+					"__worldX": 3200,
+					"__worldY": 2464
 				},
 				{
 					"__identifier": "treasure",
@@ -420,8 +424,8 @@
 					"defUid": 3,
 					"px": [704,800],
 					"fieldInstances": [{ "__identifier": "treasure_type", "__type": "LocalEnum.treasure_type", "__value": "money_small", "__tile": { "tilesetUid": 13, "x": 64, "y": 384, "w": 32, "h": 32 }, "defUid": 80, "realEditorValues": [] }],
-					"__worldX": 1440,
-					"__worldY": 800
+					"__worldX": 3296,
+					"__worldY": 2464
 				},
 				{
 					"__identifier": "treasure",
@@ -436,8 +440,8 @@
 					"defUid": 3,
 					"px": [800,800],
 					"fieldInstances": [{ "__identifier": "treasure_type", "__type": "LocalEnum.treasure_type", "__value": "money_small", "__tile": { "tilesetUid": 13, "x": 64, "y": 384, "w": 32, "h": 32 }, "defUid": 80, "realEditorValues": [] }],
-					"__worldX": 1536,
-					"__worldY": 800
+					"__worldX": 3392,
+					"__worldY": 2464
 				},
 				{
 					"__identifier": "treasure",
@@ -452,8 +456,8 @@
 					"defUid": 3,
 					"px": [896,800],
 					"fieldInstances": [{ "__identifier": "treasure_type", "__type": "LocalEnum.treasure_type", "__value": "money_small", "__tile": { "tilesetUid": 13, "x": 64, "y": 384, "w": 32, "h": 32 }, "defUid": 80, "realEditorValues": [] }],
-					"__worldX": 1632,
-					"__worldY": 800
+					"__worldX": 3488,
+					"__worldY": 2464
 				},
 				{
 					"__identifier": "camera",
@@ -485,10 +489,11 @@
 						}, {
 							"id": "V_String",
 							"params": ["39,23"]
-						} ] }
+						} ] },
+						{ "__identifier": "active", "__type": "Bool", "__value": true, "__tile": null, "defUid": 84, "realEditorValues": [] }
 					],
-					"__worldX": 2112,
-					"__worldY": 736
+					"__worldX": 3968,
+					"__worldY": 2400
 				},
 				{
 					"__identifier": "camera",
@@ -520,10 +525,11 @@
 						}, {
 							"id": "V_String",
 							"params": ["39,19"]
-						} ] }
+						} ] },
+						{ "__identifier": "active", "__type": "Bool", "__value": true, "__tile": null, "defUid": 84, "realEditorValues": [] }
 					],
-					"__worldX": 2112,
-					"__worldY": 608
+					"__worldX": 3968,
+					"__worldY": 2272
 				},
 				{
 					"__identifier": "camera",
@@ -555,10 +561,11 @@
 						}, {
 							"id": "V_String",
 							"params": ["39,15"]
-						} ] }
+						} ] },
+						{ "__identifier": "active", "__type": "Bool", "__value": true, "__tile": null, "defUid": 84, "realEditorValues": [] }
 					],
-					"__worldX": 2112,
-					"__worldY": 480
+					"__worldX": 3968,
+					"__worldY": 2144
 				},
 				{
 					"__identifier": "treasure",
@@ -573,8 +580,8 @@
 					"defUid": 3,
 					"px": [1088,640],
 					"fieldInstances": [{ "__identifier": "treasure_type", "__type": "LocalEnum.treasure_type", "__value": "money_small", "__tile": { "tilesetUid": 13, "x": 64, "y": 384, "w": 32, "h": 32 }, "defUid": 80, "realEditorValues": [] }],
-					"__worldX": 1824,
-					"__worldY": 640
+					"__worldX": 3680,
+					"__worldY": 2304
 				},
 				{
 					"__identifier": "treasure",
@@ -589,8 +596,8 @@
 					"defUid": 3,
 					"px": [1152,800],
 					"fieldInstances": [{ "__identifier": "treasure_type", "__type": "LocalEnum.treasure_type", "__value": "money_small", "__tile": { "tilesetUid": 13, "x": 64, "y": 384, "w": 32, "h": 32 }, "defUid": 80, "realEditorValues": [] }],
-					"__worldX": 1888,
-					"__worldY": 800
+					"__worldX": 3744,
+					"__worldY": 2464
 				},
 				{
 					"__identifier": "camera",
@@ -613,10 +620,11 @@
 						{ "__identifier": "directions", "__type": "Array<Point>", "__value": [{ "cx": 27, "cy": 4 }], "__tile": null, "defUid": 81, "realEditorValues": [{
 							"id": "V_String",
 							"params": ["27,4"]
-						}] }
+						}] },
+						{ "__identifier": "active", "__type": "Bool", "__value": true, "__tile": null, "defUid": 84, "realEditorValues": [] }
 					],
-					"__worldX": 1600,
-					"__worldY": 224
+					"__worldX": 3456,
+					"__worldY": 1888
 				},
 				{
 					"__identifier": "camera",
@@ -639,10 +647,11 @@
 						{ "__identifier": "directions", "__type": "Array<Point>", "__value": [{ "cx": 15, "cy": 4 }], "__tile": null, "defUid": 81, "realEditorValues": [{
 							"id": "V_String",
 							"params": ["15,4"]
-						}] }
+						}] },
+						{ "__identifier": "active", "__type": "Bool", "__value": true, "__tile": null, "defUid": 84, "realEditorValues": [] }
 					],
-					"__worldX": 1216,
-					"__worldY": 224
+					"__worldX": 3072,
+					"__worldY": 1888
 				},
 				{
 					"__identifier": "camera",
@@ -665,10 +674,11 @@
 						{ "__identifier": "directions", "__type": "Array<Point>", "__value": [{ "cx": 21, "cy": 4 }], "__tile": null, "defUid": 81, "realEditorValues": [{
 							"id": "V_String",
 							"params": ["21,4"]
-						}] }
+						}] },
+						{ "__identifier": "active", "__type": "Bool", "__value": true, "__tile": null, "defUid": 84, "realEditorValues": [] }
 					],
-					"__worldX": 1408,
-					"__worldY": 32
+					"__worldX": 3264,
+					"__worldY": 1696
 				},
 				{
 					"__identifier": "guard",
@@ -696,8 +706,8 @@
 						} ] },
 						{ "__identifier": "random_walk", "__type": "Bool", "__value": false, "__tile": null, "defUid": 83, "realEditorValues": [] }
 					],
-					"__worldX": 1216,
-					"__worldY": 64
+					"__worldX": 3072,
+					"__worldY": 1728
 				},
 				{
 					"__identifier": "guard",
@@ -725,8 +735,8 @@
 						} ] },
 						{ "__identifier": "random_walk", "__type": "Bool", "__value": false, "__tile": null, "defUid": 83, "realEditorValues": [] }
 					],
-					"__worldX": 1600,
-					"__worldY": 192
+					"__worldX": 3456,
+					"__worldY": 1856
 				},
 				{
 					"__identifier": "door",
@@ -744,8 +754,8 @@
 						"id": "V_Bool",
 						"params": [ true ]
 					}] }],
-					"__worldX": 1472,
-					"__worldY": 608
+					"__worldX": 3328,
+					"__worldY": 2272
 				},
 				{
 					"__identifier": "switch",
@@ -759,17 +769,20 @@
 					"height": 32,
 					"defUid": 7,
 					"px": [896,960],
-					"fieldInstances": [{ "__identifier": "Controlled_doors", "__type": "Array<EntityRef>", "__value": [{
-						"entityIid": "d0c1bc40-fa90-11f0-ac94-430a8040517a",
-						"layerIid": "b02dccf1-fa90-11f0-b3c4-a730ecfdc93f",
-						"levelIid": "b02dccf0-fa90-11f0-b3c4-e10636d7e8be",
-						"worldIid": "97753f20-fa90-11f0-b3c4-d91c1b21430c"
-					}], "__tile": null, "defUid": 82, "realEditorValues": [{
-						"id": "V_String",
-						"params": ["d0c1bc40-fa90-11f0-ac94-430a8040517a"]
-					}] }],
-					"__worldX": 1632,
-					"__worldY": 960
+					"fieldInstances": [
+						{ "__identifier": "Controlled_doors", "__type": "Array<EntityRef>", "__value": [{
+							"entityIid": "d0c1bc40-fa90-11f0-ac94-430a8040517a",
+							"layerIid": "b02dccf1-fa90-11f0-b3c4-a730ecfdc93f",
+							"levelIid": "b02dccf0-fa90-11f0-b3c4-e10636d7e8be",
+							"worldIid": "97753f20-fa90-11f0-b3c4-d91c1b21430c"
+						}], "__tile": null, "defUid": 82, "realEditorValues": [{
+							"id": "V_String",
+							"params": ["d0c1bc40-fa90-11f0-ac94-430a8040517a"]
+						}] },
+						{ "__identifier": "Controlled_cameras", "__type": "Array<EntityRef>", "__value": [], "__tile": null, "defUid": 85, "realEditorValues": [] }
+					],
+					"__worldX": 3488,
+					"__worldY": 2624
 				},
 				{
 					"__identifier": "door",
@@ -787,8 +800,8 @@
 						"id": "V_Bool",
 						"params": [ true ]
 					}] }],
-					"__worldX": 1888,
-					"__worldY": 32
+					"__worldX": 3744,
+					"__worldY": 1696
 				}
 			]
 		},
