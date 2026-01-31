@@ -1,9 +1,9 @@
-reenable collisions
 render light shapes
+color lookup
+do deferred rendering       <---------
 
 dont linear sample pixelart lmao
 
-do deferred rendering       <---------
 
 camera lookahead
 
