@@ -5,7 +5,7 @@
 
 static void GameDrawCone(Vector2 pos, f32 forward_angle, f32 length, f32 angle)
 {
-    u32 sample_points = 128;
+    u32 sample_points = 32;
 
     f32 start_angle = forward_angle + angle / 2;
     f32 end_angle = forward_angle - angle / 2;

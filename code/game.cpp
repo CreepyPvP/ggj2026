@@ -143,7 +143,7 @@ static void StartLevel() {
     Player *player = new Player();
     player->position = {2, 2};
     AddEntity(player);
-    LoadWorld("tutorial");
+    LoadWorld("level");
 }
 
 static void GameSetup()
