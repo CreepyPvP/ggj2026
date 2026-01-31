@@ -19,7 +19,8 @@ void Switch::Update(f32 delta) {
             controlled_doors[i]->unlocked = true;
         }
         for(i32 i = 0 ; i < controlled_camera_amount; i++){
-            controlled_cameras[i]->activated = !controlled_cameras[i]->activated;
+            if(controlled_cameras[i])
+                controlled_cameras[i]->activated = !controlled_cameras[i]->activated;
         }
     }
 }

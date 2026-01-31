@@ -26,7 +26,7 @@ void Guard::Update(f32 delta) {
 
     float dotProduct = movementDirection.x * facingDirection.x + movementDirection.y * facingDirection.y;
     if (dotProduct < 0.999f * Vector2DistanceSqr(facingDirection, {0,0})) {
-        ConeRotation += (determinante >= 0.1f ? -1 : 1 ) * rotationSpeed* delta;
+        ConeRotation += (determinante >= 0 ? -1 : 1 ) * rotationSpeed* delta;
     }
 
     ConeLength = 10* exp(dotProduct - 1);
@@ -51,6 +51,25 @@ void Guard::Update(f32 delta) {
     }
 }
 
+void GuardCamera::Update(f32 delta){
+    if(PatrolPathSize > 1){
+
+        Vector2 nextPoint = patrolPath[NextPatrolPoint];
+        Vector2 targetDirection = Vector2Normalize(nextPoint - position);
+    
+        Vector2 facingDirection = Vector2(cos(ConeRotation/ 180.0f * PI), sin(ConeRotation/ 180.0f * PI));
+        float determinante = targetDirection.x * facingDirection.y - targetDirection.y * facingDirection.x;
+
+        float dotProduct = targetDirection.x * facingDirection.x + targetDirection.y * facingDirection.y;
+        if (dotProduct < 0.999f * Vector2DistanceSqr(facingDirection, {0,0})) {
+            ConeRotation += (determinante >= 0 ? -1 : 1 ) * cameraRotationSpeed* delta;
+        }else{
+            NextPatrolPoint = (NextPatrolPoint + 1) % PatrolPathSize;
+        }
+    }
+
+}
+
 void Guard::Draw() {
     Entity::Draw();
 
@@ -67,8 +86,27 @@ void Guard::Draw() {
     GameDrawCone({position.x+0.5f,position.y+0.5f},ConeRotation, ConeLength, 45, coneColor);
 }
 
+void GuardCamera::Draw(){
+    Entity::Draw();
+
+    Vector2 render_pos = {floorf(this->position.x * 32), floorf(this->position.y * 32)};
+    DrawTextureRec(tileset, Rectangle{192, 480, 32, 32}, render_pos, {255,255,255,255});
+
+    Color coneColor{};
+
+    switch (color) {
+        case Red: coneColor = RED; break;
+        case Green: coneColor = GREEN; break;
+        case Blue: coneColor = BLUE; break;
+    }
+    GameDrawCone({position.x+0.5f,position.y+0.5f},ConeRotation, 10, field_of_view, coneColor);
+
+
+}
+
 void Guard::Configure(const ldtk::World &world, Room* room, const ldtk::Entity &data) {
     Entity::Configure(world, room, data);
+
 
     // Loading guard paths
     auto loadedPaths = data.getArrayField<ldtk::IntPoint>("PatrolPath");
@@ -79,6 +117,34 @@ void Guard::Configure(const ldtk::World &world, Room* room, const ldtk::Entity &
             (f32) path.value().x + room->offset_x, (f32) path.value().y + room->offset_y
         };
         i++;
+
+    }
+
+    // Loading guards color
+    const auto &enum_value = data.getField<ldtk::EnumValue>("color");
+    if (enum_value == world.getEnum("color")["red"]) color = Red;
+    if (enum_value == world.getEnum("color")["green"]) color = Green;
+    if (enum_value == world.getEnum("color")["blue"]) color = Blue;
+}
+
+void GuardCamera::Configure(const ldtk::World &world, Room* room, const ldtk::Entity &data) {
+    Entity::Configure(world, room, data);
+
+    field_of_view = data.getField<ldtk::FieldType::Float>("field_of_view").value();
+
+    // Loading guard paths
+    auto loadedPaths = data.getArrayField<ldtk::IntPoint>("directions");
+    PatrolPathSize =  loadedPaths.size();
+    int i = 0;
+    for (auto& path : loadedPaths) {
+        patrolPath[i] = Vector2{
+            (f32) path.value().x + room->offset_x, (f32) path.value().y + room->offset_y
+        };
+        i++;
+    }
+    if(i>0){
+        Vector2 startDirection = Vector2Normalize(patrolPath[0] - position);
+        ConeRotation = -Vector2Angle(startDirection, {1,0}) * 180 / PI;
 
     }
 

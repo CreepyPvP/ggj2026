@@ -105,6 +105,9 @@ void LoadWorld(const char *world_name) {
                 if (data_entity.getName() == "guard") {
                     entity = new Guard();
                 }
+                if(data_entity.getName() == "camera"){
+                    entity = new GuardCamera();
+                }
                 if (data_entity.getName() == "door") {
                     entity = new Door();
                     room->tiles[data_entity.getPosition().x + data_entity.getPosition().y * room->width] = 1;
