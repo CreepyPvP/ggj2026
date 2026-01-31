@@ -63,14 +63,14 @@ void Player::Draw() {
 
     Vector2 render_pos = {floorf(this->position.x * 32), floorf(this->position.y * 32)};
     if (last_dir.y < 0) {
-        DrawTextureRec(tileset, Rectangle{96, 352, 32, 32}, render_pos, WHITE);
+        DrawTextureRec(tileset, Rectangle{96, 448, 32, 32}, render_pos, WHITE);
     } else if (last_dir.y > 0) {
-        DrawTextureRec(tileset, Rectangle{32, 352, 32, 32}, render_pos, WHITE);
+        DrawTextureRec(tileset, Rectangle{32, 448, 32, 32}, render_pos, WHITE);
     } else if (last_dir.x < 0) {
-        DrawTextureRec(tileset, Rectangle{64, 352, 32, 32}, render_pos, WHITE);
+        DrawTextureRec(tileset, Rectangle{64, 448, 32, 32}, render_pos, WHITE);
     } else if (last_dir.x > 0) {
-        DrawTextureRec(tileset, Rectangle{128, 352, 32, 32}, render_pos, WHITE);
+        DrawTextureRec(tileset, Rectangle{128, 448, 32, 32}, render_pos, WHITE);
     } else {
-        DrawTextureRec(tileset, Rectangle{32, 352, 32, 32}, render_pos, WHITE);
+        DrawTextureRec(tileset, Rectangle{32, 448, 32, 32}, render_pos, WHITE);
     }
 }
