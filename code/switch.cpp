@@ -47,7 +47,7 @@ void Door::Draw(){
 void Door::Open() {
     unlocked = true;
     unlockable = false;
-    room->tiles[tile_x + tile_y * room->width] = 0;
+    SetTile(position.x, position.y, 0);
 
 
 }
@@ -78,10 +78,7 @@ void Switch::Configure(const ldtk::World &world, Room* room, const ldtk::Entity 
 
 void Door::Configure(const ldtk::World &world, Room* room, const ldtk::Entity &data) {
     unlockable = data.getField<ldtk::FieldType::Bool>("unlockable").value();
-    this->room = room;
 
-    tile_x = data.getPosition().x / 32;
-    tile_y = data.getPosition().y / 32;
 
 
     
