@@ -107,7 +107,7 @@ void LoadWorld(const char *world_name) {
                     entity->position = Vector2{
                         (f32) data_entity.getWorldPosition().x / 32, (f32) data_entity.getWorldPosition().y / 32
                     };
-                    entity->Configure(world, data_entity);
+                    entity->Configure(world, room, data_entity);
                     AddEntity(entity);
                 }
             }

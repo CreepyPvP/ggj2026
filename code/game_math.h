@@ -14,3 +14,4 @@ inline f32 Range(f32 x, f32 start, f32 end)
 {
     return Max(Min((x - start) / (end - start), 1), 0);
 }
+

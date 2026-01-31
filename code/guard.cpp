@@ -8,7 +8,15 @@
 void Guard::Update(f32 delta) {
     Entity::Update(delta);
 
-    // Update cone
+
+    Vector2 nextPoint = patrolPath[NextPatrolPoint];
+    Vector2 direction = Vector2Scale(Vector2Normalize((nextPoint - position)), speed*delta);
+    position = direction + position;
+
+    if (Vector2DistanceSqr(position + direction, nextPoint ) > Vector2DistanceSqr(position,nextPoint)) {
+        NextPatrolPoint = (NextPatrolPoint + 1) % PatrolPathSize;
+    }
+
 }
 
 void Guard::Draw() {
@@ -18,8 +26,8 @@ void Guard::Draw() {
     DrawTextureRec(tileset, Rectangle{32, 448, 32, 32}, render_pos, {255,255,255,255});
 }
 
-void Guard::Configure(const ldtk::World &world, const ldtk::Entity &data) {
-    Entity::Configure(world, data);
+void Guard::Configure(const ldtk::World &world, Room* room, const ldtk::Entity &data) {
+    Entity::Configure(world, room, data);
 
     // Loading guard paths
     auto loadedPaths = data.getArrayField<ldtk::IntPoint>("PatrolPath");
@@ -27,9 +35,10 @@ void Guard::Configure(const ldtk::World &world, const ldtk::Entity &data) {
     int i = 0;
     for (auto& path : loadedPaths) {
         patrolPath[i] = Vector2{
-            (f32) path.value().x / 32, (f32) path.value().y / 32
+            (f32) path.value().x + room->offset_x, (f32) path.value().y + room->offset_y
         };
         i++;
+
     }
 
     // Loading guards color
