@@ -14,7 +14,7 @@ i32 main(void)
     InitWindow(screenWidth, screenHeight, "Colorful Heist");
     SetTargetFPS(60);
 
-    Texture2D tileset = LoadTexture("assets/textures/tileset_world.png");
+    tileset = LoadTexture("assets/textures/tileset_world.png");
 
     GameInitialize();
 

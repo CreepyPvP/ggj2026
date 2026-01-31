@@ -3,6 +3,8 @@ raycast based player movement
 render light shapes
 do deferred rendering       <---------
 
+camera lookahead
+
  
 after:
-    - erik macros
+    - erik macros, compilation units

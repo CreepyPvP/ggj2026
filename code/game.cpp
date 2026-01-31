@@ -14,6 +14,7 @@
 #include "LDtkLoader/Project.hpp"
 
 Scene *game_scene;
+Texture2D tileset;
 
 GameState state;
     
@@ -59,13 +60,16 @@ void LoadWorld()
                 const auto& position = tile.getPosition();
                 const auto& texture_rect = tile.getTextureRect();
 
-                Vector2 dest = Vector2(position.x, position.y);
-                Rectangle src = {
+                TexturedTile textured = {};
+                textured.position = Vector2(position.x, position.y);
+                textured.source = {
                     (f32) texture_rect.x,
                     (f32) texture_rect.y,
                     (f32) texture_rect.width * (tile.flipX ? -1.0f : 1.0f),
                     (f32) texture_rect.height * (tile.flipY ? -1.0f : 1.0f)
                 };
+
+                arrput(state.textured_tiles, textured);
             }
         }
     }
@@ -120,6 +124,7 @@ static void GameDestroy()
         delete entity;
     }
     arrfree(state.entities);
+    arrfree(state.textured_tiles);
 }
 
 static f32 Raycast(Vector2 pos, Vector2 dir)
@@ -180,16 +185,22 @@ static void GameFrame(f32 delta)
     ClearBackground(LIGHTGRAY);
     BeginMode2D(state.camera);
 
-    for (u32 x = 0; x < state.width; ++x)
+    for (u32 i = 0; i < arrlen(state.textured_tiles); ++i)
     {
-        for (u32 y = 0; y < state.height; ++y)
-        {
-            u8 tile = GetTile(x, y);
-
-            if (tile)
-                DrawRectangle(x * 32, y * 32, 32, 32, BLACK);  
-        }
+        TexturedTile textured = state.textured_tiles[i];
+        DrawTextureRec(tileset, textured.source, textured.position, WHITE);
     }
+
+    // for (u32 x = 0; x < state.width; ++x)
+    // {
+    //     for (u32 y = 0; y < state.height; ++y)
+    //     {
+    //         u8 tile = GetTile(x, y);
+    //
+    //         if (tile)
+    //             DrawRectangle(x * 32, y * 32, 32, 32, BLACK);  
+    //     }
+    // }
 
     for (u32 i = 0; i < arrlen(state.entities); ++i)
     {
