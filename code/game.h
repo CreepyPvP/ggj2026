@@ -43,12 +43,19 @@ struct GameState
     Camera2D camera;
 
     Equipment equipment;
+
+    //
+    // loose sequence
+
+    bool game_lost;
+    f32 time_since_game_lost;
 };
 
 extern GameState state;
 
 f32 GameRaycast(Vector2 pos, Vector2 dir, f32 max_dist);
 void GameDrawCone(Vector2 pos, f32 forward_angle, f32 length, f32 angle, Color color);
+void GameStartLose();
 
 extern Scene *game_scene;
 void GameInitialize();

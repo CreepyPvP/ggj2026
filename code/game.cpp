@@ -158,6 +158,7 @@ static void GameSetup()
     state.camera.zoom = 2.5f;
 
     StartLevel();
+    printf("Game setup\n");
 }
 
 static void GameDestroy()
@@ -293,8 +294,30 @@ void GameDrawCone(Vector2 pos, f32 forward_angle, f32 length, f32 angle, Color c
     }
 }
 
+void GameStartLose()
+{
+    state.game_lost = true;
+}
+
 static void GameFrame(f32 delta)
 {
+    if (state.game_lost)
+    {
+        f32 t = Range(state.time_since_game_lost, 0, 1.5);
+        state.time_since_game_lost += delta;
+        delta = Lerp(0.002, 0.0007, t);
+        if (state.time_since_game_lost > 2)
+        {
+            SceneStart(game_scene);
+            return;
+        }
+    }
+
+    if (delta > 0.03)
+    {
+        delta = 0.03;
+    }
+
     // Update
     //
 
