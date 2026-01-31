@@ -98,11 +98,6 @@ void LoadWorld(const char *world_name) {
                     entity = new Treasure();
                 }
 
-                    if (entity) {
-                        entity->position = Vector2{(f32)data_entity.getWorldPosition().x / 32, (f32)data_entity.getWorldPosition().y / 32};
-                        entity->Configure(world, data_entity);
-                        AddEntity(entity);
-                    }
                 if (entity) {
                     entity->position = Vector2{
                         (f32) data_entity.getWorldPosition().x / 32, (f32) data_entity.getWorldPosition().y / 32
@@ -281,7 +276,7 @@ static void GameDrawCone(Vector2 pos, Vector2 dir, f32 length, f32 angle)
 
     point_buffer[sample_points] = pos * 32;
 
-    DrawTriangleFan(point_buffer, sample_points, BLUE);
+    DrawTriangleFan(point_buffer, sample_points, BLUE);   
 }
 
 static void GameFrame(f32 delta)
