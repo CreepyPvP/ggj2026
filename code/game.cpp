@@ -7,6 +7,7 @@
 #include "scene.h"
 #include "game_math.h"
 #include "guard.h"
+#include "switch.h"
 #include "player.h"
 
 #include "raylib.h"
@@ -88,6 +89,7 @@ void LoadWorld(const char *world_name) {
         for (const ldtk::Layer &layer: level.allLayers()) {
             if (layer.getType() != ldtk::LayerType::Entities) continue;
 
+            
             for (auto &data_entity: layer.allEntities()) {
                 Entity *entity = NULL;
                 if (data_entity.getName() == "player" && PLAYER) {
@@ -96,11 +98,9 @@ void LoadWorld(const char *world_name) {
                     };
                     continue;
                 }
-
                 if (data_entity.getName() == "treasure") {
                     entity = new Treasure();
                 }
-
                 if (data_entity.getName() == "guard") {
                     entity = new Guard();
                 }
@@ -109,10 +109,28 @@ void LoadWorld(const char *world_name) {
                     entity->position = Vector2{
                         (f32) data_entity.getWorldPosition().x / 32, (f32) data_entity.getWorldPosition().y / 32
                     };
+                    entity->ldtk_id = data_entity.iid;
                     entity->Configure(world, room, data_entity);
                     AddEntity(entity);
                 }
             }
+            for (auto &data_entity: layer.allEntities()) {
+                Entity *entity = NULL;
+                if (data_entity.getName() == "switch") {
+                    entity = new Switch();
+                }
+                if (entity) {
+                    entity->position = Vector2{
+                        (f32) data_entity.getWorldPosition().x / 32, (f32) data_entity.getWorldPosition().y / 32
+                    };
+                    entity->ldtk_id = data_entity.iid;
+                    entity->Configure(world, room, data_entity);
+                    AddEntity(entity);
+                }
+            }
+
+
+
         }
     }
 
@@ -133,6 +151,17 @@ void LoadWorld(const char *world_name) {
     //     // get an Entity field
     //     int enemy_hp = enemy.getField<int>("HP").value();
     // }
+}
+
+
+
+Entity* getEntity(ldtk::IID ldtk_id){
+    for (u32 i = 0; i < arrlen(state.entities); ++i){
+        if(state.entities[i]->ldtk_id == ldtk_id){
+            return state.entities[i];
+        }
+    }
+    return NULL;
 }
 
 void AddEntity(Entity *entity) {

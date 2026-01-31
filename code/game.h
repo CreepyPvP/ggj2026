@@ -1,6 +1,7 @@
 #pragma once
 #include "raylib.h"
 #include "types.h"
+#include "LDtkLoader/Entity.hpp"
 
 struct Entity;
 struct Scene;
@@ -53,3 +54,4 @@ void GameDrawCone(Vector2 pos, f32 forward_angle, f32 length, f32 angle, Color c
 extern Scene *game_scene;
 void GameInitialize();
 void AddEntity(Entity *entity);
+Entity* getEntity(ldtk::IID ldtk_id);
