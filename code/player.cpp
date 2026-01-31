@@ -18,6 +18,10 @@ Player::~Player() {
 void Player::Update(f32 delta) {
     Entity::Update(delta);
 
+    // Update interaction system
+    Entity *new_interaction_target = NULL;
+
+    // Update movement
     Vector2 movement = {};
     if (IsKeyDown(KEY_W))
         movement.y += -1;

@@ -7,6 +7,8 @@ extern Player *PLAYER;
 
 struct Player : Entity {
 
+    Entity *last_interactable;
+
     Player();
     ~Player() override;
     void Update(f32 delta) override;
