@@ -104,6 +104,9 @@ void LoadWorld(const char *world_name) {
                 if (data_entity.getName() == "guard") {
                     entity = new Guard();
                 }
+                if(data_entity.getName() == "camera"){
+                    entity = new GuardCamera();
+                }
                 if (data_entity.getName() == "door") {
                     entity = new Door();
                 }
@@ -177,7 +180,7 @@ static void StartLevel() {
     Player *player = new Player();
     player->position = {2, 2};
     AddEntity(player);
-    LoadWorld("tutorial");
+    LoadWorld("level");
 }
 
 static void GameSetup()
