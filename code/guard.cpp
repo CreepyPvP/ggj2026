@@ -52,6 +52,7 @@ void Guard::Update(f32 delta) {
 }
 
 void GuardCamera::Update(f32 delta){
+    if(!activated) return;
     if(PatrolPathSize > 1){
 
         Vector2 nextPoint = patrolPath[NextPatrolPoint];
@@ -73,6 +74,7 @@ void GuardCamera::Update(f32 delta){
 void Guard::Draw() {
     Entity::Draw();
 
+
     Vector2 render_pos = {floorf(this->position.x * 32), floorf(this->position.y * 32)};
     DrawTextureRec(tileset, Rectangle{32, 448, 32, 32}, render_pos, {255,255,255,255});
 
@@ -92,6 +94,7 @@ void GuardCamera::Draw(){
     Vector2 render_pos = {floorf(this->position.x * 32), floorf(this->position.y * 32)};
     DrawTextureRec(tileset, Rectangle{192, 480, 32, 32}, render_pos, {255,255,255,255});
 
+    if(!activated) return;
     Color coneColor{};
 
     switch (color) {
@@ -131,6 +134,8 @@ void GuardCamera::Configure(const ldtk::World &world, Room* room, const ldtk::En
     Entity::Configure(world, room, data);
 
     field_of_view = data.getField<ldtk::FieldType::Float>("field_of_view").value();
+
+    activated = data.getField<ldtk::FieldType::Bool>("active").value();
 
     // Loading guard paths
     auto loadedPaths = data.getArrayField<ldtk::IntPoint>("directions");

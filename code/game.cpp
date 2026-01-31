@@ -46,6 +46,33 @@ u8 GetTile(i32 x, i32 y)
     return 0;
 }
 
+void SetTile(i32 int_x, i32 int_y, Room* room, int value){
+    
+    i32 rx = int_x - room->offset_x;
+    i32 ry = int_y - room->offset_y;
+    if (rx < 0 || ry < 0 || rx >= room->width || ry >= room->height){
+        printf("Invalid SetTile call!!!");
+        return;
+    }
+    room->tiles[rx + ry * room->width] = value;
+}
+
+void SetTile(float x, float y, int value){
+    i32 int_x = (int)(x / 32);
+    i32 int_y = (int)(y / 32);
+    
+    for (u32 i = 0; i < arrlen(state.rooms); ++i)
+    {
+        Room *room = state.rooms + i;
+        if(room->offset_x <= int_x && room->offset_x + room->width >= int_x && 
+        room->offset_y <= int_y && room->offset_y + room->width >= int_y){
+            SetTile(int_x,int_y, room, value);
+        }
+        
+    }
+
+}
+
 void LoadWorld(const char *world_name) {
     ldtk::Project ldtk_project;
     ldtk_project.loadFromFile("assets/world/game_world.ldtk");
