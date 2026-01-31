@@ -58,8 +58,8 @@ void SetTile(i32 int_x, i32 int_y, Room* room, int value){
 }
 
 void SetTile(float x, float y, int value){
-    i32 int_x = (int)(x / 32);
-    i32 int_y = (int)(y / 32);
+    i32 int_x = (int)x;
+    i32 int_y = (int)y;
     
     for (u32 i = 0; i < arrlen(state.rooms); ++i)
     {
