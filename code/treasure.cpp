@@ -43,8 +43,8 @@ void Treasure::Draw() {
 }
 
 
-void Treasure::Configure(const ldtk::World &world, const ldtk::Entity &data) {
-    Entity::Configure(world, data);
+void Treasure::Configure(const ldtk::World &world, Room* room, const ldtk::Entity &data) {
+    Entity::Configure(world, room, data);
 
     const auto &enum_value = data.getField<ldtk::EnumValue>("treasure_type");
 
