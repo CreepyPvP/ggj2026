@@ -55,17 +55,45 @@ void Player::Update(f32 delta) {
         movement.x += 1;
     movement = Vector2Normalize(movement);
 
+    // collision
+    Vector2 sensor_offsets[] = {
+        { 0.2, 0.95 },
+        { 0.2, 0.65 },
+        { 0.8, 0.95 },
+        { 0.8, 0.65 },
+
+        { 0.2, 0.65 },
+        { 0.8, 0.65 },
+        { 0.2, 0.95 },
+        { 0.8, 0.95 },
+    };
+    f32 speed = 8;
+
     // x movement
     {
         Vector2 dir = {movement.x, 0};
-        f32 len = Min(GameRaycast(position, dir) - 0.001, 6 * delta);
+
+        u32 off = 0;
+        if (dir.x > 0)
+            off += 2;
+
+        f32 sensor_value = Min(GameRaycast(position + sensor_offsets[off], dir) - 0.001,
+                                GameRaycast(position + sensor_offsets[off + 1], dir) - 0.001);
+        f32 len = Min(sensor_value, speed * delta);
         position += dir * len;
     }
 
     // y movement
     {
         Vector2 dir = {0, movement.y};
-        f32 len = Min(GameRaycast(position, dir) - 0.001, 6 * delta);
+
+        u32 off = 4;
+        if (dir.y > 0)
+            off += 2;
+
+        f32 sensor_value = Min(GameRaycast(position + sensor_offsets[off], dir) - 0.001,
+                                GameRaycast(position + sensor_offsets[off + 1], dir) - 0.001);
+        f32 len = Min(sensor_value, speed * delta);
         position += dir * len;
     }
 

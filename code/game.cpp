@@ -238,16 +238,16 @@ static void GameFrame(f32 delta)
     }
 
     // Draw colliders
-    for (u32 x = 0; x < state.width; ++x)
-    {
-        for (u32 y = 0; y < state.height; ++y)
-        {
-            u8 tile = GetTile(x, y);
-
-            if (tile)
-                DrawRectangle(x * 32, y * 32, 32, 32, BLACK);  
-        }
-    }
+    // for (u32 x = 0; x < state.width; ++x)
+    // {
+    //     for (u32 y = 0; y < state.height; ++y)
+    //     {
+    //         u8 tile = GetTile(x, y);
+    //
+    //         if (tile)
+    //             DrawRectangle(x * 32, y * 32, 32, 32, BLACK);  
+    //     }
+    // }
 
     for (u32 i = 0; i < arrlen(state.entities); ++i)
     {
@@ -260,7 +260,7 @@ static void GameFrame(f32 delta)
 
     {
         // fade in
-        f32 t = Range(game_scene->time, 0, 0.5);
+        f32 t = Range(game_scene->time, 0, 0.65);
         DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, 1 - t));                        
     }
 

@@ -1,6 +1,7 @@
-render world basic
-raycast based player movement
 render light shapes
+
+dont linear sample pixelart lmao
+
 do deferred rendering       <---------
 
 camera lookahead
