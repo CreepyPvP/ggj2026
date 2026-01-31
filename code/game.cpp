@@ -247,24 +247,33 @@ void UpdateCamera(const Entity *entity, f32 delta)
     Vector2 cameraPos = state.camera.target;
 
     // Smoothing camera following player
-    float targetX = 0.1f * playerPos.x * 32 + 0.9f * cameraPos.x;
-    float targetY = 0.1f * playerPos.y * 32 + 0.9f * cameraPos.y;
-
-    // Centering camera
-    targetX++;
-    targetY++;
-
+    float targetX = 0.1f * (playerPos.x + 0.5) * 32 + 0.9f * cameraPos.x;
+    float targetY = 0.1f * (playerPos.y + 0.5) * 32 + 0.9f * cameraPos.y;
     state.camera.target = Vector2(targetX, targetY);
 }
 
 static void GameDrawCone(Vector2 pos, Vector2 dir, f32 length, f32 angle)
 {
-    Vector2 points[] = {
-        {(pos.x + 4) * 32, (pos.y + 1) * 32},
-        {(pos.x + 4) * 32, (pos.y - 1) * 32},
-        pos * 32,
-    };
-    DrawTriangleFan(points, 3, BLUE);   
+    u32 sample_points = 100;
+    Vector2 point_buffer[128];
+
+    f32 forward_angle = 0;
+    f32 start_angle = forward_angle - angle / 2;
+    f32 end_angle = forward_angle + angle / 2;
+
+    for (u32 i = 0; i < sample_points; ++i)
+    {
+        f32 current_angle = start_angle + (end_angle - start_angle) * ((f32) i / ((f32) sample_points - 1));
+        Vector2 current_direction = {cos(current_angle / 180.0f * PI), sin(current_angle / 180.0f * PI)};
+
+        f32 len = GameRaycast(pos, current_direction);
+
+        point_buffer[i] = (pos + current_direction * len) * 32;
+    }
+
+    point_buffer[sample_points] = pos * 32;
+
+    DrawTriangleFan(point_buffer, sample_points, BLUE);   
 }
 
 static void GameFrame(f32 delta)
@@ -317,7 +326,8 @@ static void GameFrame(f32 delta)
         entity->Draw();
     }
 
-    GameDrawCone({1, 2}, {1, 0}, 3, 45);
+    if (PLAYER != NULL)
+        GameDrawCone(PLAYER->position, {1, 0}, 3, 45);
 
     EndMode2D();
 
