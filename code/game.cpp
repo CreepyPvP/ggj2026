@@ -15,18 +15,7 @@
 
 Scene *game_scene;
 
-
-struct GameState
-{
-    u32 width;
-    u32 height;
-    u8 tiles[64 * 64];
-
-    Entity **entities;
-    Camera2D camera;
-};
-
-static GameState state;
+GameState state;
     
 void SetTile(i32 x, i32 y, u8 tile)
 {
@@ -132,7 +121,7 @@ void LoadWorld()
 
 static void AddEntity(Entity *entity) {
     arrput(state.entities, entity);
-    entity->entityId = arrlen(state.entities) - 1;
+    entity->entity_id = arrlen(state.entities) - 1;
 }
 
 static void GameSetup()
