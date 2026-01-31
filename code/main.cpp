@@ -22,6 +22,10 @@ i32 main(void)
 
     while (!WindowShouldClose())
     {
+        for(i32 i=0; i < 100 ; i++){
+            free(malloc(1));
+        }
+
         if (IsKeyDown(KEY_T))
         {
             SceneStart(game_scene);
@@ -33,3 +37,4 @@ i32 main(void)
     CloseWindow();
     return 0;
 }
+
