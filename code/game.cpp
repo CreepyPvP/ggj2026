@@ -12,6 +12,7 @@
 #include "player.h"
 
 #include "raylib.h"
+#include "rlgl.h"
 #include "raymath.h"
 #include "treasure.h"
 
@@ -21,6 +22,12 @@ Scene *game_scene;
 Texture2D tileset;
 
 RenderTexture2D render_target;
+RenderTexture2D light_target;
+
+Shader light_shader;
+i32 light_shader_color_buffer_loc;
+i32 light_shader_light_buffer_loc;
+i32 light_shader_size_loc;
 
 GameState state;
 
@@ -334,19 +341,41 @@ void UpdateCamera(const Entity *entity, f32 delta)
     state.camera.target = Vector2(targetX, targetY);
 }
 
+struct ConeDraw
+{
+    Vector2 pos;
+    f32 forward_angle;
+    f32 length;
+    f32 angle;
+    Color color;
+};
+
+static ConeDraw *cone_draws;
+
 void GameDrawCone(Vector2 pos, f32 forward_angle, f32 length, f32 angle, Color color)
+{
+    ConeDraw draw = {};
+    draw.pos = pos;
+    draw.forward_angle = forward_angle;
+    draw.length = length;
+    draw.angle = angle;
+    draw.color = color;
+    arrput(cone_draws, draw);
+}
+
+static void ExecuteConeDraw(ConeDraw *draw)
 {
     u32 sample_points = 64;
 
-    f32 start_angle = forward_angle + angle / 2;
-    f32 end_angle = forward_angle - angle / 2;
+    f32 start_angle = draw->forward_angle + draw->angle / 2;
+    f32 end_angle = draw->forward_angle - draw->angle / 2;
 
     Vector2 prev_sample;
 
     {
         Vector2 current_dir = {cos(start_angle / 180.0f * PI), sin(start_angle / 180.0f * PI)};
-        f32 len = Min(GameRaycast(pos, current_dir, length), length);
-        prev_sample = (pos + current_dir * len) * 32;
+        f32 len = Min(GameRaycast(draw->pos, current_dir, draw->length), draw->length);
+        prev_sample = (draw->pos + current_dir * len) * 32;
     }
 
     for (u32 i = 1; i < sample_points; ++i)
@@ -354,10 +383,10 @@ void GameDrawCone(Vector2 pos, f32 forward_angle, f32 length, f32 angle, Color c
         f32 current_angle = start_angle + (end_angle - start_angle) * ((f32) i / ((f32) sample_points - 1));
         Vector2 current_dir = {cos(current_angle / 180.0f * PI), sin(current_angle / 180.0f * PI)};
 
-        f32 len = Min(GameRaycast(pos, current_dir, length), length);
-        Vector2 sample = (pos + current_dir * len) * 32;
+        f32 len = Min(GameRaycast(draw->pos, current_dir, draw->length), draw->length);
+        Vector2 sample = (draw->pos + current_dir * len) * 32;
 
-        DrawTriangle(pos * 32, prev_sample, sample, Fade(color, 0.5));
+        DrawTriangle(draw->pos * 32, prev_sample, sample, Fade(draw->color, 0.5));
         prev_sample = sample;
     }
 }
@@ -400,6 +429,8 @@ static void GameFrame(f32 delta)
     // Render
     //
 
+    BeginTextureMode(render_target);
+
     ClearBackground({34, 32, 52, 255});
     BeginMode2D(state.camera);
 
@@ -427,32 +458,51 @@ static void GameFrame(f32 delta)
     //     }
     // }
 
+    arrsetlen(cone_draws, 0);
     for (u32 i = 0; i < arrlen(state.entities); ++i)
     {
         Entity *entity = state.entities[i];
         entity->Draw();
     }
 
-
     EndMode2D();
+    EndTextureMode();
 
+    BeginTextureMode(light_target);
+    ClearBackground({0, 0, 0, 255});
+    BeginMode2D(state.camera);
+    for (u32 i = 0; i < arrlen(cone_draws); ++i)
     {
-        // fade in
-        f32 t = Range(game_scene->time, 0, 1.25);
-        DrawRectangle(0, 0, render_target.texture.width, render_target.texture.height, Fade(BLACK, 1 - t));
+        ExecuteConeDraw(cone_draws + i);
     }
-
+    EndMode2D();
     EndTextureMode();
 
     BeginDrawing();
 
+
+    // Final composite pass
+    BeginShaderMode(light_shader);
+    Vector2 screen_size = { (f32) GetScreenWidth(), (f32) GetScreenHeight() };
+    SetShaderValueTexture(light_shader, light_shader_color_buffer_loc, render_target.texture);
+    SetShaderValueTexture(light_shader, light_shader_light_buffer_loc, light_target.texture);
+    SetShaderValue(light_shader, light_shader_size_loc, &screen_size, RL_SHADER_UNIFORM_VEC2); 
+    // DrawTexturePro(render_target.texture, {0, 0, (f32) render_target.texture.width, (f32) -render_target.texture.height},
+    //                {0, 0, (f32) GetScreenWidth(), (f32) GetScreenHeight()}, {}, 0, WHITE);
+    DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), WHITE);  
+    EndShaderMode();
+    
     int fontSize = 45;
     DrawRectangle(0,0, 450, 180, ColorAlpha(BLACK, 0.5));
     DrawText(TextFormat("Total cash:\t%dk", state.saved_cash),0.5 * fontSize,fontSize, fontSize, WHITE);
     DrawText(TextFormat("Held cash:  \t%dk", state.held_cash),0.5 * fontSize,2 * fontSize, fontSize, WHITE);
+    
+    {
+        // fade in
+        f32 t = Range(game_scene->time, 0, 1.25);
+        DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, 1 - t));
+    }
 
-    DrawTexturePro(render_target.texture, {0, 0, (f32) render_target.texture.width, (f32) -render_target.texture.height},
-                   {0, 0, (f32) GetScreenWidth(), (f32) GetScreenHeight()}, {}, 0, WHITE);
     DrawFPS(10, 10);
     EndDrawing();
 }
@@ -466,4 +516,10 @@ void GameInitialize()
     game_scene->Destroy = GameDestroy;
 
     render_target = LoadRenderTexture(1600, 900);
+    light_target = LoadRenderTexture(1600, 900);
+
+    light_shader = LoadShader(NULL, "assets/lightshader.frag");
+    light_shader_color_buffer_loc = GetShaderLocation(light_shader, "color_buffer");
+    light_shader_light_buffer_loc = GetShaderLocation(light_shader, "light_buffer");
+    light_shader_size_loc = GetShaderLocation(light_shader, "size");
 }
