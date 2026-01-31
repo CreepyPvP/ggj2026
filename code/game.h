@@ -13,11 +13,18 @@ struct TexturedTile
     Rectangle source;
 };
 
-struct GameState
-{
+struct Room {
+    i32 offset_x;
+    i32 offset_y;
     u32 width;
     u32 height;
-    u8 tiles[64 * 64];
+    u8 tiles[128 * 128];
+};
+
+struct GameState
+{
+    Room rooms[32];
+    u32 room_count;
 
     TexturedTile *textured_tiles;
 
