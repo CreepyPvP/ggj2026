@@ -91,7 +91,8 @@
 						}, {
 							"id": "V_String",
 							"params": ["17,12"]
-						} ] }
+						} ] },
+						{ "__identifier": "random_walk", "__type": "Bool", "__value": false, "__tile": null, "defUid": 83, "realEditorValues": [] }
 					],
 					"__worldX": 896,
 					"__worldY": 608
@@ -189,7 +190,8 @@
 						}, {
 							"id": "V_String",
 							"params": ["14,2"]
-						} ] }
+						} ] },
+						{ "__identifier": "random_walk", "__type": "Bool", "__value": false, "__tile": null, "defUid": 83, "realEditorValues": [] }
 					],
 					"__worldX": 960,
 					"__worldY": 288

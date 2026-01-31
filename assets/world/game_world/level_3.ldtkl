@@ -376,7 +376,8 @@
 						}, {
 							"id": "V_String",
 							"params": ["11,14"]
-						} ] }
+						} ] },
+						{ "__identifier": "random_walk", "__type": "Bool", "__value": false, "__tile": null, "defUid": 83, "realEditorValues": [] }
 					],
 					"__worldX": -608,
 					"__worldY": 448
@@ -404,7 +405,8 @@
 						}, {
 							"id": "V_String",
 							"params": ["11,4"]
-						} ] }
+						} ] },
+						{ "__identifier": "random_walk", "__type": "Bool", "__value": false, "__tile": null, "defUid": 83, "realEditorValues": [] }
 					],
 					"__worldX": -608,
 					"__worldY": 128
@@ -432,7 +434,8 @@
 						}, {
 							"id": "V_String",
 							"params": ["7,9"]
-						} ] }
+						} ] },
+						{ "__identifier": "random_walk", "__type": "Bool", "__value": false, "__tile": null, "defUid": 83, "realEditorValues": [] }
 					],
 					"__worldX": -672,
 					"__worldY": 288
@@ -559,7 +562,8 @@
 						}, {
 							"id": "V_String",
 							"params": ["33,18"]
-						} ] }
+						} ] },
+						{ "__identifier": "random_walk", "__type": "Bool", "__value": false, "__tile": null, "defUid": 83, "realEditorValues": [] }
 					],
 					"__worldX": -608,
 					"__worldY": 576
@@ -587,7 +591,8 @@
 						}, {
 							"id": "V_String",
 							"params": ["33,21"]
-						} ] }
+						} ] },
+						{ "__identifier": "random_walk", "__type": "Bool", "__value": false, "__tile": null, "defUid": 83, "realEditorValues": [] }
 					],
 					"__worldX": -576,
 					"__worldY": 672
@@ -615,7 +620,8 @@
 						}, {
 							"id": "V_String",
 							"params": ["3,20"]
-						} ] }
+						} ] },
+						{ "__identifier": "random_walk", "__type": "Bool", "__value": false, "__tile": null, "defUid": 83, "realEditorValues": [] }
 					],
 					"__worldX": -1120,
 					"__worldY": 288
@@ -757,7 +763,8 @@
 						}, {
 							"id": "V_String",
 							"params": ["6,13"]
-						} ] }
+						} ] },
+						{ "__identifier": "random_walk", "__type": "Bool", "__value": false, "__tile": null, "defUid": 83, "realEditorValues": [] }
 					],
 					"__worldX": -1024,
 					"__worldY": 480
