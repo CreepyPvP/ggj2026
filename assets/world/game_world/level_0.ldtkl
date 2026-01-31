@@ -493,22 +493,6 @@
 					"__worldY": 896
 				},
 				{
-					"__identifier": "item",
-					"__grid": [17,9],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": null,
-					"__smartColor": "#00EFFF",
-					"iid": "283d3f40-fa90-11f0-97a2-a9870440c6fc",
-					"width": 32,
-					"height": 32,
-					"defUid": 11,
-					"px": [544,288],
-					"fieldInstances": [],
-					"__worldX": 1824,
-					"__worldY": 832
-				},
-				{
 					"__identifier": "door",
 					"__grid": [14,3],
 					"__pivot": [0,0],
@@ -586,6 +570,25 @@
 					"px": [384,288],
 					"fieldInstances": [{ "__identifier": "unlockable", "__type": "Bool", "__value": false, "__tile": null, "defUid": 64, "realEditorValues": [] }],
 					"__worldX": 1664,
+					"__worldY": 832
+				},
+				{
+					"__identifier": "treasure",
+					"__grid": [17,9],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": { "tilesetUid": 13, "x": 224, "y": 384, "w": 32, "h": 32 },
+					"__smartColor": "#FFE700",
+					"iid": "c76bc7b0-fa90-11f0-90d9-d1dacc76bf89",
+					"width": 32,
+					"height": 32,
+					"defUid": 3,
+					"px": [544,288],
+					"fieldInstances": [{ "__identifier": "treasure_type", "__type": "LocalEnum.treasure_type", "__value": "diamong_big", "__tile": { "tilesetUid": 13, "x": 224, "y": 384, "w": 32, "h": 32 }, "defUid": 80, "realEditorValues": [{
+						"id": "V_String",
+						"params": ["diamong_big"]
+					}] }],
+					"__worldX": 1824,
 					"__worldY": 832
 				}
 			]

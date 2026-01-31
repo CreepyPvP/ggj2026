@@ -148,16 +148,16 @@
 					"__grid": [26,9],
 					"__pivot": [0,0],
 					"__tags": [],
-					"__tile": { "tilesetUid": 13, "x": 224, "y": 384, "w": 32, "h": 32 },
+					"__tile": { "tilesetUid": 13, "x": 192, "y": 384, "w": 32, "h": 32 },
 					"__smartColor": "#FFE700",
 					"iid": "656bb640-fa90-11f0-8a34-0b1ef7f2ac77",
 					"width": 32,
 					"height": 32,
 					"defUid": 3,
 					"px": [832,288],
-					"fieldInstances": [{ "__identifier": "treasure_type", "__type": "LocalEnum.treasure_type", "__value": "diamong_big", "__tile": { "tilesetUid": 13, "x": 224, "y": 384, "w": 32, "h": 32 }, "defUid": 80, "realEditorValues": [{
+					"fieldInstances": [{ "__identifier": "treasure_type", "__type": "LocalEnum.treasure_type", "__value": "coins_big", "__tile": { "tilesetUid": 13, "x": 192, "y": 384, "w": 32, "h": 32 }, "defUid": 80, "realEditorValues": [{
 						"id": "V_String",
-						"params": ["diamong_big"]
+						"params": ["coins_big"]
 					}] }],
 					"__worldX": -384,
 					"__worldY": 288

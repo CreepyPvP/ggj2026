@@ -195,38 +195,6 @@
 					"__worldY": 64
 				},
 				{
-					"__identifier": "item",
-					"__grid": [15,3],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": null,
-					"__smartColor": "#00EFFF",
-					"iid": "2bd58820-fa90-11f0-b3c4-e9dded292db2",
-					"width": 32,
-					"height": 32,
-					"defUid": 11,
-					"px": [480,96],
-					"fieldInstances": [],
-					"__worldX": 480,
-					"__worldY": 96
-				},
-				{
-					"__identifier": "item",
-					"__grid": [5,11],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": null,
-					"__smartColor": "#00EFFF",
-					"iid": "abcf1140-fa90-11f0-89ab-c18590f0ab1f",
-					"width": 32,
-					"height": 32,
-					"defUid": 11,
-					"px": [160,352],
-					"fieldInstances": [],
-					"__worldX": 160,
-					"__worldY": 352
-				},
-				{
 					"__identifier": "switch",
 					"__grid": [7,11],
 					"__pivot": [0,0],
@@ -305,6 +273,25 @@
 					"fieldInstances": [{ "__identifier": "unlockable", "__type": "Bool", "__value": false, "__tile": null, "defUid": 64, "realEditorValues": [] }],
 					"__worldX": 96,
 					"__worldY": 0
+				},
+				{
+					"__identifier": "treasure",
+					"__grid": [4,11],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": { "tilesetUid": 13, "x": 224, "y": 384, "w": 32, "h": 32 },
+					"__smartColor": "#FFE700",
+					"iid": "d3fcca60-fa90-11f0-90d9-75e971dc147c",
+					"width": 32,
+					"height": 32,
+					"defUid": 3,
+					"px": [128,352],
+					"fieldInstances": [{ "__identifier": "treasure_type", "__type": "LocalEnum.treasure_type", "__value": "diamong_big", "__tile": { "tilesetUid": 13, "x": 224, "y": 384, "w": 32, "h": 32 }, "defUid": 80, "realEditorValues": [{
+						"id": "V_String",
+						"params": ["diamong_big"]
+					}] }],
+					"__worldX": 128,
+					"__worldY": 352
 				}
 			]
 		},
