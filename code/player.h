@@ -7,7 +7,7 @@ extern Player *PLAYER;
 
 struct Player : Entity {
 
-    Entity *last_interactable;
+    Entity *last_interactable = NULL;
 
     Player();
     ~Player() override;

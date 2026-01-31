@@ -10,11 +10,14 @@ struct Entity {
     u32 entity_id = INVALID_ENTITY_ID;
     Vector2 position = {};
 
-    bool interactable;
-    bool active_interaction;;
+    bool interactable = false;
+    bool active_interaction = NULL;
 
     virtual void Update(f32 delta) {}
     virtual void Draw() {}
-    virtual void Interact() {}
+
+    ///
+    /// @param pressed true if pressed this frame, false if held down
+    virtual void Interact(bool pressed) {}
     virtual void SetActiveInteraction(bool active) {active_interaction=active;}
 };
