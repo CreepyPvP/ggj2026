@@ -24,11 +24,22 @@ void Switch::Update(f32 delta) {
     }
 }
 
+void Door::Update(f32 delta){}
+
 void Switch::Draw() {
     Entity::Draw();
     if (activated) return;
     Vector2 render_pos = {floorf(this->position.x * 32), floorf(this->position.y * 32)};
-    DrawTextureRec(tileset, Rectangle{32, 448, 32, 32}, render_pos, {255,255,255,255});
+    DrawTextureRec(tileset, Rectangle{32*10, 448, 32, 32}, render_pos, {255,255,255,255});
+
+}
+
+void Door::Draw(){
+    Entity::Draw();
+    if(unlocked) return;
+    Vector2 render_pos = {floorf(this->position.x * 32), floorf(this->position.y * 32)};
+    DrawTextureRec(tileset, Rectangle{576, 96, 32, 32}, render_pos, {255,255,255,255});
+
 
 }
 
@@ -52,6 +63,16 @@ void Switch::Configure(const ldtk::World &world, Room* room, const ldtk::Entity 
         controlled_cameras[i] = (GuardCamera*)getEntity(camera_ref.value()->iid);
         i++;
     }
+
+}
+
+
+void Door::Configure(const ldtk::World &world, Room* room, const ldtk::Entity &data) {
+    unlockable = data.getField<ldtk::FieldType::Bool>("unlockable").value();
+    
+
+
+    
 
 }
 

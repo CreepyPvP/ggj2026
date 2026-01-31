@@ -104,6 +104,9 @@ void LoadWorld(const char *world_name) {
                 if (data_entity.getName() == "guard") {
                     entity = new Guard();
                 }
+                if (data_entity.getName() == "door") {
+                    entity = new Door();
+                }
 
                 if (entity) {
                     entity->position = Vector2{
