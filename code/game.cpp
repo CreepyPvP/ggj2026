@@ -34,76 +34,76 @@ u8 GetTile(i32 x, i32 y)
     for (u32 i = 0; i < arrlen(state.rooms); ++i)
     {
         Room *room = state.rooms + i;
-        if (x >= room->offset_x && y >= room->offset_y && 
+        if (x >= room->offset_x && y >= room->offset_y &&
             x < room->offset_x + room->width && y < room->offset_y + room->height)
             return GetTile(x, y, room);
     }
     return 0;
 }
 
-void LoadWorld()
-{
+void LoadWorld() {
     ldtk::Project ldtk_project;
     ldtk_project.loadFromFile("assets/world/game_world.ldtk");
-    const auto& world = ldtk_project.getWorld("tutorial");
-    for (const ldtk::Level &level : world.allLevels()) {
-        const ldtk::Layer& collision_layer = level.getLayer("collisions");
+    const auto &world = ldtk_project.getWorld("tutorial");
+    for (const ldtk::Level &level: world.allLevels()) {
+        const ldtk::Layer &collision_layer = level.getLayer("collisions");
 
         Room *room = arraddnptr(state.rooms, 1);
         memset(room, 0, sizeof(*room));
 
+        room->offset_x = level.position.x / 32;
+        room->offset_y = level.position.y / 32;
         room->width = level.size.x / 32;
         room->height = level.size.y / 32;
 
-        for (i32 x = 0; x < room->width; ++x)
-        {
-            for (i32 y = 0; y < room->height; ++y)
-            {
-                const ldtk::IntGridValue& grid_val = collision_layer.getIntGridVal(x, y);
+        for (i32 x = 0; x < room->width; ++x) {
+            for (i32 y = 0; y < room->height; ++y) {
+                const ldtk::IntGridValue &grid_val = collision_layer.getIntGridVal(x, y);
                 room->tiles[x + y * room->width] = grid_val.value > 0;
             }
+        }
+        for (const ldtk::Layer &layer: level.allLayers()) {
+            if (layer.getType() == ldtk::LayerType::AutoLayer) {
+                for (const auto &tile: layer.allTiles()) {
+                    const auto &position = tile.getWorldPosition();
+                    const auto &texture_rect = tile.getTextureRect();
 
-            for (const ldtk::Layer& layer : level.allLayers())
-            {
-                if (layer.getType() == ldtk::LayerType::AutoLayer)
-                {
-                    for (const auto& tile : layer.allTiles()) {
-                        const auto& position = tile.getWorldPosition();
-                        const auto& texture_rect = tile.getTextureRect();
+                    TexturedTile textured = {};
+                    textured.position = Vector2(position.x, position.y);
+                    textured.source = {
+                        (f32) texture_rect.x,
+                        (f32) texture_rect.y,
+                        (f32) texture_rect.width * (tile.flipX ? -1.0f : 1.0f),
+                        (f32) texture_rect.height * (tile.flipY ? -1.0f : 1.0f)
+                    };
 
-                        TexturedTile textured = {};
-                        textured.position = Vector2(position.x, position.y);
-                        textured.source = {
-                            (f32) texture_rect.x,
-                            (f32) texture_rect.y,
-                            (f32) texture_rect.width * (tile.flipX ? -1.0f : 1.0f),
-                            (f32) texture_rect.height * (tile.flipY ? -1.0f : 1.0f)
-                        };
-
-                        arrput(state.textured_tiles, textured);
-                    }
+                    arrput(state.textured_tiles, textured);
                 }
             }
+        }
 
-            for (const ldtk::Layer& layer : level.allLayers()) {
-                if (layer.getType() != ldtk::LayerType::Entities) continue;
+        for (const ldtk::Layer &layer: level.allLayers()) {
+            if (layer.getType() != ldtk::LayerType::Entities) continue;
 
-                for (auto& data_entity : layer.allEntities()) {
-                    Entity *entity = NULL;
-                    if (data_entity.getName() == "player" && PLAYER) {
-                        PLAYER->position = Vector2{(f32)data_entity.getWorldPosition().x / 32, (f32)data_entity.getWorldPosition().y / 32};
-                        continue;
-                    }
+            for (auto &data_entity: layer.allEntities()) {
+                Entity *entity = NULL;
+                if (data_entity.getName() == "player" && PLAYER) {
+                    PLAYER->position = Vector2{
+                        (f32) data_entity.getWorldPosition().x / 32, (f32) data_entity.getWorldPosition().y / 32
+                    };
+                    continue;
+                }
 
-                    if (data_entity.getName() == "treasure") {
-                        entity = new Treasure();
-                    }
+                if (data_entity.getName() == "treasure") {
+                    entity = new Treasure();
+                }
 
-                    if (entity) {
-                        entity->position = Vector2{(f32)data_entity.getWorldPosition().x / 32, (f32)data_entity.getWorldPosition().y / 32};
-                        entity->Configure(data_entity);
-                        AddEntity(entity);
-                    }
+                if (entity) {
+                    entity->position = Vector2{
+                        (f32) data_entity.getWorldPosition().x / 32, (f32) data_entity.getWorldPosition().y / 32
+                    };
+                    entity->Configure(data_entity);
+                    AddEntity(entity);
                 }
             }
         }
@@ -162,7 +162,7 @@ static void GameDestroy()
     arrfree(state.rooms);
 }
 
-f32 GameRaycast(Vector2 pos, Vector2 dir) 
+f32 GameRaycast(Vector2 pos, Vector2 dir)
 {
     f32 min_t = 1e30;
 
@@ -183,7 +183,7 @@ f32 GameRaycast(Vector2 pos, Vector2 dir)
                 Vector2 aabb_size = { 1, 1 };
 
                 // x collision
-                if (dir.x > 0.00001 || dir.x < 0.00001) 
+                if (dir.x > 0.00001 || dir.x < 0.00001)
                 {
                     {
                         float t = (aabb_position.x - pos.x) / dir.x;
@@ -195,7 +195,7 @@ f32 GameRaycast(Vector2 pos, Vector2 dir)
                                 min_t = t;
                             }
                         }
-                    } 
+                    }
                     {
                         float t = (aabb_position.x + aabb_size.x - pos.x) / dir.x;
                         float y = t * dir.y + pos.y;
@@ -221,7 +221,7 @@ f32 GameRaycast(Vector2 pos, Vector2 dir)
                                 min_t = t;
                             }
                         }
-                    } 
+                    }
                     {
                         float t = (aabb_position.y + aabb_size.y - pos.y) / dir.y;
                         float x = t * dir.x + pos.x;
@@ -241,7 +241,7 @@ f32 GameRaycast(Vector2 pos, Vector2 dir)
     return min_t;
 }
 
-void UpdateCamera(const Entity *entity, f32 delta) 
+void UpdateCamera(const Entity *entity, f32 delta)
 {
     Vector2 playerPos = entity->position;
     Vector2 cameraPos = state.camera.target;
@@ -264,13 +264,13 @@ static void GameDrawCone(Vector2 pos, Vector2 dir, f32 length, f32 angle)
         {(pos.x + 4) * 32, (pos.y - 1) * 32},
         pos * 32,
     };
-    DrawTriangleFan(points, 3, BLUE);   
+    DrawTriangleFan(points, 3, BLUE);
 }
 
 static void GameFrame(f32 delta)
 {
     // Update
-    // 
+    //
 
     for (u32 i = 0; i < arrlen(state.entities); ++i)
     {
@@ -305,8 +305,8 @@ static void GameFrame(f32 delta)
                 i32 y = room->offset_y + dy;
                 u8 tile = GetTile(x, y);
 
-                if (tile)
-                    DrawRectangle(x * 32, y * 32, 32, 32, BLACK);  
+                // if (tile)
+                //     DrawRectangle(x * 32, y * 32, 32, 32, BLACK);
             }
         }
     }
@@ -324,7 +324,7 @@ static void GameFrame(f32 delta)
     {
         // fade in
         f32 t = Range(game_scene->time, 0, 0.65);
-        DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, 1 - t));                        
+        DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, 1 - t));
     }
 
     DrawFPS(10, 10);
