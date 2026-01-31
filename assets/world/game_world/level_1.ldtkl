@@ -213,6 +213,25 @@
 					"fieldInstances": [],
 					"__worldX": 576,
 					"__worldY": 576
+				},
+				{
+					"__identifier": "door",
+					"__grid": [8,8],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": null,
+					"__smartColor": "#6192DF",
+					"iid": "661564c0-fa90-11f0-b3c4-415ec76fa2e3",
+					"width": 32,
+					"height": 32,
+					"defUid": 4,
+					"px": [256,256],
+					"fieldInstances": [{ "__identifier": "unlockable", "__type": "Bool", "__value": false, "__tile": null, "defUid": 64, "realEditorValues": [{
+						"id": "V_Bool",
+						"params": [ false ]
+					}] }],
+					"__worldX": 768,
+					"__worldY": 480
 				}
 			]
 		},
