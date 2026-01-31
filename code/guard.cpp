@@ -26,6 +26,8 @@ void Guard::Update(f32 delta) {
         ConeRotation += (determinante >= 0.1f ? -1 : 1 ) * rotationSpeed* delta;
     }
 
+    ConeLength = 10* exp(dotProduct - 1);
+
 }
 
 void Guard::Draw() {
@@ -41,7 +43,7 @@ void Guard::Draw() {
         case Green: coneColor = GREEN; break;
         case Blue: coneColor = BLUE; break;
     }
-    GameDrawCone({position.x+0.5f,position.y+0.5f},ConeRotation, 10, 45, coneColor);
+    GameDrawCone({position.x+0.5f,position.y+0.5f},ConeRotation, ConeLength, 45, coneColor);
 }
 
 void Guard::Configure(const ldtk::World &world, Room* room, const ldtk::Entity &data) {
