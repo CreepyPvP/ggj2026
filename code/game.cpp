@@ -412,8 +412,8 @@ void GameStartLose()
 }
 
 static void ResetPlayerPosition(){
+    
     PLAYER->position = PLAYER->spawnPosition;
-    state.held_cash = 0;
     state.game_lost = false;
     state.time_since_game_lost = 0;
 }

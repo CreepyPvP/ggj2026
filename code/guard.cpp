@@ -5,11 +5,49 @@
 #include "raymath.h"
 #include "player.h"
 #include "LDtkLoader/World.hpp"
+#include "treasure.h"
 
 #include <stdio.h>
 
+
+
+static void DropCash(){
+    while(state.held_cash >= 30){
+        int possible_treasures = 6;
+        if(state.held_cash < 150)
+            possible_treasures = 5;
+        else if(state.held_cash < 80)
+            possible_treasures = 4;
+        else if(state.held_cash < 50)
+            possible_treasures = 3;
+
+
+        int random_treasure = std::rand() % possible_treasures;
+        TreasureType type;
+        switch(random_treasure){
+            case 0: type = money_small; state.held_cash -=10; break;
+            case 1: type = coins_small; state.held_cash -=20; break;
+            case 3: type = money_big; state.held_cash -=30; break;
+            case 4: type = coins_big; state.held_cash -=50; break;
+            case 2: type = diamond_small; state.held_cash -=80; break;
+            case 5: type = diamond_big; state.held_cash -=150; break;
+        }
+
+        Treasure* treasure = new Treasure();
+        treasure->type = type;
+        float randx = (std::rand() / (float)RAND_MAX) -0.5f;
+        float randy = (std::rand() / (float)RAND_MAX) -0.5f;
+        treasure->position = PLAYER->position + Vector2(2*randx, 2*randy);
+        AddEntity(treasure);
+    }
+    state.held_cash = 0;
+}
+
+
+
 void CatchPlayer(GuardColor color){
     if(color != PLAYER->playerColor)
+        //DropCash();
         GameStartLose();
 
 }
