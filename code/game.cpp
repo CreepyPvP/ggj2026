@@ -5,6 +5,7 @@
 
 #include "door.h"
 #include "entity.h"
+#include "equipment_selection.h"
 #include "extract.h"
 #include "scene.h"
 #include "game_math.h"
@@ -236,6 +237,12 @@ static void GameSetup()
     state.display_zoom = 1.8;
     state.target_zoom = 2.5;
     state.target_vignette = 0.12;
+
+    // state.equipment = eqs_state.equipment;
+    state.equipment.mask_red = true;
+    state.equipment.mask_blue = true;
+    state.equipment.mask_green = true;
+    state.equipment.lock_picks = 2;
 
     StartLevel();
     printf("Game setup\n");

@@ -1,5 +1,6 @@
 #include "level_selection.h"
 
+#include "equipment_selection.h"
 #include "game.h"
 #include "game_math.h"
 #include "raylib.h"
@@ -105,6 +106,7 @@ void InitializeLevelSelection() {
     level_selection->Setup = LevelSelectionSetup;
     level_selection->Frame = LevelSelectionFrame;
     level_selection->Destroy = LevelSelectionDestroy;
+
     preview_frame = LoadTexture("assets/textures/levels/preview_frame.png");
     levels[0] = {
         .preview = LoadTexture("assets/textures/levels/tutorial_preview.png"),
