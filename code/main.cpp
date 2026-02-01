@@ -13,6 +13,7 @@ i32 main(void)
 {
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     InitWindow(1600, 900, "Colorful Heist");
+    SetExitKey(0);
 
     SetTargetFPS(60);
 
@@ -27,9 +28,9 @@ i32 main(void)
 
     while (!WindowShouldClose())
     {
-        if (IsKeyDown(KEY_T))
+        if (IsKeyPressed(KEY_T) && IsKeyDown(KEY_LEFT_CONTROL))
         {
-            SceneStart(game_scene);
+            SceneStart(level_selection);
         }
 
         SceneFrame(GetFrameTime());

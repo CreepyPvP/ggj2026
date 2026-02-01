@@ -42,6 +42,6 @@ void main()
     }
 
     // vignette
-    final_color.rgb *= vec3(pow(16.0 * uv.x * uv.y * (1 - uv.x) * (1 - uv.y), 0.12) * 0.7 + 0.3);
+    final_color.rgb *= vec3(pow(16.0 * uv.x * uv.y * (1 - uv.x) * (1 - uv.y), 0.12) * 0.85 + 0.15);
 }
 
