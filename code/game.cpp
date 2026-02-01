@@ -598,7 +598,7 @@ static void GameFrame(f32 delta)
 
     DrawScoreScreen();
 
-    DrawFPS(10, 10);
+    // DrawFPS(10, 10);
     EndDrawing();
 }
 
