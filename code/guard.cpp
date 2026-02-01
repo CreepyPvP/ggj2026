@@ -18,6 +18,7 @@ void Guard::Update(f32 delta) {
 
     if (Vector2DistanceSqr(position + movementDirection, nextPoint ) > Vector2DistanceSqr(position,nextPoint)) {
         NextPatrolPoint = (NextPatrolPoint + 1) % PatrolPathSize;
+        //RotationSpeedMultiplier = 1.0f;
     }
 
     movementDirection = Vector2Normalize(movementDirection);
@@ -25,11 +26,20 @@ void Guard::Update(f32 delta) {
     float determinante = movementDirection.x * facingDirection.y - movementDirection.y * facingDirection.x;
 
     float dotProduct = movementDirection.x * facingDirection.x + movementDirection.y * facingDirection.y;
-    if (dotProduct < 0.999f * Vector2DistanceSqr(facingDirection, {0,0})) {
-        ConeRotation += (determinante >= 0 ? -1 : 1 ) * rotationSpeed* delta;
+    if (dotProduct < 0.999f) { //Vector2DistanceSqr(facingDirection, {0,0}) = 1 unless floating point precision...
+        ConeRotation += (determinante >= 0 ? -1 : 1 ) * RotationSpeedMultiplier * rotationSpeed* delta;
     }
 
-    ConeLength = 10* exp(dotProduct - 1);
+    if ((dotProduct+0.25) * 3 < RotationSpeedMultiplier) {
+        RotationSpeedMultiplier += 10*delta;
+        if (RotationSpeedMultiplier > 3)RotationSpeedMultiplier = 3;
+    }
+    else {
+        RotationSpeedMultiplier -= 1.5f*delta;
+        if (RotationSpeedMultiplier < 1)RotationSpeedMultiplier = 1;
+    }
+
+    ConeLength = 12  - 3* RotationSpeedMultiplier;
 
     // Check game over
     if (PLAYER)
