@@ -9,6 +9,10 @@ struct Scene;
 extern Texture2D tileset;
 extern Sound guardSound1;
 extern Sound guardSound2;
+extern Sound coinSound;
+extern Sound switchSound;
+extern Sound slideSound;
+extern Sound failureSound;
 
 struct TexturedTile
 {

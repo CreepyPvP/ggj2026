@@ -20,6 +20,7 @@ void Treasure::Update(f32 delta) {
 
     if (Vector2DistanceSqr(position, PLAYER->position) < 0.8 * 0.8) {
         collected = true;
+        PlaySound(coinSound);
         animation_timer = 0;
         int cash_amount = 10;
         switch(type){
