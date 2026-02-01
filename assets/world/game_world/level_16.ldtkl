@@ -876,6 +876,22 @@
 					],
 					"__worldX": 352,
 					"__worldY": 1120
+				},
+				{
+					"__identifier": "door",
+					"__grid": [8,7],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": null,
+					"__smartColor": "#6192DF",
+					"iid": "900be960-fa90-11f0-b31d-77f8db26993b",
+					"width": 32,
+					"height": 32,
+					"defUid": 4,
+					"px": [256,224],
+					"fieldInstances": [{ "__identifier": "unlockable", "__type": "Bool", "__value": false, "__tile": null, "defUid": 64, "realEditorValues": [] }],
+					"__worldX": 448,
+					"__worldY": 608
 				}
 			]
 		},
