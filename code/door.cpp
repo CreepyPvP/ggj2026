@@ -113,6 +113,29 @@ void Door::PostDraw() {
         DrawRectangleRec(Rectangle{cursor_pos.x, cursor_pos.y, 1, inner_shape.y}, {99, 149, 121, 255});
     }
 
+    {
+        const char *text = "- \"space\"";
+
+        Vector2 pos = {render_pos.x + shape.x/2 + 3, render_pos.y - shape.y/2};
+        Vector2 shape = MeasureTextEx(GetFontDefault(), text, 6, 1);
+        DrawRectangle(pos.x - 2, pos.y - 1, shape.x + 4, shape.y + 2, ColorAlpha(BLACK, 0.5f));
+        DrawTextEx(GetFontDefault(), text, pos, 6, 1, WHITE);
+    }
+
+    if (state.equipment.lock_picks > 0) {
+        const char *text = "Bypass with Lockpick 'F' x%i";
+
+        text = TextFormat(text, state.equipment.lock_picks);
+
+        Vector2 pos = {render_pos.x, render_pos.y + 7};
+        Vector2 shape = MeasureTextEx(GetFontDefault(), text, 6, 1);
+
+        pos.x -= shape.x/2;
+
+        DrawRectangle(pos.x - 1, pos.y - 1, shape.x + 3, shape.y + 2, ColorAlpha(BLACK, 0.5f));
+        DrawTextEx(GetFontDefault(), text, pos, 6, 1, ORANGE);
+    }
+
 }
 
 
