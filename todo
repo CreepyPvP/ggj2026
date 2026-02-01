@@ -1,8 +1,11 @@
-camera lookahead
+zoom in on doorgame
+player animations
+fix cone rendering 
 
 
 animate dropshadows?
 floating particles?
+camera lookahead
  
 after:
     - erik macros, compilation units, easing functions
