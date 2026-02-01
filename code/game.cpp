@@ -411,6 +411,9 @@ void GameStartLose()
     state.game_lost = true;
 }
 
+
+
+
 static void ResetPlayerPosition(){
     
     PLAYER->position = PLAYER->spawnPosition;

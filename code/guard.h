@@ -15,6 +15,8 @@ enum GuardColor {
   Blue
 };
 
+void DropCash();
+
 struct Guard : Entity {
     GuardColor color;
     int PatrolPathSize;

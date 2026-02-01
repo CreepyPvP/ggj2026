@@ -11,7 +11,7 @@
 
 
 
-static void DropCash(){
+void DropCash(){
     while(state.held_cash >= 30){
         int possible_treasures = 6;
         if(state.held_cash < 150)
@@ -20,6 +20,8 @@ static void DropCash(){
             possible_treasures = 4;
         else if(state.held_cash < 50)
             possible_treasures = 3;
+
+        printf("Dropping money at %d", state.held_cash);
 
 
         int random_treasure = std::rand() % possible_treasures;
@@ -44,11 +46,11 @@ static void DropCash(){
 }
 
 
-
 void CatchPlayer(GuardColor color){
-    if(color != PLAYER->playerColor)
-        //DropCash();
+    if(color != PLAYER->playerColor){
+        DropCash();
         GameStartLose();
+    }
 
 }
 

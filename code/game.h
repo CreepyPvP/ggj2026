@@ -36,7 +36,7 @@ struct GameState
     Room *rooms;
 
     u32 saved_cash;
-    u32 held_cash;
+    int held_cash;
 
     TexturedTile *textured_tiles;
 
@@ -72,3 +72,5 @@ void AddEntity(Entity *entity);
 void SetTile(float x, float y, int value);
 void SetTile(i32 int_x, i32 int_y, Room* room, int value);
 Entity* getEntity(ldtk::IID ldtk_id);
+
+
