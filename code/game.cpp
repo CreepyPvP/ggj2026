@@ -16,6 +16,7 @@
 #include "raylib.h"
 #include "rlgl.h"
 #include "raymath.h"
+#include "score.h"
 #include "treasure.h"
 
 #include "LDtkLoader/Project.hpp"
@@ -218,6 +219,13 @@ void AddEntity(Entity *entity) {
     entity->entity_id = arrlen(state.entities) - 1;
 }
 
+static void DoGameOver() {
+    state.game_over = true;
+    state.game_frozen = true;
+
+    AddNewScore(menu_state.target_level, state.held_cash + state.saved_cash);
+}
+
 static void StartLevel() {
     // player
     Player *player = new Player();
@@ -234,7 +242,7 @@ static void GameSetup()
     state.camera.offset = Vector2{ (f32)render_target.texture.width/2.0f, (f32) render_target.texture.height / 2.0f };
     state.camera.rotation = 0.0f;
 
-    state.game_countdown = 183.0f;
+    state.game_countdown = 20; //183.0f;
     state.display_zoom = 1.8;
     state.target_zoom = 2.5;
 
@@ -411,9 +419,6 @@ void GameStartLose()
     state.game_lost = true;
 }
 
-
-
-
 static void ResetPlayerPosition(){
     
     PLAYER->position = PLAYER->spawnPosition;
@@ -446,16 +451,34 @@ static void GameFrame(f32 delta)
     // Update
     //
 
-    for (u32 i = 0; i < arrlen(state.entities); ++i)
-    {
-        Entity *entity = state.entities[i];
-        entity->Update(delta);
+    if (!state.game_frozen) {
+        for (u32 i = 0; i < arrlen(state.entities); ++i)
+        {
+            Entity *entity = state.entities[i];
+            entity->Update(delta);
+        }
+
+        if (PLAYER != NULL) UpdateCamera(PLAYER, delta);
+
+        state.display_zoom = 0.95f * state.display_zoom + 0.05f * state.target_zoom;
+        state.camera.zoom = state.display_zoom;
     }
 
-    if (PLAYER != NULL) UpdateCamera(PLAYER, delta);
-
-    state.display_zoom = 0.95 * state.display_zoom + 0.05 * state.target_zoom;
-    state.camera.zoom = state.display_zoom;
+    if (!state.game_over && !state.game_frozen) {
+        state.game_countdown -= delta;
+        if (state.game_countdown < 0) {
+            state.game_countdown = 0;
+            DoGameOver();
+        }
+    }
+    if (state.game_over && score_manager.show_screen && !score_manager.input_mode)
+    {
+        if (IsKeyPressed(KEY_ENTER))
+        {
+            score_manager.show_screen = false;
+            SceneStart(level_selection);
+        }
+    }
 
     // Render
     //
@@ -563,15 +586,12 @@ static void GameFrame(f32 delta)
         DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, 1 - t));
     }
 
-    state.game_countdown -= delta;
-    if (state.game_countdown < 0.2) {
-        GameStartLose();
-    }
-    if (state.game_countdown < 0) state.game_countdown = 0;
     int mins = state.game_countdown / 60;
     int seconds = state.game_countdown - 60 * mins;
     int millisec = (state.game_countdown - 60 * mins - seconds) * 1000;
     DrawText(TextFormat("Countdown:\t%d:%d:%d", mins, seconds, millisec), 0.5 * fontSize,1* fontSize, fontSize, WHITE);
+
+    DrawScoreScreen();
 
     DrawFPS(10, 10);
     EndDrawing();

@@ -7,3 +7,4 @@ cmake-build-*
 .idea
 .vs
 CMakeSettings.json
+scores.txt

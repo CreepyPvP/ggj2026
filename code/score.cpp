@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "game_math.h"
 #include "raylib.h"
 #include "raymath.h"
 
@@ -306,7 +305,10 @@ void DrawScoreScreen() {
     Vector2 content_size = {size.x - 40, size.y - 120 - 20};
 
     if (score_manager.input_mode) {
-        if (DrawScoreInput(content_offset, content_size)) score_manager.input_mode = false;
+        if (DrawScoreInput(content_offset, content_size)) {
+            score_manager.input_mode = false;
+            PersistScores();
+        }
     } else {
         DrawScoreList(content_offset, content_size, score_manager.highlight_current);
     }
