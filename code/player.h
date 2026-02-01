@@ -1,5 +1,6 @@
 #pragma once
 #include "entity.h"
+#include "guard.h"
 
 struct Player;
 
@@ -9,6 +10,8 @@ struct Player : Entity {
 
     Entity *last_interactable = NULL;
     Vector2 last_dir = {};
+
+    GuardColor playerColor = Blue;
 
     Player();
     ~Player() override;
