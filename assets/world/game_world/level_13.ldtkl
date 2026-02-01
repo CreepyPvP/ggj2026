@@ -89,7 +89,7 @@
 				},
 				{
 					"__identifier": "guard",
-					"__grid": [4,6],
+					"__grid": [5,5],
 					"__pivot": [0,0],
 					"__tags": [],
 					"__tile": null,
@@ -98,29 +98,29 @@
 					"width": 32,
 					"height": 32,
 					"defUid": 5,
-					"px": [128,192],
+					"px": [160,160],
 					"fieldInstances": [
 						{ "__identifier": "color", "__type": "LocalEnum.color", "__value": "red", "__tile": null, "defUid": 71, "realEditorValues": [{
 							"id": "V_String",
 							"params": ["red"]
 						}] },
-						{ "__identifier": "PatrolPath", "__type": "Array<Point>", "__value": [ { "cx": 4, "cy": 7 }, { "cx": 5, "cy": 7 }, { "cx": 5, "cy": 2 }, { "cx": 4, "cy": 2 } ], "__tile": null, "defUid": 9, "realEditorValues": [ {
-							"id": "V_String",
-							"params": ["4,7"]
-						}, {
-							"id": "V_String",
-							"params": ["5,7"]
-						}, {
+						{ "__identifier": "PatrolPath", "__type": "Array<Point>", "__value": [ { "cx": 5, "cy": 2 }, { "cx": 4, "cy": 2 }, { "cx": 4, "cy": 7 }, { "cx": 5, "cy": 7 } ], "__tile": null, "defUid": 9, "realEditorValues": [ {
 							"id": "V_String",
 							"params": ["5,2"]
 						}, {
 							"id": "V_String",
 							"params": ["4,2"]
+						}, {
+							"id": "V_String",
+							"params": ["4,7"]
+						}, {
+							"id": "V_String",
+							"params": ["5,7"]
 						} ] },
 						{ "__identifier": "random_walk", "__type": "Bool", "__value": false, "__tile": null, "defUid": 83, "realEditorValues": [] }
 					],
-					"__worldX": 1216,
-					"__worldY": 1024
+					"__worldX": 1248,
+					"__worldY": 992
 				},
 				{
 					"__identifier": "treasure",

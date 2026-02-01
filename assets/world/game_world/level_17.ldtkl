@@ -51,7 +51,40 @@
 			"seed": 5756243,
 			"overrideTilesetUid": null,
 			"gridTiles": [],
-			"entityInstances": []
+			"entityInstances": [
+				{
+					"__identifier": "treasure",
+					"__grid": [2,8],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": { "tilesetUid": 13, "x": 64, "y": 384, "w": 32, "h": 32 },
+					"__smartColor": "#FFE700",
+					"iid": "d1847220-fa90-11f0-b31d-dd01b4a863d5",
+					"width": 32,
+					"height": 32,
+					"defUid": 3,
+					"px": [64,256],
+					"fieldInstances": [{ "__identifier": "treasure_type", "__type": "LocalEnum.treasure_type", "__value": "money_small", "__tile": { "tilesetUid": 13, "x": 64, "y": 384, "w": 32, "h": 32 }, "defUid": 80, "realEditorValues": [] }],
+					"__worldX": 704,
+					"__worldY": 1312
+				},
+				{
+					"__identifier": "treasure",
+					"__grid": [1,11],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": { "tilesetUid": 13, "x": 64, "y": 384, "w": 32, "h": 32 },
+					"__smartColor": "#FFE700",
+					"iid": "d24db590-fa90-11f0-b31d-01a75d6df016",
+					"width": 32,
+					"height": 32,
+					"defUid": 3,
+					"px": [32,352],
+					"fieldInstances": [{ "__identifier": "treasure_type", "__type": "LocalEnum.treasure_type", "__value": "money_small", "__tile": { "tilesetUid": 13, "x": 64, "y": 384, "w": 32, "h": 32 }, "defUid": 80, "realEditorValues": [] }],
+					"__worldX": 672,
+					"__worldY": 1408
+				}
+			]
 		},
 		{
 			"__identifier": "walls",
