@@ -387,7 +387,7 @@ static void ExecuteConeDraw(ConeDraw *draw)
 
     {
         Vector2 current_dir = {cos(start_angle / 180.0f * PI), sin(start_angle / 180.0f * PI)};
-        f32 len = Min(GameRaycast(draw->pos, current_dir, draw->length), draw->length);
+        f32 len = Min(GameRaycast(draw->pos, current_dir, draw->length + 2), draw->length);
         prev_sample = (draw->pos + current_dir * len) * 32;
     }
 
@@ -396,7 +396,7 @@ static void ExecuteConeDraw(ConeDraw *draw)
         f32 current_angle = start_angle + (end_angle - start_angle) * ((f32) i / ((f32) sample_points - 1));
         Vector2 current_dir = {cos(current_angle / 180.0f * PI), sin(current_angle / 180.0f * PI)};
 
-        f32 len = Min(GameRaycast(draw->pos, current_dir, draw->length), draw->length);
+        f32 len = Min(GameRaycast(draw->pos, current_dir, draw->length + 2), draw->length);
         Vector2 sample = (draw->pos + current_dir * len) * 32;
 
         DrawTriangle(draw->pos * 32, prev_sample, sample, Fade(draw->color, 0.5));
@@ -513,7 +513,10 @@ static void GameFrame(f32 delta)
     DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), WHITE);
     EndShaderMode();
 
-    BeginMode2D(state.camera);
+    Camera2D composite_camera = state.camera;
+    composite_camera.offset = Vector2{ (f32)GetScreenWidth()/2.0f, (f32) GetScreenHeight() / 2.0f };
+    composite_camera.zoom *= (f32) GetScreenWidth() / (f32) render_target.texture.width;
+    BeginMode2D(composite_camera);
 
     for (u32 i = 0; i < arrlen(state.entities); ++i)
     {
