@@ -23,6 +23,9 @@
 Scene *game_scene;
 Texture2D tileset;
 
+Sound guardSound1;
+Sound guardSound2;
+
 RenderTexture2D render_target;
 RenderTexture2D light_target;
 

@@ -7,6 +7,8 @@ struct Entity;
 struct Scene;
 
 extern Texture2D tileset;
+extern Sound guardSound1;
+extern Sound guardSound2;
 
 struct TexturedTile
 {
