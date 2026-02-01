@@ -362,6 +362,15 @@ void GameDrawCone(Vector2 pos, f32 forward_angle, f32 length, f32 angle, Color c
     draw.length = length;
     draw.angle = angle;
     draw.color = color;
+
+    if (PLAYER)
+    {
+        if (Vector2Length(pos -  PLAYER->position) > 20 + length)
+        {
+            return;
+        }
+    }
+
     arrput(cone_draws, draw);
 }
 
@@ -482,7 +491,10 @@ static void GameFrame(f32 delta)
 
     BeginTextureMode(light_target);
     ClearBackground({0, 0, 0, 255});
-    BeginMode2D(state.camera);
+    Camera2D light_camera = state.camera;
+    light_camera.offset = Vector2{ (f32)light_target.texture.width/2.0f, (f32) light_target.texture.height / 2.0f };
+    light_camera.zoom *= 0.50 * 0.6;
+    BeginMode2D(light_camera);
     for (u32 i = 0; i < arrlen(cone_draws); ++i)
     {
         ExecuteConeDraw(cone_draws + i);
@@ -528,7 +540,7 @@ void GameInitialize()
     game_scene->Destroy = GameDestroy;
 
     render_target = LoadRenderTexture(1600, 900);
-    light_target = LoadRenderTexture(1600, 900);
+    light_target = LoadRenderTexture(480, 270);
 
     light_shader = LoadShader(NULL, "assets/lightshader.frag");
     light_shader_color_buffer_loc = GetShaderLocation(light_shader, "color_buffer");
