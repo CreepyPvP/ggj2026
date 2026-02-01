@@ -208,16 +208,16 @@
 					"__pivot": [0,0],
 					"__tags": [],
 					"__tile": null,
-					"__smartColor": "#BE4A2F",
+					"__smartColor": "#4BB41C",
 					"iid": "09000880-fa90-11f0-97a2-272c43b7c506",
 					"width": 32,
 					"height": 32,
 					"defUid": 5,
 					"px": [320,480],
 					"fieldInstances": [
-						{ "__identifier": "color", "__type": "LocalEnum.color", "__value": "red", "__tile": null, "defUid": 71, "realEditorValues": [{
+						{ "__identifier": "color", "__type": "LocalEnum.color", "__value": "green", "__tile": null, "defUid": 71, "realEditorValues": [{
 							"id": "V_String",
-							"params": ["red"]
+							"params": ["green"]
 						}] },
 						{ "__identifier": "PatrolPath", "__type": "Array<Point>", "__value": [ { "cx": 10, "cy": 2 }, { "cx": 10, "cy": 15 } ], "__tile": null, "defUid": 9, "realEditorValues": [ {
 							"id": "V_String",
@@ -237,16 +237,16 @@
 					"__pivot": [0,0],
 					"__tags": [],
 					"__tile": null,
-					"__smartColor": "#BE4A2F",
+					"__smartColor": "#1E75C3",
 					"iid": "4423cdc0-fa90-11f0-97a2-9144c887d4a8",
 					"width": 32,
 					"height": 32,
 					"defUid": 5,
 					"px": [160,480],
 					"fieldInstances": [
-						{ "__identifier": "color", "__type": "LocalEnum.color", "__value": "red", "__tile": null, "defUid": 71, "realEditorValues": [{
+						{ "__identifier": "color", "__type": "LocalEnum.color", "__value": "blue", "__tile": null, "defUid": 71, "realEditorValues": [{
 							"id": "V_String",
-							"params": ["red"]
+							"params": ["blue"]
 						}] },
 						{ "__identifier": "PatrolPath", "__type": "Array<Point>", "__value": [ { "cx": 16, "cy": 15 }, { "cx": 5, "cy": 15 } ], "__tile": null, "defUid": 9, "realEditorValues": [ {
 							"id": "V_String",
@@ -474,16 +474,16 @@
 					"__pivot": [0,0],
 					"__tags": [],
 					"__tile": null,
-					"__smartColor": "#BE4A2F",
+					"__smartColor": "#1E75C3",
 					"iid": "0c473250-fa90-11f0-97a2-8b873c11695a",
 					"width": 32,
 					"height": 32,
 					"defUid": 5,
 					"px": [448,352],
 					"fieldInstances": [
-						{ "__identifier": "color", "__type": "LocalEnum.color", "__value": "red", "__tile": null, "defUid": 71, "realEditorValues": [{
+						{ "__identifier": "color", "__type": "LocalEnum.color", "__value": "blue", "__tile": null, "defUid": 71, "realEditorValues": [{
 							"id": "V_String",
-							"params": ["red"]
+							"params": ["blue"]
 						}] },
 						{ "__identifier": "PatrolPath", "__type": "Array<Point>", "__value": [ { "cx": 21, "cy": 11 }, { "cx": 14, "cy": 11 } ], "__tile": null, "defUid": 9, "realEditorValues": [ {
 							"id": "V_String",
