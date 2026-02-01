@@ -166,7 +166,6 @@ void Player::Update(f32 delta) {
         last_dir = movement;
         stepSoundTimer += delta;
         if(stepSoundTimer > stepSoundInterval){
-            printf("Playing step sound");
             stepSoundTimer -= stepSoundInterval;
             PlaySound(stepSound);
         }
