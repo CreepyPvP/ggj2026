@@ -234,7 +234,7 @@ static void GameSetup()
     state.camera.rotation = 0.0f;
     state.camera.zoom = 2.5f;
 
-    state.game_countdown = 300.0f;
+    state.game_countdown = 183.0f;
 
     StartLevel();
     printf("Game setup\n");
@@ -543,6 +543,9 @@ static void GameFrame(f32 delta)
     }
 
     state.game_countdown -= delta;
+    if (state.game_countdown < 0.2) {
+        GameStartLose();
+    }
     if (state.game_countdown < 0) state.game_countdown = 0;
     int mins = state.game_countdown / 60;
     int seconds = state.game_countdown - 60 * mins;
