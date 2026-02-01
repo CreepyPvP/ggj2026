@@ -416,6 +416,8 @@ static void ResetPlayerPosition(){
     state.held_cash = 0;
     state.game_lost = false;
     state.time_since_game_lost = 0;
+    state.target_zoom = 2.5;
+    game_scene->time = 0;
 }
 
 static void GameFrame(f32 delta)
@@ -425,6 +427,7 @@ static void GameFrame(f32 delta)
         f32 t = Range(state.time_since_game_lost, 0, 1.1);
         state.time_since_game_lost += delta;
         delta = Lerp(0.002, 0.0007, t);
+        state.target_zoom = 4 + t;
         if (state.time_since_game_lost > 1.3)
         {
             ResetPlayerPosition();
