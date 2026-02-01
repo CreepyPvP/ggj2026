@@ -446,6 +446,13 @@ static void GameFrame(f32 delta)
 
     BeginDrawing();
 
+    // Drawing DeathScreen
+    if (state.game_lost) {
+        unsigned char alpha = 255 * (state.time_since_game_lost / 0.5);
+        int fontSize = 200 * (state.time_since_game_lost / 1.3);
+        DrawText("BUSTED", 1600*0.27,900*0.35,fontSize, { 230, 41, 55, alpha});
+    }
+
     int fontSize = 45;
     DrawRectangle(0,0, 450, 180, ColorAlpha(BLACK, 0.5));
     DrawText(TextFormat("Total cash:\t%dk", state.saved_cash),0.5 * fontSize,fontSize, fontSize, WHITE);
