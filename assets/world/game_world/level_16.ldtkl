@@ -851,33 +851,6 @@
 					"__worldY": 1344
 				},
 				{
-					"__identifier": "switch",
-					"__grid": [5,23],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": null,
-					"__smartColor": "#63C74D",
-					"iid": "0bb7e720-fa90-11f0-b31d-25af7a4260ab",
-					"width": 32,
-					"height": 32,
-					"defUid": 7,
-					"px": [160,736],
-					"fieldInstances": [
-						{ "__identifier": "Controlled_doors", "__type": "Array<EntityRef>", "__value": [{
-							"entityIid": "c1dac0f0-fa90-11f0-b31d-69b376e3339b",
-							"layerIid": "3745fa61-fa90-11f0-8342-d58585aa318e",
-							"levelIid": "3745fa60-fa90-11f0-8342-43343e3c282c",
-							"worldIid": "3745d350-fa90-11f0-8342-3b8bda70e3f5"
-						}], "__tile": null, "defUid": 82, "realEditorValues": [{
-							"id": "V_String",
-							"params": ["c1dac0f0-fa90-11f0-b31d-69b376e3339b"]
-						}] },
-						{ "__identifier": "Controlled_cameras", "__type": "Array<EntityRef>", "__value": [], "__tile": null, "defUid": 85, "realEditorValues": [] }
-					],
-					"__worldX": 352,
-					"__worldY": 1120
-				},
-				{
 					"__identifier": "door",
 					"__grid": [8,7],
 					"__pivot": [0,0],

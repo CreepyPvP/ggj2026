@@ -472,53 +472,6 @@
 					"__worldY": 832
 				},
 				{
-					"__identifier": "switch",
-					"__grid": [15,2],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": null,
-					"__smartColor": "#63C74D",
-					"iid": "04d08f50-fa90-11f0-b31d-5dfd7b9e7fa0",
-					"width": 32,
-					"height": 32,
-					"defUid": 7,
-					"px": [480,64],
-					"fieldInstances": [
-						{ "__identifier": "Controlled_doors", "__type": "Array<EntityRef>", "__value": [
-							{
-								"entityIid": "c181f290-fa90-11f0-b31d-9b0167b81364",
-								"layerIid": "3745fa61-fa90-11f0-8342-d58585aa318e",
-								"levelIid": "3745fa60-fa90-11f0-8342-43343e3c282c",
-								"worldIid": "3745d350-fa90-11f0-8342-3b8bda70e3f5"
-							},
-							{
-								"entityIid": "278b3890-fa90-11f0-8319-cb9288ad426a",
-								"layerIid": "3745fa61-fa90-11f0-8342-d58585aa318e",
-								"levelIid": "3745fa60-fa90-11f0-8342-43343e3c282c",
-								"worldIid": "3745d350-fa90-11f0-8342-3b8bda70e3f5"
-							},
-							{
-								"entityIid": "a6b46340-fa90-11f0-b31d-73113cf49904",
-								"layerIid": "ffebbc11-fa90-11f0-8df1-9bea40f6fcc4",
-								"levelIid": "ffebbc10-fa90-11f0-8df1-69fb647cc095",
-								"worldIid": "3745d350-fa90-11f0-8342-3b8bda70e3f5"
-							}
-						], "__tile": null, "defUid": 82, "realEditorValues": [ {
-							"id": "V_String",
-							"params": ["c181f290-fa90-11f0-b31d-9b0167b81364"]
-						}, {
-							"id": "V_String",
-							"params": ["278b3890-fa90-11f0-8319-cb9288ad426a"]
-						}, {
-							"id": "V_String",
-							"params": ["a6b46340-fa90-11f0-b31d-73113cf49904"]
-						} ] },
-						{ "__identifier": "Controlled_cameras", "__type": "Array<EntityRef>", "__value": [], "__tile": null, "defUid": 85, "realEditorValues": [] }
-					],
-					"__worldX": 2688,
-					"__worldY": 448
-				},
-				{
 					"__identifier": "treasure",
 					"__grid": [2,2],
 					"__pivot": [0,0],

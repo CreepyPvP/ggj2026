@@ -422,33 +422,6 @@
 					"__worldY": 1120
 				},
 				{
-					"__identifier": "switch",
-					"__grid": [1,0],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": null,
-					"__smartColor": "#63C74D",
-					"iid": "37c9ba40-fa90-11f0-8df1-d1dee2a3e049",
-					"width": 32,
-					"height": 32,
-					"defUid": 7,
-					"px": [32,0],
-					"fieldInstances": [
-						{ "__identifier": "Controlled_doors", "__type": "Array<EntityRef>", "__value": [{
-							"entityIid": "c23b7e90-fa90-11f0-b31d-4b85f495b084",
-							"layerIid": "3745fa61-fa90-11f0-8342-d58585aa318e",
-							"levelIid": "3745fa60-fa90-11f0-8342-43343e3c282c",
-							"worldIid": "3745d350-fa90-11f0-8342-3b8bda70e3f5"
-						}], "__tile": null, "defUid": 82, "realEditorValues": [{
-							"id": "V_String",
-							"params": ["c23b7e90-fa90-11f0-b31d-4b85f495b084"]
-						}] },
-						{ "__identifier": "Controlled_cameras", "__type": "Array<EntityRef>", "__value": [], "__tile": null, "defUid": 85, "realEditorValues": [] }
-					],
-					"__worldX": 1408,
-					"__worldY": 1024
-				},
-				{
 					"__identifier": "treasure",
 					"__grid": [1,5],
 					"__pivot": [0,0],
