@@ -43,11 +43,11 @@ void Guard::Update(f32 delta) {
         if (RotationSpeedMultiplier > 3)RotationSpeedMultiplier = 3;
     }
     else {
-        RotationSpeedMultiplier -= 1.5f*delta;
+        RotationSpeedMultiplier -= 10.0f*delta;
         if (RotationSpeedMultiplier < 1)RotationSpeedMultiplier = 1;
     }
 
-    ConeLength = 12  - 3* RotationSpeedMultiplier;
+    ConeLength = 11  - 2.5f* RotationSpeedMultiplier;
 
     // Check game over
     if (PLAYER)
