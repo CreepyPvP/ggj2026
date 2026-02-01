@@ -258,7 +258,7 @@ TimeScore *AddNewScore(u32 level, u32 amount) {
     u32 insert_index = score_manager.score_count;
 
     for (u32 i = 0; i < score_manager.score_count; ++i) {
-        if (score_manager.scores[i].cash_extracted > amount) {
+        if (score_manager.scores[i].cash_extracted < amount) {
             insert_index = i;
             break;
         }
@@ -268,7 +268,7 @@ TimeScore *AddNewScore(u32 level, u32 amount) {
     score_manager.highlight_current = true;
     score_manager.input_mode = true;
     score_manager.show_screen = true;
-    score_manager.level = amount;
+    score_manager.level = level;
 
     if (score_manager.score_count != insert_index) {
         memcpy(score_manager.scores + insert_index + 1, score_manager.scores + insert_index, sizeof(TimeScore) * (score_manager.score_count - insert_index));
