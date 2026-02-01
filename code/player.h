@@ -15,6 +15,9 @@ struct Player : Entity {
 
     GuardColor playerColor = Blue;
 
+    u32 animation_frame = 0;
+    f32 animation_time = 0;
+
     Player();
     ~Player() override;
     void Update(f32 delta) override;
