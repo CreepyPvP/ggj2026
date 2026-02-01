@@ -507,10 +507,10 @@ static void GameFrame(f32 delta)
     Vector2 screen_size = { (f32) GetScreenWidth(), (f32) GetScreenHeight() };
     SetShaderValueTexture(light_shader, light_shader_color_buffer_loc, render_target.texture);
     SetShaderValueTexture(light_shader, light_shader_light_buffer_loc, light_target.texture);
-    SetShaderValue(light_shader, light_shader_size_loc, &screen_size, RL_SHADER_UNIFORM_VEC2); 
+    SetShaderValue(light_shader, light_shader_size_loc, &screen_size, RL_SHADER_UNIFORM_VEC2);
     // DrawTexturePro(render_target.texture, {0, 0, (f32) render_target.texture.width, (f32) -render_target.texture.height},
     //                {0, 0, (f32) GetScreenWidth(), (f32) GetScreenHeight()}, {}, 0, WHITE);
-    DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), WHITE);  
+    DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), WHITE);
     EndShaderMode();
 
     BeginMode2D(state.camera);
@@ -522,12 +522,20 @@ static void GameFrame(f32 delta)
     }
 
     EndMode2D();
-    
+
+
+    // Drawing DeathScreen
+    if (state.game_lost) {
+        unsigned char alpha = 255 * (state.time_since_game_lost / 0.5);
+        int fontSize = 200 * (state.time_since_game_lost / 1.3);
+        DrawText("BUSTED", 1600*0.27,900*0.35,fontSize, { 230, 41, 55, alpha});
+    }
+
     int fontSize = 45;
     DrawRectangle(0,0, 550, 180, ColorAlpha(BLACK, 0.5));
     DrawText(TextFormat("Total cash:\t%dk", state.saved_cash),0.5 * fontSize,2 * fontSize, fontSize, WHITE);
     DrawText(TextFormat("Held cash:  \t%dk", state.held_cash),0.5 * fontSize,3 * fontSize, fontSize, WHITE);
-    
+
     {
         // fade in
         f32 t = Range(game_scene->time, 0, 1.25);
