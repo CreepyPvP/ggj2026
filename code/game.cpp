@@ -30,6 +30,7 @@ Sound coinSound;
 Sound switchSound;
 Sound slideSound;
 Sound failureSound;
+Sound stepSound;
 
 RenderTexture2D render_target;
 RenderTexture2D light_target;

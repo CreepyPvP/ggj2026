@@ -26,6 +26,7 @@ i32 main(void)
     switchSound = LoadSound("assets/sounds/switch.wav");
     slideSound = LoadSound("assets/sounds/slide.wav");
     failureSound = LoadSound("assets/sounds/failurebell.wav");
+    stepSound = LoadSound("assets/sounds/step.wav");
 
     LoadScores();
 
