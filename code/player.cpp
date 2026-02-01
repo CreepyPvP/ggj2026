@@ -43,6 +43,14 @@ void Player::Update(f32 delta) {
         last_interactable->Interact(IsKeyPressed(KEY_SPACE));
     }
 
+    //Update Color Debug
+    if(IsKeyDown(KEY_R))
+        playerColor = Red;
+    if(IsKeyDown(KEY_G))
+        playerColor = Green;
+    if(IsKeyDown(KEY_B))
+        playerColor = Blue;
+
     // Update movement
     Vector2 movement = {};
     if (IsKeyDown(KEY_W))
