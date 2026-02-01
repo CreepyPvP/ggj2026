@@ -2112,16 +2112,16 @@
 					"__pivot": [0,0],
 					"__tags": [],
 					"__tile": null,
-					"__smartColor": "#1E75C3",
+					"__smartColor": "#BE4A2F",
 					"iid": "bfbea680-fa90-11f0-b0f7-431d509b437f",
 					"width": 32,
 					"height": 32,
 					"defUid": 65,
 					"px": [352,640],
 					"fieldInstances": [
-						{ "__identifier": "color", "__type": "LocalEnum.color", "__value": "blue", "__tile": null, "defUid": 74, "realEditorValues": [{
+						{ "__identifier": "color", "__type": "LocalEnum.color", "__value": "red", "__tile": null, "defUid": 74, "realEditorValues": [{
 							"id": "V_String",
-							"params": ["blue"]
+							"params": ["red"]
 						}] },
 						{ "__identifier": "field_of_view", "__type": "Float", "__value": 20, "__tile": null, "defUid": 67, "realEditorValues": [{ "id": "V_Float", "params": [20] }] },
 						{ "__identifier": "directions", "__type": "Array<Point>", "__value": [{ "cx": 11, "cy": 25 }], "__tile": null, "defUid": 81, "realEditorValues": [{
