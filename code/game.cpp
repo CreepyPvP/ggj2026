@@ -133,6 +133,7 @@ void LoadWorld(const char *world_name) {
                     PLAYER->position = Vector2{
                         (f32) data_entity.getWorldPosition().x / 32, (f32) data_entity.getWorldPosition().y / 32
                     };
+                    PLAYER->spawnPosition = PLAYER->position;
                     continue;
                 }
                 if (data_entity.getName() == "treasure") {
@@ -410,6 +411,13 @@ void GameStartLose()
     state.game_lost = true;
 }
 
+static void ResetPlayerPosition(){
+    PLAYER->position = PLAYER->spawnPosition;
+    state.held_cash = 0;
+    state.game_lost = false;
+    state.time_since_game_lost = 0;
+}
+
 static void GameFrame(f32 delta)
 {
     if (state.game_lost)
@@ -419,7 +427,7 @@ static void GameFrame(f32 delta)
         delta = Lerp(0.002, 0.0007, t);
         if (state.time_since_game_lost > 1.3)
         {
-            SceneStart(game_scene);
+            ResetPlayerPosition();
             return;
         }
     }
