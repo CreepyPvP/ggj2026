@@ -3,6 +3,7 @@
 #include "math.h"
 #include "game.h"
 #include "game_math.h"
+#include "raymath.h"
 #include "rlgl.h"
 #include "LDtkLoader/World.hpp"
 
@@ -12,6 +13,41 @@ void Door::Update(f32 delta) {
         animation_timer += 2 * delta;
         if (animation_timer >= 2)
             animation_timer = -1;
+    }
+
+    if (unlocked || !unlockable || !active_interaction) return;
+
+    if (unlock_error_timer > 0) {
+        unlock_error_timer -= delta;
+        return;
+    }
+    unlock_cursor += delta * unlock_cursor_speed;
+
+    if (unlock_cursor < 0) {
+        unlock_cursor = -unlock_cursor;
+        unlock_cursor_speed = -unlock_cursor_speed;
+    }
+    if (unlock_cursor > 1) {
+        unlock_cursor =  2 - unlock_cursor;
+        unlock_cursor_speed = -unlock_cursor_speed;
+    }
+
+    if (IsKeyPressed(KEY_SPACE)) {
+        if (unlock_cursor >= unlock_offset && unlock_cursor <= unlock_offset + unlock_range) {
+            unlock_step++;
+            SelectRandomUnlockRange();
+
+            if (unlock_step > 3) {
+                Open();
+            }
+        } else {
+            unlock_error_timer = 1;
+        }
+    }
+
+    if (IsKeyPressed(KEY_F) && state.equipment.lock_picks > 0) {
+        state.equipment.lock_picks--;
+        Open();
     }
 }
 
@@ -48,9 +84,41 @@ void Door::PreDraw() {
     DrawTextureRec(tileset, uv, render_pos, {255, 255, 255, 255});
 }
 
+void Door::PostDraw() {
+    Entity::PostDraw();
+    if (unlocked) return;
+    if (!active_interaction) return;
+
+    Vector2 render_pos = {floorf(this->position.x * 32) + 16, floorf(this->position.y * 32)};
+    render_pos = Vector2{render_pos.x, render_pos.y - 8};
+    Vector2 shape = {32, 8};
+    Vector2 inner_shape = {28, 4};
+
+    DrawRectangleRec(Rectangle{render_pos.x - shape.x / 2, render_pos.y - shape.y / 2, shape.x, shape.y}, {31, 33, 44, 255});
+    DrawRectangleRec(Rectangle{render_pos.x - inner_shape.x / 2, render_pos.y - inner_shape.y / 2, inner_shape.x, inner_shape.y}, {83, 82, 106, 255});
+
+    {
+        Vector2 cursor_pos = {render_pos.x - inner_shape.x / 2, render_pos.y - inner_shape.y / 2};
+
+        cursor_pos = Vector2Add(cursor_pos, Vector2{(inner_shape.x - 1) * unlock_offset, 0});
+
+        DrawRectangleRec(Rectangle{cursor_pos.x, cursor_pos.y, ceilf(inner_shape.x * unlock_range), inner_shape.y}, {216, 149, 87, 255});
+    }
+
+    {
+        Vector2 cursor_pos = {render_pos.x - inner_shape.x / 2, render_pos.y - inner_shape.y / 2};
+
+        cursor_pos = Vector2Add(cursor_pos, Vector2{(inner_shape.x - 1) * unlock_cursor, 0});
+
+        DrawRectangleRec(Rectangle{cursor_pos.x, cursor_pos.y, 1, inner_shape.y}, {99, 149, 121, 255});
+    }
+
+}
+
+
 void Door::Open() {
+    interactable = false;
     unlocked = true;
-    unlockable = false;
     SetTile(position.x, position.y, 0);
 
     animation_timer = 0;
@@ -61,4 +129,28 @@ void Door::Configure(const ldtk::World &world, Room *room, const ldtk::Entity &d
     unlockable = data.getField<ldtk::FieldType::Bool>("unlockable").value();
 
     interactable = unlockable;
+}
+
+void Door::SetActiveInteraction(bool active) {
+    Entity::SetActiveInteraction(active);
+
+    // reset unlock system
+    unlock_step = 0;
+    unlock_offset = 0.8f;
+    unlock_range = 0.2f;
+    unlock_cursor = 0;
+    unlock_cursor_speed = 1;
+    unlock_error_timer = 0;
+
+
+    SelectRandomUnlockRange();
+}
+
+void Door::SelectRandomUnlockRange() {
+
+
+    unlock_cursor_speed = 1 + unlock_step * 0.3f;
+    u32 difficulty = 30 - unlock_step * 5;
+    unlock_range = difficulty / 100.0f;
+    unlock_offset = std::rand() % (100 - difficulty) / 100.0f;
 }

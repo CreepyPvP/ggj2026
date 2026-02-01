@@ -482,11 +482,6 @@ static void GameFrame(f32 delta)
         Entity *entity = state.entities[i];
         entity->Draw();
     }
-    for (u32 i = 0; i < arrlen(state.entities); ++i)
-    {
-        Entity *entity = state.entities[i];
-        entity->PostDraw();
-    }
 
     EndMode2D();
     EndTextureMode();
@@ -517,6 +512,16 @@ static void GameFrame(f32 delta)
     //                {0, 0, (f32) GetScreenWidth(), (f32) GetScreenHeight()}, {}, 0, WHITE);
     DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), WHITE);  
     EndShaderMode();
+
+    BeginMode2D(state.camera);
+
+    for (u32 i = 0; i < arrlen(state.entities); ++i)
+    {
+        Entity *entity = state.entities[i];
+        entity->PostDraw();
+    }
+
+    EndMode2D();
     
     int fontSize = 45;
     DrawRectangle(0,0, 550, 180, ColorAlpha(BLACK, 0.5));
