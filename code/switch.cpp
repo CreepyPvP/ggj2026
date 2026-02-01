@@ -18,6 +18,7 @@ void Switch::Update(f32 delta) {
     
     if (Vector2DistanceSqr(position, PLAYER->position) < 0.8 * 0.8) {
         activated = true;
+        PlaySound(switchSound);
         for(i32 i = 0 ; i < controlled_door_amount; i++){
             controlled_doors[i]->Open();
         }

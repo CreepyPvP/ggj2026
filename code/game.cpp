@@ -26,6 +26,10 @@ Texture2D tileset;
 
 Sound guardSound1;
 Sound guardSound2;
+Sound coinSound;
+Sound switchSound;
+Sound slideSound;
+Sound failureSound;
 
 RenderTexture2D render_target;
 RenderTexture2D light_target;

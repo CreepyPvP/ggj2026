@@ -21,6 +21,11 @@ i32 main(void)
 
     guardSound1 = LoadSound("assets/sounds/GuardSound1.wav");
     guardSound2 = LoadSound("assets/sounds/GuardSound2.wav");
+    coinSound = LoadSound("assets/sounds/coingain.wav");
+    switchSound = LoadSound("assets/sounds/switch.wav");
+    slideSound = LoadSound("assets/sounds/slide.wav");
+    failureSound = LoadSound("assets/sounds/failurebell.wav");
+
     LoadScores();
 
     GameInitialize();

@@ -55,10 +55,14 @@ void GuardCatchNoise(){
 
 }
 
-void CatchPlayer(GuardColor color){
+void CatchPlayer(GuardColor color, bool noise){
     if(color != PLAYER->playerColor){
         DropCash();
         GameStartLose();
+        if(noise)
+            GuardCatchNoise();
+        else
+            PlaySound(failureSound);
     }
 
 }
@@ -102,8 +106,7 @@ void Guard::Update(f32 delta) {
     if (PLAYER && !state.game_lost)
     {
         if (Vector2DistanceSqr(position, PLAYER->position) < 0.8 * 0.8) {
-            GuardCatchNoise();
-            CatchPlayer(color);
+            CatchPlayer(color,true);
         }
 
         Vector2 player_pos = PLAYER->position + Vector2{0.5, 0.775};
@@ -118,7 +121,7 @@ void Guard::Update(f32 delta) {
             if (Vector2DotProduct(forward, to) >= Vector2DotProduct(forward, edge))
             {
                 GuardCatchNoise();
-                CatchPlayer(color);
+                CatchPlayer(color,true);
             }
         }
     }
@@ -160,7 +163,7 @@ void GuardCamera::Update(f32 delta){
         Vector2 guard_pos = position + Vector2{0.5, 0.5};
         
         if (Vector2DistanceSqr(guard_pos, player_pos) < 0.8 * 0.8) {
-            CatchPlayer(color);
+            CatchPlayer(color, false);
         }
 
         Vector2 to = Vector2Normalize(player_pos - guard_pos);
@@ -172,7 +175,7 @@ void GuardCamera::Update(f32 delta){
             Vector2 edge = { cos((ConeRotation + field_of_view/2) / 180.0f * PI), sin((ConeRotation + field_of_view/2) / 180.0f * PI) };
             if (Vector2DotProduct(forward, to) >= Vector2DotProduct(forward, edge))
             {
-                CatchPlayer(color);
+                CatchPlayer(color, false);
             }
         }
     }

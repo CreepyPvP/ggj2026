@@ -40,10 +40,14 @@ void Door::Update(f32 delta) {
             SelectRandomUnlockRange();
 
             if (unlock_step > 3) {
+                PlaySound(switchSound);
                 Open();
                 state.target_zoom = 2.5;
+            }else{
+                PlaySound(slideSound);
             }
         } else {
+            PlaySound(failureSound);
             unlock_error_timer = 1;
         }
     }
