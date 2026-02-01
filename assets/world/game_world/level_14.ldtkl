@@ -97,34 +97,22 @@
 					"defUid": 7,
 					"px": [832,224],
 					"fieldInstances": [
-						{ "__identifier": "Controlled_doors", "__type": "Array<EntityRef>", "__value": [
-							{
-								"entityIid": "fc2f1320-fa90-11f0-b31d-bf16e346952d",
-								"layerIid": "f5cccad0-fa90-11f0-8df1-d783fbbe7085",
-								"levelIid": "f5cca3c0-fa90-11f0-8df1-abe6257a90b2",
-								"worldIid": "3745d350-fa90-11f0-8342-3b8bda70e3f5"
-							},
-							{
-								"entityIid": "fbd09f70-fa90-11f0-b31d-2f0a3928504b",
-								"layerIid": "f5cccad0-fa90-11f0-8df1-d783fbbe7085",
-								"levelIid": "f5cca3c0-fa90-11f0-8df1-abe6257a90b2",
-								"worldIid": "3745d350-fa90-11f0-8342-3b8bda70e3f5"
-							},
-							{
-								"entityIid": "278b3890-fa90-11f0-8319-cb9288ad426a",
-								"layerIid": "3745fa61-fa90-11f0-8342-d58585aa318e",
-								"levelIid": "3745fa60-fa90-11f0-8342-43343e3c282c",
-								"worldIid": "3745d350-fa90-11f0-8342-3b8bda70e3f5"
-							}
-						], "__tile": null, "defUid": 82, "realEditorValues": [ {
+						{ "__identifier": "Controlled_doors", "__type": "Array<EntityRef>", "__value": [ {
+							"entityIid": "fc2f1320-fa90-11f0-b31d-bf16e346952d",
+							"layerIid": "f5cccad0-fa90-11f0-8df1-d783fbbe7085",
+							"levelIid": "f5cca3c0-fa90-11f0-8df1-abe6257a90b2",
+							"worldIid": "3745d350-fa90-11f0-8342-3b8bda70e3f5"
+						}, {
+							"entityIid": "fbd09f70-fa90-11f0-b31d-2f0a3928504b",
+							"layerIid": "f5cccad0-fa90-11f0-8df1-d783fbbe7085",
+							"levelIid": "f5cca3c0-fa90-11f0-8df1-abe6257a90b2",
+							"worldIid": "3745d350-fa90-11f0-8342-3b8bda70e3f5"
+						} ], "__tile": null, "defUid": 82, "realEditorValues": [ {
 							"id": "V_String",
 							"params": ["fc2f1320-fa90-11f0-b31d-bf16e346952d"]
 						}, {
 							"id": "V_String",
 							"params": ["fbd09f70-fa90-11f0-b31d-2f0a3928504b"]
-						}, {
-							"id": "V_String",
-							"params": ["278b3890-fa90-11f0-8319-cb9288ad426a"]
 						} ] },
 						{ "__identifier": "Controlled_cameras", "__type": "Array<EntityRef>", "__value": [], "__tile": null, "defUid": 85, "realEditorValues": [] }
 					],
