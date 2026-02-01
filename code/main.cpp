@@ -28,6 +28,8 @@ i32 main(void)
     failureSound = LoadSound("assets/sounds/failurebell.wav");
     stepSound = LoadSound("assets/sounds/step.wav");
 
+    Music music = LoadMusicStream("assets/sounds/heist.mp3");
+
     LoadScores();
 
     GameInitialize();
@@ -35,8 +37,11 @@ i32 main(void)
 
     SceneStart(level_selection);
 
+    PlayMusicStream(music);
     while (!WindowShouldClose())
     {
+        UpdateMusicStream(music);
+
         if (IsKeyPressed(KEY_T) && IsKeyDown(KEY_LEFT_CONTROL))
         {
             SceneStart(level_selection);
