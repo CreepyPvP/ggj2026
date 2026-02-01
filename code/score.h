@@ -25,7 +25,7 @@ struct ScoreManager {
     bool input_mode;
 };
 
-ScoreManager score_manager = {};
+extern ScoreManager score_manager;
 
 TimeScore *AddNewScore(u32 level, u32 amount);
 void ShowList(u32 level);
