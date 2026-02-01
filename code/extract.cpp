@@ -8,7 +8,8 @@ void Extract::Update(f32 delta) {
     Entity::Update(delta);
 
     if (Vector2DistanceSqr(position, PLAYER->position) < 0.8 * 0.8) {
-        state.game_lost = true;
+        state.saved_cash += state.held_cash;
+        state.held_cash = 0;
     }
 }
 
@@ -16,7 +17,7 @@ void Extract::Draw() {
     Entity::Draw();
 
     Vector2 render_pos = {floorf(this->position.x * 32), floorf(this->position.y * 32)};
-    DrawCircle(render_pos.x, render_pos.y, 32, RED);
+    DrawTextureRec(tileset, Rectangle{192, 896, 64, 32}, render_pos, WHITE);
 }
 
 

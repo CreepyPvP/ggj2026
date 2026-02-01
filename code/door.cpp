@@ -17,7 +17,7 @@ void Door::Update(f32 delta) {
 
     if (unlocked || !unlockable || !active_interaction) return;
 
-    state.target_zoom = 3.5 + unlock_step * 0.2;
+    state.target_zoom = 4.5 + unlock_step * 0.5;
 
     if (unlock_error_timer > 0) {
         unlock_error_timer -= delta;
@@ -92,15 +92,22 @@ void Door::PostDraw() {
     if (unlocked) return;
     if (!active_interaction) return;
 
+    Color shapeColor = {31, 33, 44, 255};
+    if(unlock_error_timer > 0 && ((int)(unlock_error_timer * 10)) % 2 == 0  ){
+        shapeColor = {240,33,44,255};
+    }
+
     Vector2 render_pos = {floorf(this->position.x * 32) + 16, floorf(this->position.y * 32)};
     render_pos = Vector2{render_pos.x, render_pos.y - 8};
     Vector2 shape = {32, 8};
     Vector2 inner_shape = {28, 4};
-
-    DrawRectangleRec(Rectangle{render_pos.x - shape.x / 2, render_pos.y - shape.y / 2, shape.x, shape.y}, {31, 33, 44, 255});
+    //Outer shape drawing
+    DrawRectangleRec(Rectangle{render_pos.x - shape.x / 2, render_pos.y - shape.y / 2, shape.x, shape.y}, shapeColor);
+    //Innter shape drawing
     DrawRectangleRec(Rectangle{render_pos.x - inner_shape.x / 2, render_pos.y - inner_shape.y / 2, inner_shape.x, inner_shape.y}, {83, 82, 106, 255});
 
     {
+        //Unlock range
         Vector2 cursor_pos = {render_pos.x - inner_shape.x / 2, render_pos.y - inner_shape.y / 2};
 
         cursor_pos = Vector2Add(cursor_pos, Vector2{(inner_shape.x - 1) * unlock_offset, 0});
@@ -109,12 +116,39 @@ void Door::PostDraw() {
     }
 
     {
+        //Cursor
         Vector2 cursor_pos = {render_pos.x - inner_shape.x / 2, render_pos.y - inner_shape.y / 2};
 
         cursor_pos = Vector2Add(cursor_pos, Vector2{(inner_shape.x - 1) * unlock_cursor, 0});
-
-        DrawRectangleRec(Rectangle{cursor_pos.x, cursor_pos.y, 1, inner_shape.y}, {99, 149, 121, 255});
+        Color cursor_color = {99, 149, 121, 255};
+        if(unlock_error_timer>0)
+            cursor_color = {255,0,0 ,255}; 
+        DrawRectangleRec(Rectangle{cursor_pos.x, cursor_pos.y, 1, inner_shape.y}, cursor_color);
     }
+
+    {
+        const char *text = "- \"space\"";
+
+        Vector2 pos = {render_pos.x + shape.x/2 + 3, render_pos.y - shape.y/2};
+        Vector2 shape = MeasureTextEx(GetFontDefault(), text, 6, 1);
+        DrawRectangle(pos.x - 2, pos.y - 1, shape.x + 4, shape.y + 2, ColorAlpha(BLACK, 0.5f));
+        DrawTextEx(GetFontDefault(), text, pos, 6, 1, WHITE);
+    }
+
+    if (state.equipment.lock_picks > 0) {
+        const char *text = "Bypass with Lockpick 'F' x%i";
+
+        text = TextFormat(text, state.equipment.lock_picks);
+
+        Vector2 pos = {render_pos.x, render_pos.y + 7};
+        Vector2 shape = MeasureTextEx(GetFontDefault(), text, 6, 1);
+
+        pos.x -= shape.x/2;
+
+        DrawRectangle(pos.x - 1, pos.y - 1, shape.x + 3, shape.y + 2, ColorAlpha(BLACK, 0.5f));
+        DrawTextEx(GetFontDefault(), text, pos, 6, 1, ORANGE);
+    }
+
 
 }
 

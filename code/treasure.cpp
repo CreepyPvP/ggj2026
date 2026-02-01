@@ -23,12 +23,12 @@ void Treasure::Update(f32 delta) {
         animation_timer = 0;
         int cash_amount = 10;
         switch(type){
-            case money_small: cash_amount = 10;
-            case money_big: cash_amount = 30;
-            case coins_small: cash_amount = 20;
-            case coins_big: cash_amount = 50;
-            case diamond_small: cash_amount = 80;
-            case diamond_big: cash_amount = 150;
+            case money_small: cash_amount = 10; break;
+            case money_big: cash_amount = 30; break;
+            case coins_small: cash_amount = 20; break;
+            case coins_big: cash_amount = 50; break;
+            case diamond_small: cash_amount = 80; break;
+            case diamond_big: cash_amount = 150; break;
         }
 
         state.held_cash += cash_amount;
