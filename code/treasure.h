@@ -13,6 +13,8 @@ enum TreasureType {
 
 struct Treasure: Entity{
     bool collected = false;
+    float animation_timer = -1;
+
     TreasureType type;
     void Update(f32 delta) override;
     void Draw() override;

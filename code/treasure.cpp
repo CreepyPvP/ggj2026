@@ -9,17 +9,41 @@ void Treasure::Update(f32 delta) {
     Entity::Update(delta);
 
     if (!PLAYER) return;
-    if (collected) return;
+    if (collected) {
+        if(animation_timer >= 0){
+            animation_timer += 2*delta;
+            if(animation_timer >= 1)
+                animation_timer = -1;
+        }
+        return;
+    }
 
     if (Vector2DistanceSqr(position, PLAYER->position) < 0.8 * 0.8) {
         collected = true;
-        state.held_cash += 10;
+        animation_timer = 0;
+        int cash_amount = 10;
+        switch(type){
+            case money_small: cash_amount = 10;
+            case money_big: cash_amount = 30;
+            case coins_small: cash_amount = 20;
+            case coins_big: cash_amount = 50;
+            case diamond_small: cash_amount = 80;
+            case diamond_big: cash_amount = 150;
+        }
+
+        state.held_cash += cash_amount;
     }
 }
 
 void Treasure::Draw() {
     Entity::Draw();
-    if (collected) return;
+    if (collected) {
+        if(animation_timer >= 0){
+            Vector2 render_pos = {floorf(this->position.x * 32), floorf(this->position.y * 32) - 16*animation_timer};    
+            DrawTextureRec(tileset, {160,544,32,32}, render_pos, WHITE);
+        }
+        return;
+    }
 
     Vector2 render_pos = {floorf(this->position.x * 32), floorf(this->position.y * 32)};
     Rectangle uv_coord = {};
