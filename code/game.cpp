@@ -33,6 +33,8 @@ Sound slideSound;
 Sound failureSound;
 Sound stepSound;
 
+Music music;
+
 RenderTexture2D render_target;
 RenderTexture2D light_target;
 
