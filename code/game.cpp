@@ -234,6 +234,8 @@ static void GameSetup()
     state.camera.rotation = 0.0f;
     state.camera.zoom = 2.5f;
 
+    state.game_countdown = 300.0f;
+
     StartLevel();
     printf("Game setup\n");
 }
@@ -517,15 +519,22 @@ static void GameFrame(f32 delta)
     EndShaderMode();
     
     int fontSize = 45;
-    DrawRectangle(0,0, 450, 180, ColorAlpha(BLACK, 0.5));
-    DrawText(TextFormat("Total cash:\t%dk", state.saved_cash),0.5 * fontSize,fontSize, fontSize, WHITE);
-    DrawText(TextFormat("Held cash:  \t%dk", state.held_cash),0.5 * fontSize,2 * fontSize, fontSize, WHITE);
+    DrawRectangle(0,0, 550, 180, ColorAlpha(BLACK, 0.5));
+    DrawText(TextFormat("Total cash:\t%dk", state.saved_cash),0.5 * fontSize,2 * fontSize, fontSize, WHITE);
+    DrawText(TextFormat("Held cash:  \t%dk", state.held_cash),0.5 * fontSize,3 * fontSize, fontSize, WHITE);
     
     {
         // fade in
         f32 t = Range(game_scene->time, 0, 1.25);
         DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, 1 - t));
     }
+
+    state.game_countdown -= delta;
+    if (state.game_countdown < 0) state.game_countdown = 0;
+    int mins = state.game_countdown / 60;
+    int seconds = state.game_countdown - 60 * mins;
+    int millisec = (state.game_countdown - 60 * mins - seconds) * 1000;
+    DrawText(TextFormat("Countdown:\t%d:%d:%d", mins, seconds, millisec), 0.5 * fontSize,1* fontSize, fontSize, WHITE);
 
     DrawFPS(10, 10);
     EndDrawing();
