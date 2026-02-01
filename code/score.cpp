@@ -366,10 +366,10 @@ void LoadScores()
 {
     i32 file_size = 0;
     u8 *memory = LoadFileData("scores.txt", &file_size);
-    if (!memory)
+    if (!memory || !file_size)
         return;
 
-    buffer_offset = file_size;
+    buffer_offset = 0;
     if (!buffer) 
         buffer = (u8 *) malloc(1024 * 1024);
 
