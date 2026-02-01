@@ -153,120 +153,24 @@
 								"layerIid": "3745fa61-fa90-11f0-8342-d58585aa318e",
 								"levelIid": "3745fa60-fa90-11f0-8342-43343e3c282c",
 								"worldIid": "3745d350-fa90-11f0-8342-3b8bda70e3f5"
-							},
-							{
-								"entityIid": "2848bc30-fa90-11f0-8319-4f47a3b445d3",
-								"layerIid": "3745fa61-fa90-11f0-8342-d58585aa318e",
-								"levelIid": "3745fa60-fa90-11f0-8342-43343e3c282c",
-								"worldIid": "3745d350-fa90-11f0-8342-3b8bda70e3f5"
 							}
-						], "__tile": null, "defUid": 82, "realEditorValues": [
-							{
-								"id": "V_String",
-								"params": ["fcb4b450-fa90-11f0-8342-bd7455e5f747"]
-							},
-							{
-								"id": "V_String",
-								"params": ["fc7f4c70-fa90-11f0-8342-3f54efd3bc45"]
-							},
-							{
-								"id": "V_String",
-								"params": ["241503f0-fa90-11f0-b31d-d7d434368772"]
-							},
-							{
-								"id": "V_String",
-								"params": ["2447d3c0-fa90-11f0-b31d-c769160aa29d"]
-							},
-							{
-								"id": "V_String",
-								"params": ["2848bc30-fa90-11f0-8319-4f47a3b445d3"]
-							}
-						] },
+						], "__tile": null, "defUid": 82, "realEditorValues": [ {
+							"id": "V_String",
+							"params": ["fcb4b450-fa90-11f0-8342-bd7455e5f747"]
+						}, {
+							"id": "V_String",
+							"params": ["fc7f4c70-fa90-11f0-8342-3f54efd3bc45"]
+						}, {
+							"id": "V_String",
+							"params": ["241503f0-fa90-11f0-b31d-d7d434368772"]
+						}, {
+							"id": "V_String",
+							"params": ["2447d3c0-fa90-11f0-b31d-c769160aa29d"]
+						} ] },
 						{ "__identifier": "Controlled_cameras", "__type": "Array<EntityRef>", "__value": [], "__tile": null, "defUid": 85, "realEditorValues": [] }
 					],
 					"__worldX": 1856,
 					"__worldY": 1440
-				},
-				{
-					"__identifier": "door",
-					"__grid": [9,9],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": null,
-					"__smartColor": "#6192DF",
-					"iid": "278b3890-fa90-11f0-8319-cb9288ad426a",
-					"width": 32,
-					"height": 32,
-					"defUid": 4,
-					"px": [288,288],
-					"fieldInstances": [{ "__identifier": "unlockable", "__type": "Bool", "__value": false, "__tile": null, "defUid": 64, "realEditorValues": [] }],
-					"__worldX": 2112,
-					"__worldY": 1696
-				},
-				{
-					"__identifier": "door",
-					"__grid": [9,8],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": null,
-					"__smartColor": "#6192DF",
-					"iid": "2848bc30-fa90-11f0-8319-4f47a3b445d3",
-					"width": 32,
-					"height": 32,
-					"defUid": 4,
-					"px": [288,256],
-					"fieldInstances": [{ "__identifier": "unlockable", "__type": "Bool", "__value": false, "__tile": null, "defUid": 64, "realEditorValues": [] }],
-					"__worldX": 2112,
-					"__worldY": 1664
-				},
-				{
-					"__identifier": "door",
-					"__grid": [9,7],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": null,
-					"__smartColor": "#6192DF",
-					"iid": "28cfc680-fa90-11f0-8319-eb24688057b8",
-					"width": 32,
-					"height": 32,
-					"defUid": 4,
-					"px": [288,224],
-					"fieldInstances": [{ "__identifier": "unlockable", "__type": "Bool", "__value": false, "__tile": null, "defUid": 64, "realEditorValues": [] }],
-					"__worldX": 2112,
-					"__worldY": 1632
-				},
-				{
-					"__identifier": "camera",
-					"__grid": [10,8],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": null,
-					"__smartColor": "#BE4A2F",
-					"iid": "38666810-fa90-11f0-8319-5d430ffc8760",
-					"width": 32,
-					"height": 32,
-					"defUid": 65,
-					"px": [320,256],
-					"fieldInstances": [
-						{ "__identifier": "color", "__type": "LocalEnum.color", "__value": "red", "__tile": null, "defUid": 74, "realEditorValues": [{
-							"id": "V_String",
-							"params": ["red"]
-						}] },
-						{ "__identifier": "field_of_view", "__type": "Float", "__value": 45, "__tile": null, "defUid": 67, "realEditorValues": [{ "id": "V_Float", "params": [45] }] },
-						{ "__identifier": "directions", "__type": "Array<Point>", "__value": [ { "cx": 10, "cy": 9 }, { "cx": 8, "cy": 8 }, { "cx": 10, "cy": 7 } ], "__tile": null, "defUid": 81, "realEditorValues": [ {
-							"id": "V_String",
-							"params": ["10,9"]
-						}, {
-							"id": "V_String",
-							"params": ["8,8"]
-						}, {
-							"id": "V_String",
-							"params": ["10,7"]
-						} ] },
-						{ "__identifier": "active", "__type": "Bool", "__value": true, "__tile": null, "defUid": 84, "realEditorValues": [] }
-					],
-					"__worldX": 2144,
-					"__worldY": 1664
 				},
 				{
 					"__identifier": "treasure",
