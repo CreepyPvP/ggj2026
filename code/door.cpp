@@ -1,5 +1,6 @@
 #include "door.h"
 
+#include "math.h"
 #include "game.h"
 #include "game_math.h"
 #include "rlgl.h"
