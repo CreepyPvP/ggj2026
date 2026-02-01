@@ -126,6 +126,10 @@ void Guard::Draw() {
 
     DrawTextureRec(tileset, Rectangle{32, 416, 32, 32}, render_pos + Vector2{0.0, 15}, WHITE);
     DrawTextureRec(tileset, Rectangle{32, 448, 32, 32}, render_pos, WHITE);
+    
+    
+
+
 
     Color coneColor{};
 
