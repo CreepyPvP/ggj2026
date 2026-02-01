@@ -97,4 +97,9 @@ void InitializeLevelSelection() {
         .name = "Game Level 1",
         .world_id = "level"
     };
+    levels[2] = {
+        .preview = LoadTexture("assets/textures/levels/tutorial_preview.png"),
+        .name = "Game Level 2",
+        .world_id = "society"
+    };
 }
