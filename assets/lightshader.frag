@@ -30,9 +30,10 @@ void main()
         float brighness = mix((1 - luminance), 1, 0.5);
 
         final_color = vec4(brighness * light_sample, 1);
+        // final_color = vec4(light_sample, 1);
         if (DeadzoneColor(color_sample, vec3(24, 20, 37) / 256.0f))
         {
-            final_color = vec4(0, 0, 0, 1);
+            final_color = vec4(1, 1, 1, 1);
         }
     }
     else
