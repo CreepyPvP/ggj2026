@@ -23,8 +23,8 @@ static void LevelSelectionSetup() {
 
 static void LevelSelectionFrame(f32 delta) {
 
-    if (IsKeyPressed(KEY_A) && menu_state.target_level > 0) menu_state.target_level--;
-    if (IsKeyPressed(KEY_D) && menu_state.target_level < LEVEL_COUNT-1) menu_state.target_level++;
+    if ((IsKeyPressed(KEY_A) || IsKeyPressed(KEY_LEFT)) && menu_state.target_level > 0) menu_state.target_level--;
+    if ((IsKeyPressed(KEY_D) || IsKeyPressed(KEY_RIGHT)) && menu_state.target_level < LEVEL_COUNT-1) menu_state.target_level++;
     if (IsKeyPressed(KEY_SPACE)) {
         SceneStart(game_scene);
     }
