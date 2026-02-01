@@ -326,6 +326,14 @@ void WriteU32(u32 value)
     buffer_offset += 4;
 }
 
+u32 ReadU32()
+{
+    u32 *target = (u32 *) (buffer + buffer_offset);
+    u32 value = *target;
+    buffer_offset += 4;
+    return value;
+}
+
 void WriteBytes(void *bytes, u32 size)
 {
     u8 *target = buffer + buffer_offset;
@@ -355,7 +363,7 @@ void PersistScores()
 void LoadScores()
 {
     i32 file_size = 0;
-    u8 *memory = LoadFileText("scores.txt", &file_size);
+    u8 *memory = LoadFileData("scores.txt", &file_size);
 
     buffer_offset = file_size;
     if (!buffer) 

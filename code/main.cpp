@@ -3,11 +3,11 @@
 #include "scene.h"
 #include "game.h"
 
+#include "score.h"
+
 #define STB_DS_IMPLEMENTATION
 #include "level_selection.h"
 #include "stb_ds.h"
-
-#include "score.h"
 
 i32 main(void)
 {
