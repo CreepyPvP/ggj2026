@@ -23,7 +23,7 @@ void Switch::Update(f32 delta) {
         }
         for(i32 i = 0 ; i < controlled_camera_amount; i++){
             if(controlled_cameras[i])
-                controlled_cameras[i]->activated = !controlled_cameras[i]->activated;
+                controlled_cameras[i]->activated = false;
         }
     }
 }
