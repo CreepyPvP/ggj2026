@@ -7,7 +7,7 @@ project(
 set(ROOT_DIR ${PROJECT_SOURCE_DIR})
 
 set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_BUILD_TYPE Debug)
+set(CMAKE_BUILD_TYPE Release)
 
 add_executable(${PROJECT_NAME}
     code/switch.cpp

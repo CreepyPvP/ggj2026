@@ -43,13 +43,69 @@ void Player::Update(f32 delta) {
         last_interactable->Interact(IsKeyPressed(KEY_SPACE));
     }
 
-    //Update Color Debug
-    if(IsKeyDown(KEY_R))
+    // //Update Color Debug
+    // if(IsKeyDown(KEY_R))
+    //     playerColor = Red;
+    // if(IsKeyDown(KEY_G))
+    //     playerColor = Green;
+    // if(IsKeyDown(KEY_B))
+    //     playerColor = Blue;
+
+    u32 color_count = 0;
+    i32 color_current = 0;
+    GuardColor colors[3];
+    // if (state.equipment.mask_red)
+    {
+        if (playerColor == Red)
+            color_current = color_count;
+        colors[color_count++] = Red;
+    }
+    // if (state.equipment.mask_green)
+    {
+        if (playerColor == Green)
+            color_current = color_count;
+        colors[color_count++] = Green;
+    }
+    // if (state.equipment.mask_blue)
+    {
+        if (playerColor == Blue)
+            color_current = color_count;
+        colors[color_count++] = Blue;
+    }
+
+    if (IsKeyPressed(KEY_Q))
+    {
+        color_current--;
+    }
+    if (IsKeyPressed(KEY_E))
+    {
+        color_current++;
+    }
+
+    if (color_current < 0)
+    {
+        color_current = color_count - 1;
+    }
+    if (color_current >= color_count)
+    {
+        color_current = 0;
+    }
+
+    playerColor = colors[color_current];
+
+    // j,k,l
+    if (IsKeyPressed(KEY_J) || IsKeyPressed(KEY_LEFT))
+    {
         playerColor = Red;
-    if(IsKeyDown(KEY_G))
+    }
+    if (IsKeyPressed(KEY_K) || IsKeyPressed(KEY_UP))
+    {
         playerColor = Green;
-    if(IsKeyDown(KEY_B))
+    }
+    if (IsKeyPressed(KEY_L) || IsKeyPressed(KEY_RIGHT))
+    {
         playerColor = Blue;
+    }
 
     // Update movement
     Vector2 movement = {};
