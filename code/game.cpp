@@ -227,7 +227,7 @@ static void DoGameOver() {
     state.game_over = true;
     state.game_frozen = true;
 
-    AddNewScore(menu_state.target_level, state.held_cash + state.saved_cash);
+    AddNewScore(menu_state.target_level, state.held_cash + state.saved_cash + state.game_countdown * 0.2);
 }
 
 static void StartLevel() {
