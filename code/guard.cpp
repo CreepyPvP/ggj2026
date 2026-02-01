@@ -113,7 +113,6 @@ void GuardCamera::Update(f32 delta){
             Vector2 edge = { cos((ConeRotation + field_of_view/2) / 180.0f * PI), sin((ConeRotation + field_of_view/2) / 180.0f * PI) };
             if (Vector2DotProduct(forward, to) >= Vector2DotProduct(forward, edge))
             {
-                printf("Camera caught player");
                 CatchPlayer(color);
             }
         }
