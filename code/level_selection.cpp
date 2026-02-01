@@ -8,7 +8,7 @@
 
 Scene *level_selection = {};
 LevelSelection levels[LEVEL_COUNT] = {};
-
+static u32 last_level = 0;
 LevelSelectionState menu_state;
 
 #define MENU_WIDTH 640
@@ -20,6 +20,8 @@ static void LevelSelectionSetup() {
     score_manager.show_screen = false;
     menu_state = {};
     menu_state.target = LoadRenderTexture(MENU_WIDTH, MENU_HEIGHT);
+    menu_state.current_level = last_level;
+    menu_state.target_level = last_level;
 }
 
 static void LevelSelectionFrame(f32 delta) {
@@ -92,6 +94,7 @@ static void LevelSelectionFrame(f32 delta) {
 }
 
 static void LevelSelectionDestroy() {
+    last_level = menu_state.target_level;
     UnloadRenderTexture(menu_state.target);
 }
 
