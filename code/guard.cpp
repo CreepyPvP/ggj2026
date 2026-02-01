@@ -125,12 +125,7 @@ void Guard::Draw() {
     Vector2 render_pos = {floorf(this->position.x * 32), floorf(this->position.y * 32)};
 
     DrawTextureRec(tileset, Rectangle{32, 416, 32, 32}, render_pos + Vector2{0.0, 15}, WHITE);
-    DrawTextureRec(tileset, Rectangle{32, 448, 32, 32}, render_pos, WHITE);
     
-    
-
-
-
     Color coneColor{};
 
     switch (color) {
@@ -138,7 +133,34 @@ void Guard::Draw() {
         case Green: coneColor = GREEN; break;
         case Blue: coneColor = BLUE; break;
     }
-    GameDrawCone({position.x+0.5f,position.y+0.5f},ConeRotation, ConeLength, 45, coneColor);
+    GameDrawCone({position.x+0.5f,position.y+0.5f},ConeRotation, ConeLength, 45, coneColor);    
+
+
+    
+    float texture_y = 448;
+
+    Vector2 nextPoint = patrolPath[NextPatrolPoint];
+    Vector2 targetDirection = Vector2Normalize(nextPoint - position);
+    Vector2 draw_dir = {targetDirection.x >= 0 ? 1 : -1, targetDirection.y >= 0 ? 1 : - 1 };
+    if(abs(targetDirection.x) >= abs(targetDirection.y))
+        draw_dir.y = 0;
+    else
+        draw_dir.x = 0;
+
+    if (draw_dir.y < 0) {
+        DrawTextureRec(tileset, Rectangle{96, texture_y, 32, 32}, render_pos, WHITE);
+    } else if (draw_dir.y > 0) {
+        DrawTextureRec(tileset, Rectangle{32, texture_y, 32, 32}, render_pos, WHITE);
+    } else if (draw_dir.x < 0) {
+        DrawTextureRec(tileset, Rectangle{64, texture_y, 32, 32}, render_pos, WHITE);
+    } else if (draw_dir.x > 0) {
+        DrawTextureRec(tileset, Rectangle{128, texture_y, 32, 32}, render_pos, WHITE);
+    } else {
+        DrawTextureRec(tileset, Rectangle{32, texture_y, 32, 32}, render_pos, WHITE);
+    }
+
+
+    
 }
 
 void GuardCamera::Draw(){
