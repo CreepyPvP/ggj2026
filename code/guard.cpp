@@ -122,10 +122,10 @@ void GuardCamera::Update(f32 delta){
 
 void Guard::Draw() {
     Entity::Draw();
-
-
     Vector2 render_pos = {floorf(this->position.x * 32), floorf(this->position.y * 32)};
-    DrawTextureRec(tileset, Rectangle{32, 448, 32, 32}, render_pos, {255,255,255,255});
+
+    DrawTextureRec(tileset, Rectangle{32, 416, 32, 32}, render_pos + Vector2{0.0, 15}, WHITE);
+    DrawTextureRec(tileset, Rectangle{32, 448, 32, 32}, render_pos, WHITE);
 
     Color coneColor{};
 
@@ -141,7 +141,7 @@ void GuardCamera::Draw(){
     Entity::Draw();
 
     Vector2 render_pos = {floorf(this->position.x * 32), floorf(this->position.y * 32)};
-    DrawTextureRec(tileset, Rectangle{192, 480, 32, 32}, render_pos, {255,255,255,255});
+    DrawTextureRec(tileset, Rectangle{192, 480, 32, 32}, render_pos, WHITE);
 
     if(!activated) return;
     Color coneColor{};

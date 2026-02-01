@@ -120,6 +120,8 @@ void Player::Draw() {
     }
 
     Vector2 render_pos = {floorf(this->position.x * 32), floorf(this->position.y * 32)};
+    DrawTextureRec(tileset, Rectangle{32, 416, 32, 32}, render_pos + Vector2{0.0, 15}, WHITE);
+
     if (last_dir.y < 0) {
         DrawTextureRec(tileset, Rectangle{96, texture_y, 32, 32}, render_pos, WHITE);
     } else if (last_dir.y > 0) {

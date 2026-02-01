@@ -444,7 +444,7 @@ static void GameFrame(f32 delta)
 
     BeginTextureMode(render_target);
 
-    ClearBackground({34, 32, 52, 255});
+    ClearBackground({26, 24, 39, 255});
     BeginMode2D(state.camera);
 
     for (u32 i = 0; i < arrlen(state.textured_tiles); ++i)
