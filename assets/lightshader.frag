@@ -8,6 +8,8 @@ uniform sampler2D color_buffer;
 uniform sampler2D light_buffer;
 
 uniform vec2 size;
+// rgb color, strength
+uniform vec4 vignette;
 
 bool DeadzoneColor(vec3 color, vec3 comp)
 {
@@ -42,6 +44,6 @@ void main()
     }
 
     // vignette
-    final_color.rgb *= vec3(pow(16.0 * uv.x * uv.y * (1 - uv.x) * (1 - uv.y), 0.12) * 0.85 + 0.15);
+    final_color.rgb *= vec3(pow(16.0 * uv.x * uv.y * (1 - uv.x) * (1 - uv.y), vignette.w) * 0.85 + 0.15);
 }
 
