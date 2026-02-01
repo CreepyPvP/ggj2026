@@ -120,7 +120,6 @@ void Guard::Update(f32 delta) {
             Vector2 edge = { cos((ConeRotation + 22.5f) / 180.0f * PI), sin((ConeRotation + 22.5f) / 180.0f * PI) };
             if (Vector2DotProduct(forward, to) >= Vector2DotProduct(forward, edge))
             {
-                GuardCatchNoise();
                 CatchPlayer(color,true);
             }
         }
