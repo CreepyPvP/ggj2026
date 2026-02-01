@@ -14,11 +14,14 @@ i32 main(void)
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     InitWindow(1600, 900, "Colorful Heist");
     SetExitKey(0);
+    InitAudioDevice();  
 
     SetTargetFPS(60);
 
     tileset = LoadTexture("assets/textures/tileset_world.png");
 
+    guardSound1 = LoadSound("assets/sounds/GuardSound1.wav");
+    guardSound2 = LoadSound("assets/sounds/GuardSound2.wav");
     LoadScores();
 
     GameInitialize();
@@ -36,7 +39,9 @@ i32 main(void)
         SceneFrame(GetFrameTime());
     }
 
+    CloseAudioDevice();
     CloseWindow();
+
     return 0;
 }
 

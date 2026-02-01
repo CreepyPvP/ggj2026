@@ -1,6 +1,7 @@
 #include "guard.h"
 
 #include "game.h"
+#include "math.h"
 #include "entity.h"
 #include "raymath.h"
 #include "player.h"
@@ -45,6 +46,14 @@ void DropCash(){
     state.held_cash = 0;
 }
 
+void GuardCatchNoise(){
+    int i = std::rand() % 2;
+    if(i == 0)
+        PlaySound(guardSound1);
+    else
+        PlaySound(guardSound2);
+
+}
 
 void CatchPlayer(GuardColor color){
     if(color != PLAYER->playerColor){
@@ -90,9 +99,10 @@ void Guard::Update(f32 delta) {
     ConeLength = 11  - 2.5f* RotationSpeedMultiplier;
 
     // Check game over
-    if (PLAYER)
+    if (PLAYER && !state.game_lost)
     {
         if (Vector2DistanceSqr(position, PLAYER->position) < 0.8 * 0.8) {
+            GuardCatchNoise();
             CatchPlayer(color);
         }
 
@@ -107,6 +117,7 @@ void Guard::Update(f32 delta) {
             Vector2 edge = { cos((ConeRotation + 22.5f) / 180.0f * PI), sin((ConeRotation + 22.5f) / 180.0f * PI) };
             if (Vector2DotProduct(forward, to) >= Vector2DotProduct(forward, edge))
             {
+                GuardCatchNoise();
                 CatchPlayer(color);
             }
         }
@@ -143,7 +154,7 @@ void GuardCamera::Update(f32 delta){
 
 
     //Check game over
-    if (PLAYER)
+    if (PLAYER && !state.game_lost)
     {
         Vector2 player_pos = PLAYER->position + Vector2{0.5, 0.775};
         Vector2 guard_pos = position + Vector2{0.5, 0.5};
