@@ -187,26 +187,7 @@ void LoadWorld(const char *world_name) {
 
         }
     }
-
-    // iterate on Enemy entities
-    // for (const ldtk::Entity& enemy : level1.getLayer("Entities").getEntitiesByName("Enemy")) {
-    //
-    //     // iterate over an array field of Enum values
-    //     for (const auto& item : enemy.getArrayField<ldtk::EnumValue>("items")) {
-    //         // test if field is null
-    //         if (!item.is_null()) {
-    //             // do something with item
-    //             if (item == world.getEnum("Items")["Sword"]) {
-    //                 // the enemy has a Sword !
-    //             }
-    //         }
-    //     }
-    //
-    //     // get an Entity field
-    //     int enemy_hp = enemy.getField<int>("HP").value();
-    // }
 }
-
 
 
 Entity* getEntity(ldtk::IID ldtk_id){
@@ -442,6 +423,7 @@ static void GameFrame(f32 delta)
         state.time_since_game_lost += delta;
         delta = Lerp(0.002, 0.0007, t);
         state.target_zoom = 4 + t;
+        state.target_vignette = 1 + t;
         if (state.time_since_game_lost > 1.3)
         {
             ResetPlayerPosition();
