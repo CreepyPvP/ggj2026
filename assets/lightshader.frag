@@ -11,9 +11,9 @@ uniform vec2 size;
 
 bool DeadzoneColor(vec3 color, vec3 comp)
 {
-    return  color.x >= comp.x - 0.11 && color.x <= comp.x + 0.11 &&
-            color.y >= comp.y - 0.11 && color.y <= comp.y + 0.11 &&
-            color.z >= comp.z - 0.11 && color.z <= comp.z + 0.11;
+    return  color.x >= comp.x - 0.01 && color.x <= comp.x + 0.01 &&
+            color.y >= comp.y - 0.01 && color.y <= comp.y + 0.01 &&
+            color.z >= comp.z - 0.01 && color.z <= comp.z + 0.01;
 }
 
 void main()
@@ -28,7 +28,7 @@ void main()
         final_color = vec4(light_sample, 1);
         if (DeadzoneColor(color_sample, vec3(24, 20, 37) / 256.0f))
         {
-            final_color = vec4(color_sample, 1);
+            final_color = vec4(0, 0, 0, 1);
         }
     }
     else
