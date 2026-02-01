@@ -71,6 +71,14 @@ void Guard::Update(f32 delta) {
             }
         }
     }
+
+    // animation
+    if (animation_time > 0.1)
+    {
+        animation_frame = animation_frame? 0 : 1;
+        animation_time -= 0.1;
+    }
+    animation_time += delta;
 }
 
 void GuardCamera::Update(f32 delta){
@@ -134,14 +142,15 @@ void Guard::Draw() {
         case Blue: coneColor = BLUE; break;
     }
     GameDrawCone({position.x+0.5f,position.y+0.5f},ConeRotation, ConeLength, 45, coneColor);    
-
-
     
     float texture_y = 448;
 
+    if (animation_frame)
+        texture_y += 32;
+
     Vector2 nextPoint = patrolPath[NextPatrolPoint];
     Vector2 targetDirection = Vector2Normalize(nextPoint - position);
-    Vector2 draw_dir = {targetDirection.x >= 0 ? 1 : -1, targetDirection.y >= 0 ? 1 : - 1 };
+    Vector2 draw_dir = {targetDirection.x >= 0 ? (f32) 1 : (f32) -1, targetDirection.y >= 0 ? (f32) 1 : (f32) -1 };
     if(abs(targetDirection.x) >= abs(targetDirection.y))
         draw_dir.y = 0;
     else
@@ -158,9 +167,6 @@ void Guard::Draw() {
     } else {
         DrawTextureRec(tileset, Rectangle{32, texture_y, 32, 32}, render_pos, WHITE);
     }
-
-
-    
 }
 
 void GuardCamera::Draw(){

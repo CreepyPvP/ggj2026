@@ -106,6 +106,15 @@ void Player::Update(f32 delta) {
     }
 
     if (Vector2LengthSqr(movement) > 0) last_dir = movement;
+
+    // animation
+    if (animation_time > 0.1)
+    {
+        animation_frame = animation_frame? 0 : 1;
+        animation_time -= 0.1;
+    }
+    if (Vector2LengthSqr(movement) > 0.1)
+        animation_time += delta;
 }
 
 void Player::Draw() {
@@ -113,7 +122,7 @@ void Player::Draw() {
 
     float texture_y = 576;
     switch(playerColor){
-        case Red: texture_y = 640; break;
+        case Red: texture_y = 608; break;
         case Blue: texture_y = 672; break;
         case Green: texture_y = 736; break;
         default: texture_y = 576; break;
@@ -121,6 +130,11 @@ void Player::Draw() {
 
     Vector2 render_pos = {floorf(this->position.x * 32), floorf(this->position.y * 32)};
     DrawTextureRec(tileset, Rectangle{32, 416, 32, 32}, render_pos + Vector2{0.0, 15}, WHITE);
+
+    if (animation_frame)
+    {
+        texture_y += 32;
+    }
 
     if (last_dir.y < 0) {
         DrawTextureRec(tileset, Rectangle{96, texture_y, 32, 32}, render_pos, WHITE);

@@ -1,5 +1,6 @@
 // raddbg 0.9.20 project file
 
+recent_file: path: "code/player.cpp"
 recent_file: path: "code/game.cpp"
 recent_file: path: "raylib/src/rlgl.h"
 recent_file: path: "code/guard.cpp"
