@@ -1,9 +1,11 @@
 #include "switch.h"
 
 #include "game.h"
+#include "game_math.h"
 #include "player.h"
 #include "raymath.h"
 #include "LDtkLoader/World.hpp"
+#include "rlgl.h"
 
 
 
@@ -25,7 +27,13 @@ void Switch::Update(f32 delta) {
     }
 }
 
-void Door::Update(f32 delta){}
+void Door::Update(f32 delta){
+    if(animation_timer >= 0){
+        animation_timer += 2*delta;
+        if(animation_timer >= 2)
+            animation_timer = -1;
+    }
+}
 
 void Switch::Draw() {
     Entity::Draw();
@@ -37,9 +45,34 @@ void Switch::Draw() {
 
 void Door::Draw(){
     Entity::Draw();
-    if(unlocked) return;
+    
     Vector2 render_pos = {floorf(this->position.x * 32), floorf(this->position.y * 32)};
-    DrawTextureRec(tileset, Rectangle{576, 96, 32, 32}, render_pos, {255,255,255,255});
+    if(!unlocked){
+        DrawTextureRec(tileset, Rectangle{576, 96, 32, 32}, render_pos, {255,255,255,255});
+    }else{
+        if(animation_timer >= 0){
+            if(animation_timer <= 1){
+                float t = Range(animation_timer,0, 1);
+                t = EaseOutExpo(t);
+                rlPushMatrix();
+                rlTranslatef(render_pos.x+16, render_pos.y+16, 0);
+                rlScalef(1+t, 1+t, 1);
+                rlTranslatef(-render_pos.x-16, -render_pos.y-16, 0);
+                DrawTextureRec(tileset, Rectangle{576, 96, 32, 32}, render_pos, {255,255,255,255});
+                rlPopMatrix();
+            }else{
+                float t = Range(animation_timer-1,0, 1);
+                t = EaseOutExpo(1-t);
+                rlPushMatrix();
+                rlTranslatef(render_pos.x+16, render_pos.y+16, 0);
+                rlScalef(2*t, 2*t, 1);
+                rlTranslatef(-render_pos.x-16, -render_pos.y-16, 0);
+                DrawTextureRec(tileset, Rectangle{576, 96, 32, 32}, render_pos, {255,255,255,255});
+                rlPopMatrix();
+            }
+        }
+    }
+
 
 
 }
@@ -48,6 +81,8 @@ void Door::Open() {
     unlocked = true;
     unlockable = false;
     SetTile(position.x, position.y, 0);
+
+    animation_timer = 0;
 
 
 }
