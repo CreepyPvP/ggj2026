@@ -309,3 +309,58 @@ void DrawScoreScreen() {
         DrawScoreList(content_offset, content_size, score_manager.highlight_current);
     }
 }
+
+//
+// Persistence
+//
+
+static u32 buffer_offset;
+static u8 *buffer;
+
+void WriteU32(u32 value)
+{
+    u32 *target = (u32 *) (buffer + buffer_offset);
+    *target = value;
+    buffer_offset += 4;
+}
+
+void WriteBytes(void *bytes, u32 size)
+{
+    u8 *target = buffer + buffer_offset;
+    memcpy(target, bytes, size);
+    buffer_offset += size;
+}
+
+void ReadBytes(void *target, u32 size)
+{
+    u8 *src = buffer + buffer_offset;
+    memcpy(target, src, size);
+    buffer_offset += size;
+}
+
+void PersistScores()
+{
+    buffer_offset = 0;
+    if (!buffer) 
+        buffer = (u8 *) malloc(1024 * 1024);
+
+    WriteU32(score_manager.score_count);
+    WriteBytes(score_manager.scores, sizeof(TimeScore) * score_manager.score_count);
+
+    SaveFileData("scores.txt", buffer, buffer_offset);
+}
+
+void LoadScores()
+{
+    i32 file_size = 0;
+    u8 *memory = LoadFileText("scores.txt", &file_size);
+
+    buffer_offset = file_size;
+    if (!buffer) 
+        buffer = (u8 *) malloc(1024 * 1024);
+
+    memcpy(buffer, memory, file_size);
+
+    score_manager.score_count = ReadU32();
+    ReadBytes(score_manager.scores, sizeof(TimeScore) * score_manager.score_count);
+}

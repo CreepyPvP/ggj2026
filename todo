@@ -1,9 +1,12 @@
-zoom in on death + color vignette red
+core persistance
+death grace time
+
+disable escape / quit
+
+orient cameras
+color vignette red
 fix cone rendering 
 
-
-animate dropshadows?
-floating particles?
 camera lookahead
  
 after:

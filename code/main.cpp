@@ -7,6 +7,8 @@
 #include "level_selection.h"
 #include "stb_ds.h"
 
+#include "score.h"
+
 i32 main(void)
 {
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
@@ -15,6 +17,8 @@ i32 main(void)
     SetTargetFPS(60);
 
     tileset = LoadTexture("assets/textures/tileset_world.png");
+
+    LoadScores();
 
     GameInitialize();
     InitializeLevelSelection();

@@ -32,3 +32,6 @@ void ShowList(u32 level);
 void ToggleList(u32 level);
 
 void DrawScoreScreen();
+
+void PersistScores();
+void LoadScores();
