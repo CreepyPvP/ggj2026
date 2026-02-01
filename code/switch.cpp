@@ -1,5 +1,6 @@
 #include "switch.h"
 
+#include "door.h"
 #include "game.h"
 #include "game_math.h"
 #include "player.h"
@@ -27,14 +28,6 @@ void Switch::Update(f32 delta) {
     }
 }
 
-void Door::Update(f32 delta){
-    if(animation_timer >= 0){
-        animation_timer += 2*delta;
-        if(animation_timer >= 2)
-            animation_timer = -1;
-    }
-}
-
 void Switch::Draw() {
     Entity::Draw();
     if (activated) return;
@@ -42,51 +35,6 @@ void Switch::Draw() {
     DrawTextureRec(tileset, Rectangle{32*10, 448, 32, 32}, render_pos, {255,255,255,255});
 
 }
-
-void Door::Draw(){
-    Entity::Draw();
-    
-    Vector2 render_pos = {floorf(this->position.x * 32), floorf(this->position.y * 32)};
-    if(!unlocked){
-        DrawTextureRec(tileset, Rectangle{576, 96, 32, 32}, render_pos, {255,255,255,255});
-    }else{
-        if(animation_timer >= 0){
-            if(animation_timer <= 1){
-                float t = Range(animation_timer,0, 1);
-                t = EaseOutExpo(t);
-                rlPushMatrix();
-                rlTranslatef(render_pos.x+16, render_pos.y+16, 0);
-                rlScalef(1+t, 1+t, 1);
-                rlTranslatef(-render_pos.x-16, -render_pos.y-16, 0);
-                DrawTextureRec(tileset, Rectangle{576, 96, 32, 32}, render_pos, {255,255,255,255});
-                rlPopMatrix();
-            }else{
-                float t = Range(animation_timer-1,0, 1);
-                t = EaseOutExpo(1-t);
-                rlPushMatrix();
-                rlTranslatef(render_pos.x+16, render_pos.y+16, 0);
-                rlScalef(2*t, 2*t, 1);
-                rlTranslatef(-render_pos.x-16, -render_pos.y-16, 0);
-                DrawTextureRec(tileset, Rectangle{576, 96, 32, 32}, render_pos, {255,255,255,255});
-                rlPopMatrix();
-            }
-        }
-    }
-
-
-
-}
-
-void Door::Open() {
-    unlocked = true;
-    unlockable = false;
-    SetTile(position.x, position.y, 0);
-
-    animation_timer = 0;
-
-
-}
-
 
 void Switch::Configure(const ldtk::World &world, Room* room, const ldtk::Entity &data) {
     Entity::Configure(world, room, data);
@@ -110,14 +58,5 @@ void Switch::Configure(const ldtk::World &world, Room* room, const ldtk::Entity 
 
 }
 
-
-void Door::Configure(const ldtk::World &world, Room* room, const ldtk::Entity &data) {
-    unlockable = data.getField<ldtk::FieldType::Bool>("unlockable").value();
-
-
-
-    
-
-}
 
 
