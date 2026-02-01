@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "game_math.h"
 #include "raylib.h"
 #include "raymath.h"
 
@@ -17,8 +16,8 @@ static Color title_font_color = {190, 103, 154, 255};
 static Color title_font_shadow_color = {109, 50, 73, 255};
 static Color font_color = {136, 110, 106, 255};
 static Color font_shadow_color = {26, 30, 49, 255};
-static Color score_font_color = {243, 132, 40, 255};
-static Color score_font_shadow_color = {126, 48, 31, 255};
+static Color score_font_color = {99, 149, 121, 255};
+static Color score_font_shadow_color = {66, 97, 80, 255};
 static Color background_color = {244, 237, 216, 255};
 static Color background_outline_color = {189, 164, 153, 255};
 static Color background_shadow_color = {72, 59, 61, 255};
@@ -107,8 +106,8 @@ static bool DrawScoreInput(Vector2 offset, Vector2 size) {
     DrawLeftText(center.x, offset.y + 5, placement, 50, GetPlacementShadowColor(place));
     DrawLeftText(center.x, offset.y, placement, 50, GetPlacementColor(place));
 
-    DrawRightText(center.x, offset.y + 5 + 50, "Time: ", 50, font_shadow_color);
-    DrawRightText(center.x, offset.y + 50, "Time: ", 50, font_color);
+    DrawRightText(center.x, offset.y + 5 + 50, "Cash: ", 50, font_shadow_color);
+    DrawRightText(center.x, offset.y + 50, "Cash: ", 50, font_color);
     DrawLeftText(center.x, offset.y + 5 + 50, cash_score, 50, score_font_shadow_color);
     DrawLeftText(center.x, offset.y + 50, cash_score, 50, score_font_color);
 
@@ -176,7 +175,7 @@ static void DrawScoreEntry(Vector2 offset, Vector2 size, TimeScore *score, bool 
 
 
     char placement[16] = "...";
-    const char *cash_score = "--k $";
+    const char *cash_score = "$ --k";
     const char *name = "-----------";
     offset.x += size.x/2 - 300;
 
@@ -185,7 +184,7 @@ static void DrawScoreEntry(Vector2 offset, Vector2 size, TimeScore *score, bool 
     if (score) {
         place = GetPlacement(score);
         sprintf(placement, "#%i", GetPlacement(score));
-        cash_score = TextFormat("%ik $", score->cash_extracted);
+        cash_score = TextFormat("$ %ik", score->cash_extracted);
 
         name = score->name;
     }
@@ -198,8 +197,8 @@ static void DrawScoreEntry(Vector2 offset, Vector2 size, TimeScore *score, bool 
     DrawLeftText(offset.x, offset.y + 6, placement, 60, GetPlacementShadowColor(place));
     DrawLeftText(offset.x, offset.y, placement, 60, GetPlacementColor(place));
 
-    DrawLeftText(offset.x + 120, offset.y + 6, cash_score, 60, font_shadow_color);
-    DrawLeftText(offset.x + 120, offset.y, cash_score, 60, font_color);
+    DrawLeftText(offset.x + 120, offset.y + 6, cash_score, 60, score_font_shadow_color);
+    DrawLeftText(offset.x + 120, offset.y, cash_score, 60, score_font_color);
 
     DrawLeftText(offset.x + 420, offset.y + 6, name, 60, name_font_shadow_color);
     DrawLeftText(offset.x + 420, offset.y, name, 60, name_font_color);
@@ -259,7 +258,7 @@ TimeScore *AddNewScore(u32 level, u32 amount) {
     u32 insert_index = score_manager.score_count;
 
     for (u32 i = 0; i < score_manager.score_count; ++i) {
-        if (score_manager.scores[i].cash_extracted > amount) {
+        if (score_manager.scores[i].cash_extracted < amount) {
             insert_index = i;
             break;
         }
@@ -269,7 +268,7 @@ TimeScore *AddNewScore(u32 level, u32 amount) {
     score_manager.highlight_current = true;
     score_manager.input_mode = true;
     score_manager.show_screen = true;
-    score_manager.level = amount;
+    score_manager.level = level;
 
     if (score_manager.score_count != insert_index) {
         memcpy(score_manager.scores + insert_index + 1, score_manager.scores + insert_index, sizeof(TimeScore) * (score_manager.score_count - insert_index));
@@ -306,8 +305,76 @@ void DrawScoreScreen() {
     Vector2 content_size = {size.x - 40, size.y - 120 - 20};
 
     if (score_manager.input_mode) {
-        if (DrawScoreInput(content_offset, content_size)) score_manager.input_mode = false;
+        if (DrawScoreInput(content_offset, content_size)) {
+            score_manager.input_mode = false;
+            PersistScores();
+        }
     } else {
         DrawScoreList(content_offset, content_size, score_manager.highlight_current);
     }
+}
+
+//
+// Persistence
+//
+
+static u32 buffer_offset;
+static u8 *buffer;
+
+void WriteU32(u32 value)
+{
+    u32 *target = (u32 *) (buffer + buffer_offset);
+    *target = value;
+    buffer_offset += 4;
+}
+
+u32 ReadU32()
+{
+    u32 *target = (u32 *) (buffer + buffer_offset);
+    u32 value = *target;
+    buffer_offset += 4;
+    return value;
+}
+
+void WriteBytes(void *bytes, u32 size)
+{
+    u8 *target = buffer + buffer_offset;
+    memcpy(target, bytes, size);
+    buffer_offset += size;
+}
+
+void ReadBytes(void *target, u32 size)
+{
+    u8 *src = buffer + buffer_offset;
+    memcpy(target, src, size);
+    buffer_offset += size;
+}
+
+void PersistScores()
+{
+    buffer_offset = 0;
+    if (!buffer) 
+        buffer = (u8 *) malloc(1024 * 1024);
+
+    WriteU32(score_manager.score_count);
+    WriteBytes(score_manager.scores, sizeof(TimeScore) * score_manager.score_count);
+
+    SaveFileData("scores.txt", buffer, buffer_offset);
+}
+
+void LoadScores()
+{
+    i32 file_size = 0;
+    u8 *memory = LoadFileData("scores.txt", &file_size);
+    if (!memory || !file_size)
+        return;
+
+    buffer_offset = 0;
+    if (!buffer) 
+        buffer = (u8 *) malloc(1024 * 1024);
+
+    memcpy(buffer, memory, file_size);
+
+    score_manager.score_count = ReadU32();
+    ReadBytes(score_manager.scores, sizeof(TimeScore) * score_manager.score_count);
 }

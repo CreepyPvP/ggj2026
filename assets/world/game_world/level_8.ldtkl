@@ -51,7 +51,75 @@
 			"seed": 3970381,
 			"overrideTilesetUid": null,
 			"gridTiles": [],
-			"entityInstances": []
+			"entityInstances": [
+				{
+					"__identifier": "guard",
+					"__grid": [20,3],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": null,
+					"__smartColor": "#BE4A2F",
+					"iid": "fa6cc350-fa90-11f0-8df1-2522f1a512f4",
+					"width": 32,
+					"height": 32,
+					"defUid": 5,
+					"px": [640,96],
+					"fieldInstances": [
+						{ "__identifier": "color", "__type": "LocalEnum.color", "__value": "red", "__tile": null, "defUid": 71, "realEditorValues": [{
+							"id": "V_String",
+							"params": ["red"]
+						}] },
+						{ "__identifier": "PatrolPath", "__type": "Array<Point>", "__value": [ { "cx": 20, "cy": 2 }, { "cx": 2, "cy": 2 }, { "cx": 2, "cy": 3 }, { "cx": 20, "cy": 3 } ], "__tile": null, "defUid": 9, "realEditorValues": [ {
+							"id": "V_String",
+							"params": ["20,2"]
+						}, {
+							"id": "V_String",
+							"params": ["2,2"]
+						}, {
+							"id": "V_String",
+							"params": ["2,3"]
+						}, {
+							"id": "V_String",
+							"params": ["20,3"]
+						} ] },
+						{ "__identifier": "random_walk", "__type": "Bool", "__value": false, "__tile": null, "defUid": 83, "realEditorValues": [] }
+					],
+					"__worldX": 1728,
+					"__worldY": 1568
+				},
+				{
+					"__identifier": "treasure",
+					"__grid": [11,1],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": { "tilesetUid": 13, "x": 64, "y": 384, "w": 32, "h": 32 },
+					"__smartColor": "#FFE700",
+					"iid": "6ebbb550-fa90-11f0-8319-8744c947a721",
+					"width": 32,
+					"height": 32,
+					"defUid": 3,
+					"px": [352,32],
+					"fieldInstances": [{ "__identifier": "treasure_type", "__type": "LocalEnum.treasure_type", "__value": "money_small", "__tile": { "tilesetUid": 13, "x": 64, "y": 384, "w": 32, "h": 32 }, "defUid": 80, "realEditorValues": [] }],
+					"__worldX": 1440,
+					"__worldY": 1504
+				},
+				{
+					"__identifier": "treasure",
+					"__grid": [12,4],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": { "tilesetUid": 13, "x": 64, "y": 384, "w": 32, "h": 32 },
+					"__smartColor": "#FFE700",
+					"iid": "6f268510-fa90-11f0-8319-d947ed926e53",
+					"width": 32,
+					"height": 32,
+					"defUid": 3,
+					"px": [384,128],
+					"fieldInstances": [{ "__identifier": "treasure_type", "__type": "LocalEnum.treasure_type", "__value": "money_small", "__tile": { "tilesetUid": 13, "x": 64, "y": 384, "w": 32, "h": 32 }, "defUid": 80, "realEditorValues": [] }],
+					"__worldX": 1472,
+					"__worldY": 1600
+				}
+			]
 		},
 		{
 			"__identifier": "walls",
@@ -274,5 +342,5 @@
 			"entityInstances": []
 		}
 	],
-	"__neighbours": [ { "levelIid": "3745fa60-fa90-11f0-8342-43343e3c282c", "dir": "e" }, { "levelIid": "2b4a6470-fa90-11f0-8342-45445a2dd18e", "dir": "w" } ]
+	"__neighbours": [ { "levelIid": "3745fa60-fa90-11f0-8342-43343e3c282c", "dir": "e" }, { "levelIid": "2b4a6470-fa90-11f0-8342-45445a2dd18e", "dir": "w" }, { "levelIid": "21509fb0-fa90-11f0-8df1-2531d7af9d0a", "dir": "n" } ]
 }

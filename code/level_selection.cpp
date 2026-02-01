@@ -8,7 +8,7 @@
 
 Scene *level_selection = {};
 LevelSelection levels[LEVEL_COUNT] = {};
-
+static u32 last_level = 0;
 LevelSelectionState menu_state;
 
 #define MENU_WIDTH 640
@@ -20,6 +20,8 @@ static void LevelSelectionSetup() {
     score_manager.show_screen = false;
     menu_state = {};
     menu_state.target = LoadRenderTexture(MENU_WIDTH, MENU_HEIGHT);
+    menu_state.current_level = last_level;
+    menu_state.target_level = last_level;
 }
 
 static void LevelSelectionFrame(f32 delta) {
@@ -92,6 +94,7 @@ static void LevelSelectionFrame(f32 delta) {
 }
 
 static void LevelSelectionDestroy() {
+    last_level = menu_state.target_level;
     UnloadRenderTexture(menu_state.target);
 }
 
@@ -106,16 +109,19 @@ void InitializeLevelSelection() {
     levels[0] = {
         .preview = LoadTexture("assets/textures/levels/tutorial_preview.png"),
         .name = "Tutorial",
-        .world_id = "tutorial"
+        .world_id = "tutorial",
+        .game_time = 183,
     };
     levels[1] = {
         .preview = LoadTexture("assets/textures/levels/level_preview.png"),
         .name = "Game Level 1",
-        .world_id = "level"
+        .world_id = "level",
+        .game_time = 183,
     };
     levels[2] = {
         .preview = LoadTexture("assets/textures/levels/tutorial_preview.png"),
         .name = "Game Level 2",
-        .world_id = "society"
+        .world_id = "society",
+        .game_time = 183,
     };
 }

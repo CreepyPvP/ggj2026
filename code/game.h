@@ -35,6 +35,7 @@ struct Equipment {
 
 struct GameState
 {
+    bool game_frozen;
     Room *rooms;
 
     u32 saved_cash;
@@ -58,6 +59,7 @@ struct GameState
 
     f32 game_countdown;
 
+    bool game_over;
     bool game_lost;
     f32 time_since_game_lost;
 };

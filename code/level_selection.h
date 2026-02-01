@@ -10,6 +10,7 @@ struct LevelSelection {
     Texture preview;
     const char *name;
     const char *world_id;
+    f32 game_time;
 };
 
 struct LevelSelectionState {
