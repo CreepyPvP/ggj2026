@@ -360,6 +360,15 @@ void GameDrawCone(Vector2 pos, f32 forward_angle, f32 length, f32 angle, Color c
     draw.length = length;
     draw.angle = angle;
     draw.color = color;
+
+    if (PLAYER)
+    {
+        if (Vector2Length(pos -  PLAYER->position) > 20 + length)
+        {
+            return;
+        }
+    }
+
     arrput(cone_draws, draw);
 }
 
