@@ -86,6 +86,38 @@
 					],
 					"__worldX": 1728,
 					"__worldY": 1568
+				},
+				{
+					"__identifier": "treasure",
+					"__grid": [11,1],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": { "tilesetUid": 13, "x": 64, "y": 384, "w": 32, "h": 32 },
+					"__smartColor": "#FFE700",
+					"iid": "6ebbb550-fa90-11f0-8319-8744c947a721",
+					"width": 32,
+					"height": 32,
+					"defUid": 3,
+					"px": [352,32],
+					"fieldInstances": [{ "__identifier": "treasure_type", "__type": "LocalEnum.treasure_type", "__value": "money_small", "__tile": { "tilesetUid": 13, "x": 64, "y": 384, "w": 32, "h": 32 }, "defUid": 80, "realEditorValues": [] }],
+					"__worldX": 1440,
+					"__worldY": 1504
+				},
+				{
+					"__identifier": "treasure",
+					"__grid": [12,4],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": { "tilesetUid": 13, "x": 64, "y": 384, "w": 32, "h": 32 },
+					"__smartColor": "#FFE700",
+					"iid": "6f268510-fa90-11f0-8319-d947ed926e53",
+					"width": 32,
+					"height": 32,
+					"defUid": 3,
+					"px": [384,128],
+					"fieldInstances": [{ "__identifier": "treasure_type", "__type": "LocalEnum.treasure_type", "__value": "money_small", "__tile": { "tilesetUid": 13, "x": 64, "y": 384, "w": 32, "h": 32 }, "defUid": 80, "realEditorValues": [] }],
+					"__worldX": 1472,
+					"__worldY": 1600
 				}
 			]
 		},

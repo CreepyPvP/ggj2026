@@ -16,8 +16,8 @@ static Color title_font_color = {190, 103, 154, 255};
 static Color title_font_shadow_color = {109, 50, 73, 255};
 static Color font_color = {136, 110, 106, 255};
 static Color font_shadow_color = {26, 30, 49, 255};
-static Color score_font_color = {243, 132, 40, 255};
-static Color score_font_shadow_color = {126, 48, 31, 255};
+static Color score_font_color = {99, 149, 121, 255};
+static Color score_font_shadow_color = {66, 97, 80, 255};
 static Color background_color = {244, 237, 216, 255};
 static Color background_outline_color = {189, 164, 153, 255};
 static Color background_shadow_color = {72, 59, 61, 255};
@@ -106,8 +106,8 @@ static bool DrawScoreInput(Vector2 offset, Vector2 size) {
     DrawLeftText(center.x, offset.y + 5, placement, 50, GetPlacementShadowColor(place));
     DrawLeftText(center.x, offset.y, placement, 50, GetPlacementColor(place));
 
-    DrawRightText(center.x, offset.y + 5 + 50, "Time: ", 50, font_shadow_color);
-    DrawRightText(center.x, offset.y + 50, "Time: ", 50, font_color);
+    DrawRightText(center.x, offset.y + 5 + 50, "Cash: ", 50, font_shadow_color);
+    DrawRightText(center.x, offset.y + 50, "Cash: ", 50, font_color);
     DrawLeftText(center.x, offset.y + 5 + 50, cash_score, 50, score_font_shadow_color);
     DrawLeftText(center.x, offset.y + 50, cash_score, 50, score_font_color);
 
@@ -175,7 +175,7 @@ static void DrawScoreEntry(Vector2 offset, Vector2 size, TimeScore *score, bool 
 
 
     char placement[16] = "...";
-    const char *cash_score = "--k $";
+    const char *cash_score = "$ --k";
     const char *name = "-----------";
     offset.x += size.x/2 - 300;
 
@@ -184,7 +184,7 @@ static void DrawScoreEntry(Vector2 offset, Vector2 size, TimeScore *score, bool 
     if (score) {
         place = GetPlacement(score);
         sprintf(placement, "#%i", GetPlacement(score));
-        cash_score = TextFormat("%ik $", score->cash_extracted);
+        cash_score = TextFormat("$ %ik", score->cash_extracted);
 
         name = score->name;
     }
@@ -197,8 +197,8 @@ static void DrawScoreEntry(Vector2 offset, Vector2 size, TimeScore *score, bool 
     DrawLeftText(offset.x, offset.y + 6, placement, 60, GetPlacementShadowColor(place));
     DrawLeftText(offset.x, offset.y, placement, 60, GetPlacementColor(place));
 
-    DrawLeftText(offset.x + 120, offset.y + 6, cash_score, 60, font_shadow_color);
-    DrawLeftText(offset.x + 120, offset.y, cash_score, 60, font_color);
+    DrawLeftText(offset.x + 120, offset.y + 6, cash_score, 60, score_font_shadow_color);
+    DrawLeftText(offset.x + 120, offset.y, cash_score, 60, score_font_color);
 
     DrawLeftText(offset.x + 420, offset.y + 6, name, 60, name_font_shadow_color);
     DrawLeftText(offset.x + 420, offset.y, name, 60, name_font_color);
