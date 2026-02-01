@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "door.h"
 #include "entity.h"
 #include "extract.h"
 #include "scene.h"
@@ -463,7 +464,17 @@ static void GameFrame(f32 delta)
     for (u32 i = 0; i < arrlen(state.entities); ++i)
     {
         Entity *entity = state.entities[i];
+        entity->PreDraw();
+    }
+    for (u32 i = 0; i < arrlen(state.entities); ++i)
+    {
+        Entity *entity = state.entities[i];
         entity->Draw();
+    }
+    for (u32 i = 0; i < arrlen(state.entities); ++i)
+    {
+        Entity *entity = state.entities[i];
+        entity->PostDraw();
     }
 
     EndMode2D();
