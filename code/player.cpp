@@ -43,6 +43,14 @@ void Player::Update(f32 delta) {
         last_interactable->Interact(IsKeyPressed(KEY_SPACE));
     }
 
+    //Update Color Debug
+    if(IsKeyDown(KEY_R))
+        playerColor = Red;
+    if(IsKeyDown(KEY_G))
+        playerColor = Green;
+    if(IsKeyDown(KEY_B))
+        playerColor = Blue;
+
     // Update movement
     Vector2 movement = {};
     if (IsKeyDown(KEY_W))
@@ -103,16 +111,24 @@ void Player::Update(f32 delta) {
 void Player::Draw() {
     Entity::Draw();
 
+    float texture_y = 576;
+    switch(playerColor){
+        case Red: texture_y = 640; break;
+        case Blue: texture_y = 672; break;
+        case Green: texture_y = 736; break;
+        default: texture_y = 576; break;
+    }
+
     Vector2 render_pos = {floorf(this->position.x * 32), floorf(this->position.y * 32)};
     if (last_dir.y < 0) {
-        DrawTextureRec(tileset, Rectangle{96, 448, 32, 32}, render_pos, WHITE);
+        DrawTextureRec(tileset, Rectangle{96, texture_y, 32, 32}, render_pos, WHITE);
     } else if (last_dir.y > 0) {
-        DrawTextureRec(tileset, Rectangle{32, 448, 32, 32}, render_pos, WHITE);
+        DrawTextureRec(tileset, Rectangle{32, texture_y, 32, 32}, render_pos, WHITE);
     } else if (last_dir.x < 0) {
-        DrawTextureRec(tileset, Rectangle{64, 448, 32, 32}, render_pos, WHITE);
+        DrawTextureRec(tileset, Rectangle{64, texture_y, 32, 32}, render_pos, WHITE);
     } else if (last_dir.x > 0) {
-        DrawTextureRec(tileset, Rectangle{128, 448, 32, 32}, render_pos, WHITE);
+        DrawTextureRec(tileset, Rectangle{128, texture_y, 32, 32}, render_pos, WHITE);
     } else {
-        DrawTextureRec(tileset, Rectangle{32, 448, 32, 32}, render_pos, WHITE);
+        DrawTextureRec(tileset, Rectangle{32, texture_y, 32, 32}, render_pos, WHITE);
     }
 }

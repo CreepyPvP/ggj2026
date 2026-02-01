@@ -43,11 +43,11 @@ void Guard::Update(f32 delta) {
         if (RotationSpeedMultiplier > 3)RotationSpeedMultiplier = 3;
     }
     else {
-        RotationSpeedMultiplier -= 1.5f*delta;
+        RotationSpeedMultiplier -= 10.0f*delta;
         if (RotationSpeedMultiplier < 1)RotationSpeedMultiplier = 1;
     }
 
-    ConeLength = 12  - 3* RotationSpeedMultiplier;
+    ConeLength = 11  - 2.5f* RotationSpeedMultiplier;
 
     // Check game over
     if (PLAYER)
@@ -113,7 +113,6 @@ void GuardCamera::Update(f32 delta){
             Vector2 edge = { cos((ConeRotation + field_of_view/2) / 180.0f * PI), sin((ConeRotation + field_of_view/2) / 180.0f * PI) };
             if (Vector2DotProduct(forward, to) >= Vector2DotProduct(forward, edge))
             {
-                printf("Camera caught player");
                 CatchPlayer(color);
             }
         }

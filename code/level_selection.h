@@ -12,6 +12,15 @@ struct LevelSelection {
     const char *world_id;
 };
 
+struct LevelSelectionState {
+    u32 target_level;
+    f32 current_level;
+    RenderTexture2D target;
+};
+
+
+extern LevelSelectionState menu_state;
+
 extern LevelSelection levels[LEVEL_COUNT];
 
 void InitializeLevelSelection();

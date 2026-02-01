@@ -17,7 +17,7 @@ i32 main(void)
     GameInitialize();
     InitializeLevelSelection();
 
-    SceneStart(game_scene);
+    SceneStart(level_selection);
 
     while (!WindowShouldClose())
     {

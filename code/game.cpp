@@ -8,6 +8,7 @@
 #include "scene.h"
 #include "game_math.h"
 #include "guard.h"
+#include "level_selection.h"
 #include "switch.h"
 #include "player.h"
 
@@ -220,7 +221,7 @@ static void StartLevel() {
     Player *player = new Player();
     player->position = {2, 2};
     AddEntity(player);
-    LoadWorld("level");
+    LoadWorld(levels[menu_state.target_level].world_id);
 }
 
 static void GameSetup()
