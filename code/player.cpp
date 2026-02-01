@@ -63,7 +63,7 @@ void Player::Update(f32 delta) {
         movement.x += 1;
     movement = Vector2Normalize(movement);
 
-    // collision
+    // collision (player hitbox is at 0.5, 0.775)
     Vector2 sensor_offsets[] = {
         { 0.4, 0.9 },
         { 0.4, 0.65 },
