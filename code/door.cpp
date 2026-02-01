@@ -17,6 +17,8 @@ void Door::Update(f32 delta) {
 
     if (unlocked || !unlockable || !active_interaction) return;
 
+    state.target_zoom = 3.5 + unlock_step * 0.2;
+
     if (unlock_error_timer > 0) {
         unlock_error_timer -= delta;
         return;
@@ -39,6 +41,7 @@ void Door::Update(f32 delta) {
 
             if (unlock_step > 3) {
                 Open();
+                state.target_zoom = 2.5;
             }
         } else {
             unlock_error_timer = 1;
@@ -142,6 +145,8 @@ void Door::SetActiveInteraction(bool active) {
     unlock_cursor_speed = 1;
     unlock_error_timer = 0;
 
+    if (!active)
+        state.target_zoom = 2.5;
 
     SelectRandomUnlockRange();
 }

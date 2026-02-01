@@ -46,6 +46,12 @@ struct GameState
     Equipment equipment;
 
     //
+    // zoom transition
+
+    f32 display_zoom;
+    f32 target_zoom;
+
+    //
     // loose sequence
 
     f32 game_countdown;

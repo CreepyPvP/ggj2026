@@ -232,9 +232,10 @@ static void GameSetup()
     state.camera.target = Vector2{ 0, 0 };
     state.camera.offset = Vector2{ (f32)render_target.texture.width/2.0f, (f32) render_target.texture.height / 2.0f };
     state.camera.rotation = 0.0f;
-    state.camera.zoom = 2.5f;
 
     state.game_countdown = 183.0f;
+    state.display_zoom = 1.8;
+    state.target_zoom = 2.5;
 
     StartLevel();
     printf("Game setup\n");
@@ -438,6 +439,9 @@ static void GameFrame(f32 delta)
     }
 
     if (PLAYER != NULL) UpdateCamera(PLAYER, delta);
+
+    state.display_zoom = 0.95 * state.display_zoom + 0.05 * state.target_zoom;
+    state.camera.zoom = state.display_zoom;
 
     // Render
     //
