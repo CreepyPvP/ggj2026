@@ -1,11 +1,7 @@
-core persistance
-death grace time
-
-disable escape / quit
-
-orient cameras
-color vignette red
+color vignette red on death
 fix cone rendering 
+
+proper level times / score depending on time left
 
 camera lookahead
  

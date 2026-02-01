@@ -38,6 +38,7 @@ Shader light_shader;
 i32 light_shader_color_buffer_loc;
 i32 light_shader_light_buffer_loc;
 i32 light_shader_size_loc;
+i32 light_shader_vignette_loc;
 
 GameState state;
 
@@ -230,7 +231,7 @@ static void DoGameOver() {
     state.game_over = true;
     state.game_frozen = true;
 
-    AddNewScore(menu_state.target_level, state.held_cash + state.saved_cash);
+    AddNewScore(menu_state.target_level, state.held_cash + state.saved_cash + state.game_countdown * 0.2);
 }
 
 static void StartLevel() {
@@ -252,6 +253,7 @@ static void GameSetup()
     state.game_countdown = levels[menu_state.target_level].game_time; //183.0f;
     state.display_zoom = 1.8;
     state.target_zoom = 2.5;
+    state.target_vignette = 0.12;
 
     StartLevel();
     printf("Game setup\n");
@@ -432,6 +434,7 @@ static void ResetPlayerPosition(){
     state.game_lost = false;
     state.time_since_game_lost = 0;
     state.target_zoom = 2.5;
+    state.target_vignette = 0.12;
     game_scene->time = 0;
 }
 
@@ -468,6 +471,7 @@ static void GameFrame(f32 delta)
         if (PLAYER != NULL) UpdateCamera(PLAYER, delta);
 
         state.display_zoom = 0.95f * state.display_zoom + 0.05f * state.target_zoom;
+        state.display_vignette = 0.95f * state.display_vignette + 0.05f * state.target_vignette;
         state.camera.zoom = state.display_zoom;
     }
 
@@ -553,9 +557,11 @@ static void GameFrame(f32 delta)
     // Final composite pass
     BeginShaderMode(light_shader);
     Vector2 screen_size = { (f32) GetScreenWidth(), (f32) GetScreenHeight() };
+    Vector4 vignette = { 0, 0, 0, state.display_vignette };
     SetShaderValueTexture(light_shader, light_shader_color_buffer_loc, render_target.texture);
     SetShaderValueTexture(light_shader, light_shader_light_buffer_loc, light_target.texture);
     SetShaderValue(light_shader, light_shader_size_loc, &screen_size, RL_SHADER_UNIFORM_VEC2);
+    SetShaderValue(light_shader, light_shader_vignette_loc, &vignette, RL_SHADER_UNIFORM_VEC4);
     // DrawTexturePro(render_target.texture, {0, 0, (f32) render_target.texture.width, (f32) -render_target.texture.height},
     //                {0, 0, (f32) GetScreenWidth(), (f32) GetScreenHeight()}, {}, 0, WHITE);
     DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), WHITE);
@@ -619,4 +625,5 @@ void GameInitialize()
     light_shader_color_buffer_loc = GetShaderLocation(light_shader, "color_buffer");
     light_shader_light_buffer_loc = GetShaderLocation(light_shader, "light_buffer");
     light_shader_size_loc = GetShaderLocation(light_shader, "size");
+    light_shader_vignette_loc = GetShaderLocation(light_shader, "vignette");
 }

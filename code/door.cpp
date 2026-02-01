@@ -18,6 +18,7 @@ void Door::Update(f32 delta) {
     if (unlocked || !unlockable || !active_interaction) return;
 
     state.target_zoom = 3.5 + unlock_step * 1;
+    state.target_vignette = 1 + unlock_step * 0.1;
 
     if (unlock_error_timer > 0) {
         unlock_error_timer -= delta;
@@ -184,7 +185,10 @@ void Door::SetActiveInteraction(bool active) {
     unlock_error_timer = 0;
 
     if (!active)
+    {
         state.target_zoom = 2.5;
+        state.target_vignette = 0.12;
+    }
 
     SelectRandomUnlockRange();
 }

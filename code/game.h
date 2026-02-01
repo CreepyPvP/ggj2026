@@ -53,10 +53,13 @@ struct GameState
     Equipment equipment;
 
     //
-    // zoom transition
+    // transitions
 
     f32 display_zoom;
     f32 target_zoom;
+
+    f32 display_vignette;
+    f32 target_vignette;
 
     //
     // loose sequence
