@@ -8,7 +8,7 @@
 void Treasure::Update(f32 delta) {
     Entity::Update(delta);
 
-    if (!PLAYER) return;
+    if (!PLAYER || state.game_lost) return;
     if (collected) {
         if(animation_timer >= 0){
             animation_timer += 2*delta;
