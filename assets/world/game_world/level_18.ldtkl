@@ -434,7 +434,15 @@
 					"defUid": 7,
 					"px": [32,0],
 					"fieldInstances": [
-						{ "__identifier": "Controlled_doors", "__type": "Array<EntityRef>", "__value": [], "__tile": null, "defUid": 82, "realEditorValues": [] },
+						{ "__identifier": "Controlled_doors", "__type": "Array<EntityRef>", "__value": [{
+							"entityIid": "c23b7e90-fa90-11f0-b31d-4b85f495b084",
+							"layerIid": "3745fa61-fa90-11f0-8342-d58585aa318e",
+							"levelIid": "3745fa60-fa90-11f0-8342-43343e3c282c",
+							"worldIid": "3745d350-fa90-11f0-8342-3b8bda70e3f5"
+						}], "__tile": null, "defUid": 82, "realEditorValues": [{
+							"id": "V_String",
+							"params": ["c23b7e90-fa90-11f0-b31d-4b85f495b084"]
+						}] },
 						{ "__identifier": "Controlled_cameras", "__type": "Array<EntityRef>", "__value": [], "__tile": null, "defUid": 85, "realEditorValues": [] }
 					],
 					"__worldX": 1408,
