@@ -461,7 +461,7 @@
 				},
 				{
 					"__identifier": "treasure",
-					"__grid": [1,11],
+					"__grid": [2,11],
 					"__pivot": [0,0],
 					"__tags": [],
 					"__tile": { "tilesetUid": 13, "x": 64, "y": 384, "w": 32, "h": 32 },
@@ -470,14 +470,14 @@
 					"width": 32,
 					"height": 32,
 					"defUid": 3,
-					"px": [32,352],
+					"px": [64,352],
 					"fieldInstances": [{ "__identifier": "treasure_type", "__type": "LocalEnum.treasure_type", "__value": "money_small", "__tile": { "tilesetUid": 13, "x": 64, "y": 384, "w": 32, "h": 32 }, "defUid": 80, "realEditorValues": [] }],
-					"__worldX": 1408,
+					"__worldX": 1440,
 					"__worldY": 1376
 				},
 				{
 					"__identifier": "treasure",
-					"__grid": [5,8],
+					"__grid": [6,7],
 					"__pivot": [0,0],
 					"__tags": [],
 					"__tile": { "tilesetUid": 13, "x": 64, "y": 384, "w": 32, "h": 32 },
@@ -486,10 +486,10 @@
 					"width": 32,
 					"height": 32,
 					"defUid": 3,
-					"px": [160,256],
+					"px": [192,224],
 					"fieldInstances": [{ "__identifier": "treasure_type", "__type": "LocalEnum.treasure_type", "__value": "money_small", "__tile": { "tilesetUid": 13, "x": 64, "y": 384, "w": 32, "h": 32 }, "defUid": 80, "realEditorValues": [] }],
-					"__worldX": 1536,
-					"__worldY": 1280
+					"__worldX": 1568,
+					"__worldY": 1248
 				}
 			]
 		},
