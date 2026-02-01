@@ -242,7 +242,7 @@ static void GameSetup()
     state.camera.offset = Vector2{ (f32)render_target.texture.width/2.0f, (f32) render_target.texture.height / 2.0f };
     state.camera.rotation = 0.0f;
 
-    state.game_countdown = 20; //183.0f;
+    state.game_countdown = levels[menu_state.target_level].game_time; //183.0f;
     state.display_zoom = 1.8;
     state.target_zoom = 2.5;
 

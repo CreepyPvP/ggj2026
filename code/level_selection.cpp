@@ -109,16 +109,19 @@ void InitializeLevelSelection() {
     levels[0] = {
         .preview = LoadTexture("assets/textures/levels/tutorial_preview.png"),
         .name = "Tutorial",
-        .world_id = "tutorial"
+        .world_id = "tutorial",
+        .game_time = 183,
     };
     levels[1] = {
         .preview = LoadTexture("assets/textures/levels/level_preview.png"),
         .name = "Game Level 1",
-        .world_id = "level"
+        .world_id = "level",
+        .game_time = 183,
     };
     levels[2] = {
         .preview = LoadTexture("assets/textures/levels/tutorial_preview.png"),
         .name = "Game Level 2",
-        .world_id = "society"
+        .world_id = "society",
+        .game_time = 183,
     };
 }
