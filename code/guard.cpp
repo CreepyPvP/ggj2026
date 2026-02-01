@@ -56,7 +56,7 @@ void Guard::Update(f32 delta) {
             CatchPlayer(color);
         }
 
-        Vector2 player_pos = PLAYER->position + Vector2{0.5, 0.5};
+        Vector2 player_pos = PLAYER->position + Vector2{0.5, 0.775};
         Vector2 guard_pos = position + Vector2{0.5, 0.5};
         Vector2 to = Vector2Normalize(player_pos - guard_pos);
         f32 dist = GameRaycast(guard_pos, to, ConeLength + 1);
@@ -97,7 +97,7 @@ void GuardCamera::Update(f32 delta){
     //Check game over
     if (PLAYER)
     {
-        Vector2 player_pos = PLAYER->position + Vector2{0.5, 0.5};
+        Vector2 player_pos = PLAYER->position + Vector2{0.5, 0.775};
         Vector2 guard_pos = position + Vector2{0.5, 0.5};
         
         if (Vector2DistanceSqr(guard_pos, player_pos) < 0.8 * 0.8) {

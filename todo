@@ -1,12 +1,8 @@
-fix autotiling order
-
 camera lookahead
 
 
-color lookup
-dropshadows
-door hitbox
+animate dropshadows?
 floating particles?
  
 after:
-    - erik macros, compilation units
+    - erik macros, compilation units, easing functions
