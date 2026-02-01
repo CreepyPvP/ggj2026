@@ -13,6 +13,9 @@ extern Sound coinSound;
 extern Sound switchSound;
 extern Sound slideSound;
 extern Sound failureSound;
+extern Sound stepSound;
+
+extern Music music;
 
 struct TexturedTile
 {

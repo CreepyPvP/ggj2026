@@ -24,6 +24,7 @@ add_executable(${PROJECT_NAME}
 	code/extract.cpp
 	code/door.cpp
 	code/score.cpp
+	code/equipment_selection.cpp
 
     external/LDtkLoader/DataTypes.cpp
     external/LDtkLoader/Entity.cpp

@@ -6,6 +6,7 @@
 #include "score.h"
 
 #define STB_DS_IMPLEMENTATION
+#include "equipment_selection.h"
 #include "level_selection.h"
 #include "stb_ds.h"
 
@@ -26,16 +27,23 @@ i32 main(void)
     switchSound = LoadSound("assets/sounds/switch.wav");
     slideSound = LoadSound("assets/sounds/slide.wav");
     failureSound = LoadSound("assets/sounds/failurebell.wav");
+    stepSound = LoadSound("assets/sounds/step.wav");
+
+    Music music = LoadMusicStream("assets/sounds/heist.mp3");
 
     LoadScores();
 
     GameInitialize();
     InitializeLevelSelection();
+    InitializeEquipmentSelection();
 
     SceneStart(level_selection);
 
+    PlayMusicStream(music);
     while (!WindowShouldClose())
     {
+        UpdateMusicStream(music);
+
         if (IsKeyPressed(KEY_T) && IsKeyDown(KEY_LEFT_CONTROL))
         {
             SceneStart(level_selection);

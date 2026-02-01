@@ -316,6 +316,25 @@
 					"fieldInstances": [{ "__identifier": "treasure_type", "__type": "LocalEnum.treasure_type", "__value": "money_small", "__tile": { "tilesetUid": 13, "x": 64, "y": 384, "w": 32, "h": 32 }, "defUid": 80, "realEditorValues": [] }],
 					"__worldX": 928,
 					"__worldY": 1152
+				},
+				{
+					"__identifier": "treasure",
+					"__grid": [7,20],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": { "tilesetUid": 13, "x": 160, "y": 384, "w": 32, "h": 32 },
+					"__smartColor": "#FFE700",
+					"iid": "8dae2010-fa90-11f0-b31d-11b10e33565c",
+					"width": 32,
+					"height": 32,
+					"defUid": 3,
+					"px": [224,640],
+					"fieldInstances": [{ "__identifier": "treasure_type", "__type": "LocalEnum.treasure_type", "__value": "money_big", "__tile": { "tilesetUid": 13, "x": 160, "y": 384, "w": 32, "h": 32 }, "defUid": 80, "realEditorValues": [{
+						"id": "V_String",
+						"params": ["money_big"]
+					}] }],
+					"__worldX": 1024,
+					"__worldY": 1664
 				}
 			]
 		},

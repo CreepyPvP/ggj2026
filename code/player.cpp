@@ -161,7 +161,16 @@ void Player::Update(f32 delta) {
         position += dir * len;
     }
 
-    if (Vector2LengthSqr(movement) > 0) last_dir = movement;
+    float stepSoundInterval = 0.2f;
+    if (Vector2LengthSqr(movement) > 0){ 
+        last_dir = movement;
+        stepSoundTimer += delta;
+        if(stepSoundTimer > stepSoundInterval){
+            printf("Playing step sound");
+            stepSoundTimer -= stepSoundInterval;
+            PlaySound(stepSound);
+        }
+    }
 
     // animation
     if (animation_time > 0.1)
