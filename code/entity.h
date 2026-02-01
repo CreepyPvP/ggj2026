@@ -24,7 +24,13 @@ struct Entity {
     virtual void Update(f32 delta) {
     }
 
+    virtual void PreDraw() {
+    }
+
     virtual void Draw() {
+    }
+
+    virtual void PostDraw() {
     }
 
     ///

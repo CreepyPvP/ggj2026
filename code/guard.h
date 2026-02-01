@@ -4,7 +4,7 @@
 
 constexpr float rotationSpeed = 100.0f;
 constexpr float cameraRotationSpeed = 15.0f;
-constexpr float speed = 3.0f;
+constexpr float speed = 2.8f;
 constexpr int max_path_size = 64;
 
 constexpr int max_camera_path_size = 16;
@@ -21,6 +21,7 @@ struct Guard : Entity {
   int PatrolPathSize;
   int NextPatrolPoint;
   float ConeRotation;
+  float RotationSpeedMultiplier; // between 1 and 3
   float ConeLength;
   bool RandomWalk;
   void Update(f32 delta) override;

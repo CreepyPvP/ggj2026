@@ -8,6 +8,14 @@
 
 #include <stdio.h>
 
+void CatchPlayer(GuardColor color){
+    if(color != PLAYER->playerColor)
+        GameStartLose();
+
+}
+
+
+
 void Guard::Update(f32 delta) {
     Entity::Update(delta);
 
@@ -18,6 +26,7 @@ void Guard::Update(f32 delta) {
 
     if (Vector2DistanceSqr(position + movementDirection, nextPoint ) > Vector2DistanceSqr(position,nextPoint)) {
         NextPatrolPoint = (NextPatrolPoint + 1) % PatrolPathSize;
+        //RotationSpeedMultiplier = 1.0f;
     }
 
     movementDirection = Vector2Normalize(movementDirection);
@@ -25,15 +34,28 @@ void Guard::Update(f32 delta) {
     float determinante = movementDirection.x * facingDirection.y - movementDirection.y * facingDirection.x;
 
     float dotProduct = movementDirection.x * facingDirection.x + movementDirection.y * facingDirection.y;
-    if (dotProduct < 0.999f * Vector2DistanceSqr(facingDirection, {0,0})) {
-        ConeRotation += (determinante >= 0 ? -1 : 1 ) * rotationSpeed* delta;
+    if (dotProduct < 0.999f) { //Vector2DistanceSqr(facingDirection, {0,0}) = 1 unless floating point precision...
+        ConeRotation += (determinante >= 0 ? -1 : 1 ) * RotationSpeedMultiplier * rotationSpeed* delta;
     }
 
-    ConeLength = 10* exp(dotProduct - 1);
+    if ((dotProduct+0.25) * 3 < RotationSpeedMultiplier) {
+        RotationSpeedMultiplier += 10*delta;
+        if (RotationSpeedMultiplier > 3)RotationSpeedMultiplier = 3;
+    }
+    else {
+        RotationSpeedMultiplier -= 10.0f*delta;
+        if (RotationSpeedMultiplier < 1)RotationSpeedMultiplier = 1;
+    }
+
+    ConeLength = 11  - 2.5f* RotationSpeedMultiplier;
 
     // Check game over
     if (PLAYER)
     {
+        if (Vector2DistanceSqr(position, PLAYER->position) < 0.8 * 0.8) {
+            CatchPlayer(color);
+        }
+
         Vector2 player_pos = PLAYER->position + Vector2{0.5, 0.5};
         Vector2 guard_pos = position + Vector2{0.5, 0.5};
         Vector2 to = Vector2Normalize(player_pos - guard_pos);
@@ -45,7 +67,7 @@ void Guard::Update(f32 delta) {
             Vector2 edge = { cos((ConeRotation + 22.5f) / 180.0f * PI), sin((ConeRotation + 22.5f) / 180.0f * PI) };
             if (Vector2DotProduct(forward, to) >= Vector2DotProduct(forward, edge))
             {
-                GameStartLose();
+                CatchPlayer(color);
             }
         }
     }
@@ -66,6 +88,33 @@ void GuardCamera::Update(f32 delta){
             ConeRotation += (determinante >= 0 ? -1 : 1 ) * cameraRotationSpeed* delta;
         }else{
             NextPatrolPoint = (NextPatrolPoint + 1) % PatrolPathSize;
+        }
+    }
+
+    int ConeLength = 10;
+
+
+    //Check game over
+    if (PLAYER)
+    {
+        Vector2 player_pos = PLAYER->position + Vector2{0.5, 0.5};
+        Vector2 guard_pos = position + Vector2{0.5, 0.5};
+        
+        if (Vector2DistanceSqr(guard_pos, player_pos) < 0.8 * 0.8) {
+            CatchPlayer(color);
+        }
+
+        Vector2 to = Vector2Normalize(player_pos - guard_pos);
+        f32 dist = GameRaycast(guard_pos, to, ConeLength + 1);
+        f32 dist_to_player = Vector2Length(player_pos - guard_pos);
+        if ((dist + 0.001) >= dist_to_player && dist_to_player <= (ConeLength + 0.001))
+        {
+            Vector2 forward = { cos(ConeRotation / 180.0f * PI), sin(ConeRotation / 180.0f * PI) };
+            Vector2 edge = { cos((ConeRotation + field_of_view/2) / 180.0f * PI), sin((ConeRotation + field_of_view/2) / 180.0f * PI) };
+            if (Vector2DotProduct(forward, to) >= Vector2DotProduct(forward, edge))
+            {
+                CatchPlayer(color);
+            }
         }
     }
 

@@ -48,6 +48,8 @@ struct GameState
     //
     // loose sequence
 
+    f32 game_countdown;
+
     bool game_lost;
     f32 time_since_game_lost;
 };

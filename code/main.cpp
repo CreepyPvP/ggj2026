@@ -9,7 +9,9 @@
 
 i32 main(void)
 {
+    SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     InitWindow(1600, 900, "Colorful Heist");
+
     SetTargetFPS(60);
 
     tileset = LoadTexture("assets/textures/tileset_world.png");
@@ -17,7 +19,7 @@ i32 main(void)
     GameInitialize();
     InitializeLevelSelection();
 
-    SceneStart(game_scene);
+    SceneStart(level_selection);
 
     while (!WindowShouldClose())
     {

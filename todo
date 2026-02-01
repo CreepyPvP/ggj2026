@@ -1,9 +1,12 @@
-color lookup
-do deferred rendering       <---------
 fix autotiling order
 
 camera lookahead
 
+
+color lookup
+dropshadows
+door hitbox
+floating particles?
  
 after:
     - erik macros, compilation units
