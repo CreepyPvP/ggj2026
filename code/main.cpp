@@ -6,6 +6,7 @@
 #include "score.h"
 
 #define STB_DS_IMPLEMENTATION
+#include "equipment_selection.h"
 #include "level_selection.h"
 #include "stb_ds.h"
 
@@ -32,6 +33,7 @@ i32 main(void)
 
     GameInitialize();
     InitializeLevelSelection();
+    InitializeEquipmentSelection();
 
     SceneStart(level_selection);
 
