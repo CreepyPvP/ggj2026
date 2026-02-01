@@ -8,3 +8,5 @@ typedef int32_t i32;
 typedef uint8_t u8;
 typedef uint16_t u16;
 typedef float f32;
+
+#define lengthof(x) (sizeof(x) / sizeof(x[0]))

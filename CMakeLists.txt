@@ -23,6 +23,7 @@ add_executable(${PROJECT_NAME}
     code/guard.cpp
 	code/extract.cpp
 	code/door.cpp
+	code/score.cpp
 
     external/LDtkLoader/DataTypes.cpp
     external/LDtkLoader/Entity.cpp
