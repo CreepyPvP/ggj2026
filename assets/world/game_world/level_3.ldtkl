@@ -1004,33 +1004,6 @@
 					"fieldInstances": [{ "__identifier": "treasure_type", "__type": "LocalEnum.treasure_type", "__value": "money_small", "__tile": { "tilesetUid": 13, "x": 64, "y": 384, "w": 32, "h": 32 }, "defUid": 80, "realEditorValues": [] }],
 					"__worldX": 864,
 					"__worldY": 2016
-				},
-				{
-					"__identifier": "camera",
-					"__grid": [25,1],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": null,
-					"__smartColor": "#BE4A2F",
-					"iid": "c5d13740-fa90-11f0-b0f7-638bd3e5c47f",
-					"width": 32,
-					"height": 32,
-					"defUid": 65,
-					"px": [800,32],
-					"fieldInstances": [
-						{ "__identifier": "color", "__type": "LocalEnum.color", "__value": "red", "__tile": null, "defUid": 74, "realEditorValues": [{
-							"id": "V_String",
-							"params": ["red"]
-						}] },
-						{ "__identifier": "field_of_view", "__type": "Float", "__value": 20, "__tile": null, "defUid": 67, "realEditorValues": [{ "id": "V_Float", "params": [20] }] },
-						{ "__identifier": "directions", "__type": "Array<Point>", "__value": [{ "cx": 25, "cy": 0 }], "__tile": null, "defUid": 81, "realEditorValues": [{
-							"id": "V_String",
-							"params": ["25,0"]
-						}] },
-						{ "__identifier": "active", "__type": "Bool", "__value": true, "__tile": null, "defUid": 84, "realEditorValues": [] }
-					],
-					"__worldX": 1440,
-					"__worldY": 1696
 				}
 			]
 		},
