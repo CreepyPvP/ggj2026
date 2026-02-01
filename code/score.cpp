@@ -23,6 +23,8 @@ static Color background_color = {244, 237, 216, 255};
 static Color background_outline_color = {189, 164, 153, 255};
 static Color background_shadow_color = {72, 59, 61, 255};
 
+ScoreManager score_manager = {};
+
 static Color GetPlacementColor(i32 place) {
 
     if (place == 1) return gold_font_color;

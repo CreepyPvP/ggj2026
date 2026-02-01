@@ -2,7 +2,7 @@
 #include "raylib.h"
 #include "scene.h"
 
-#define LEVEL_COUNT 2
+#define LEVEL_COUNT 3
 
 extern Scene *level_selection;
 
