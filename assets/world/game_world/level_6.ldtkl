@@ -823,6 +823,81 @@
 					"fieldInstances": [{ "__identifier": "treasure_type", "__type": "LocalEnum.treasure_type", "__value": "money_small", "__tile": { "tilesetUid": 13, "x": 64, "y": 384, "w": 32, "h": 32 }, "defUid": 80, "realEditorValues": [] }],
 					"__worldX": 3936,
 					"__worldY": 1408
+				},
+				{
+					"__identifier": "guard",
+					"__grid": [25,15],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": null,
+					"__smartColor": "#4BB41C",
+					"iid": "79d13960-fa90-11f0-8342-09380a28d300",
+					"width": 32,
+					"height": 32,
+					"defUid": 5,
+					"px": [800,480],
+					"fieldInstances": [
+						{ "__identifier": "color", "__type": "LocalEnum.color", "__value": "green", "__tile": null, "defUid": 71, "realEditorValues": [{
+							"id": "V_String",
+							"params": ["green"]
+						}] },
+						{ "__identifier": "PatrolPath", "__type": "Array<Point>", "__value": [
+							{ "cx": 31, "cy": 15 },
+							{ "cx": 31, "cy": 21 },
+							{ "cx": 13, "cy": 21 },
+							{ "cx": 13, "cy": 8 },
+							{ "cx": 14, "cy": 8 },
+							{ "cx": 14, "cy": 9 },
+							{ "cx": 17, "cy": 11 },
+							{ "cx": 30, "cy": 11 },
+							{ "cx": 30, "cy": 13 },
+							{ "cx": 25, "cy": 15 }
+						], "__tile": null, "defUid": 9, "realEditorValues": [
+							{
+								"id": "V_String",
+								"params": ["31,15"]
+							},
+							{
+								"id": "V_String",
+								"params": ["31,21"]
+							},
+							{
+								"id": "V_String",
+								"params": ["13,21"]
+							},
+							{
+								"id": "V_String",
+								"params": ["13,8"]
+							},
+							{
+								"id": "V_String",
+								"params": ["14,8"]
+							},
+							{
+								"id": "V_String",
+								"params": ["14,9"]
+							},
+							{
+								"id": "V_String",
+								"params": ["17,11"]
+							},
+							{
+								"id": "V_String",
+								"params": ["30,11"]
+							},
+							{
+								"id": "V_String",
+								"params": ["30,13"]
+							},
+							{
+								"id": "V_String",
+								"params": ["25,15"]
+							}
+						] },
+						{ "__identifier": "random_walk", "__type": "Bool", "__value": false, "__tile": null, "defUid": 83, "realEditorValues": [] }
+					],
+					"__worldX": 3872,
+					"__worldY": 1312
 				}
 			]
 		},

@@ -3210,6 +3210,25 @@
 					}] }],
 					"__worldX": 2944,
 					"__worldY": 1216
+				},
+				{
+					"__identifier": "treasure",
+					"__grid": [59,12],
+					"__pivot": [0,0],
+					"__tags": [],
+					"__tile": { "tilesetUid": 13, "x": 128, "y": 384, "w": 32, "h": 32 },
+					"__smartColor": "#FFE700",
+					"iid": "5e6da870-fa90-11f0-8342-47aa9b6f90a2",
+					"width": 32,
+					"height": 32,
+					"defUid": 3,
+					"px": [1888,384],
+					"fieldInstances": [{ "__identifier": "treasure_type", "__type": "LocalEnum.treasure_type", "__value": "diamond_small", "__tile": { "tilesetUid": 13, "x": 128, "y": 384, "w": 32, "h": 32 }, "defUid": 80, "realEditorValues": [{
+						"id": "V_String",
+						"params": ["diamond_small"]
+					}] }],
+					"__worldX": 2976,
+					"__worldY": 1216
 				}
 			]
 		},
