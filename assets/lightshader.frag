@@ -40,5 +40,8 @@ void main()
     {
         final_color = vec4(color_sample, 1);
     }
+
+    // vignette
+    final_color.rgb *= vec3(pow(16.0 * uv.x * uv.y * (1 - uv.x) * (1 - uv.y), 0.12) * 0.7 + 0.3);
 }
 
