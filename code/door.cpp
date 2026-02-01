@@ -17,7 +17,7 @@ void Door::Update(f32 delta) {
 
     if (unlocked || !unlockable || !active_interaction) return;
 
-    state.target_zoom = 4.5 + unlock_step * 0.5;
+    state.target_zoom = 3.5 + unlock_step * 1;
 
     if (unlock_error_timer > 0) {
         unlock_error_timer -= delta;

@@ -11,6 +11,8 @@ struct Player : Entity {
     Entity *last_interactable = NULL;
     Vector2 last_dir = {};
 
+    Vector2 spawnPosition;
+
     GuardColor playerColor = Blue;
 
     Player();
