@@ -11,7 +11,7 @@
 	"iid": "e54f6bb0-fa90-11f0-abe6-957975aa9344",
 	"jsonVersion": "1.5.3",
 	"appBuildId": 473703,
-	"nextUid": 187,
+	"nextUid": 188,
 	"identifierStyle": "Lowercase",
 	"toc": [],
 	"worldLayout": null,
@@ -2767,10 +2767,7 @@
 			"autoTilesKilledByOtherLayerUid": null,
 			"uiFilterTags": [],
 			"useAsyncRender": false,
-			"intGridValues": [
-				{ "value": 1, "identifier": "WALL", "color": "#733E39", "tile": null, "groupUid": 0 },
-				{ "value": 2, "identifier": "WOOD", "color": "#BE4A2F", "tile": null, "groupUid": 0 }
-			],
+			"intGridValues": [{ "value": 1, "identifier": "WALL", "color": "#733E39", "tile": null, "groupUid": 0 }],
 			"intGridValuesGroups": [],
 			"autoRuleGroups": [],
 			"autoSourceLayerDefUid": null,
@@ -3646,6 +3643,31 @@
 				"fieldInstances": [],
 				"layerInstances": null,
 				"__neighbours": [ { "levelIid": "a992d250-fa90-11f0-b3c4-1fb56c707e5f", "dir": "w" }, { "levelIid": "b02dccf0-fa90-11f0-b3c4-e10636d7e8be", "dir": "s" } ]
+			}
+		] },
+		{ "iid": "3745d350-fa90-11f0-8342-3b8bda70e3f5", "identifier": "society", "defaultLevelWidth": 256, "defaultLevelHeight": 256, "worldGridWidth": 256, "worldGridHeight": 256, "worldLayout": "Free", "levels": [
+			{
+				"identifier": "level_7",
+				"iid": "3745fa60-fa90-11f0-8342-43343e3c282c",
+				"uid": 187,
+				"worldX": 1824,
+				"worldY": 1408,
+				"worldDepth": 0,
+				"pxWid": 384,
+				"pxHei": 352,
+				"__bgColor": "#696A79",
+				"bgColor": null,
+				"useAutoIdentifier": true,
+				"bgRelPath": null,
+				"bgPos": null,
+				"bgPivotX": 0.5,
+				"bgPivotY": 0.5,
+				"__smartColor": "#ADADB5",
+				"__bgPos": null,
+				"externalRelPath": "game_world/level_7.ldtkl",
+				"fieldInstances": [],
+				"layerInstances": null,
+				"__neighbours": []
 			}
 		] }
 	],
